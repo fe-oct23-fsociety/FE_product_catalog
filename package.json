@@ -2,6 +2,7 @@
   "name": "product_catalog",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://fe-oct23-fsociety.github.io/product_catalog/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -11,12 +12,15 @@
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "npm-merge-driver": "^2.3.6",
+    "gh-pages": "^6.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
