@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/fe-oct23-fsociety/product_catalog/static/css/main.1d766016.css",
+    "main.js": "/fe-oct23-fsociety/product_catalog/static/js/main.d1c2d1e3.js",
+    "index.html": "/fe-oct23-fsociety/product_catalog/index.html",
+    "main.1d766016.css.map": "/fe-oct23-fsociety/product_catalog/static/css/main.1d766016.css.map",
+    "main.d1c2d1e3.js.map": "/fe-oct23-fsociety/product_catalog/static/js/main.d1c2d1e3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1d766016.css",
+    "static/js/main.d1c2d1e3.js"
+  ]
+}
