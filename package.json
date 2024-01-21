@@ -2,7 +2,7 @@
   "name": "product_catalog",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://fe-oct23-fsociety.github.io/product_catalog/",
+  "homepage": "https://fe-oct23-fsociety.github.io/FE_product_catalog/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
