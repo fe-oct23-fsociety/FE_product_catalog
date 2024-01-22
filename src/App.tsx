@@ -1,13 +1,16 @@
 import React from 'react';
-
 import './App.css';
-import { PhonesPageGrid } from './components/PhonesPageGrid/PhonesPageGrid';
+import { PhonesPage } from './components/phones/phones';
 
 function App() {
   return (
     <div className="App">
       <h1>Product Catalog</h1>
-      <PhonesPageGrid />
+      {/*
+        this for testing, you can delete it
+      */}
+      <PhonesPage />
+      {/*  */}
     </div>
   );
 }
