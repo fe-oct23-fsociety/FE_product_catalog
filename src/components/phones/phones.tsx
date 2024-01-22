@@ -1,6 +1,6 @@
-import { FC } from 'react';
+import React from 'react';
 import { PhonesPageGrid } from '../PhonesPageGrid';
 
-export const PhonesPage: FC = () => {
+export const PhonesPage: React.FC = () => {
   return <PhonesPageGrid />;
 };
