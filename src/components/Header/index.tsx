@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { NavList } from '../NavList';
 import { Logo } from '../Logo';
-import { NavItem } from '../NavList/NavItem';
+import { NavItem } from '../NavItem';
 import {
   ReactComponent as FavouritesIcon,
 } from '../../images/icons/favourites.svg';
