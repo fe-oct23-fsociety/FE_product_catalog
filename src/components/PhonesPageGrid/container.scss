@@ -1,0 +1,22 @@
+.container {
+  $column-count: 1;
+  padding: 50px 40px;
+
+  display: grid;
+  grid-template-columns: repeat($column-count, 272px);
+  row-gap: 40px;
+  column-gap: 16px;
+  justify-content: center;
+
+  @media (min-width: 640px) {
+    & {
+      grid-template-columns: repeat(2, 272px);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    & {
+      grid-template-columns: repeat(4, 272px);
+    }
+  }
+}

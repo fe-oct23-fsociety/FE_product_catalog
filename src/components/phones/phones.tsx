@@ -1,7 +1,6 @@
 import { FC } from 'react';
+import { PhonesPageGrid } from '../PhonesPageGrid';
 
-export const PhonesPage:FC = () => {
-  return (
-    <h1> this is phone test page</h1>
-  );
+export const PhonesPage: FC = () => {
+  return <PhonesPageGrid />;
 };
