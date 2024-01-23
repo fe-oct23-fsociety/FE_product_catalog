@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { NavItem } from '../NavItem';
 import styles from './NavList.module.scss';
 
@@ -21,7 +21,7 @@ const navList = [
   },
 ];
 
-export const NavList: FC = () => {
+export const NavList: React.FC = () => {
   return (
     <nav className={styles['nav-bar']} data-cy="Nav">
       {navList.map(({ href, title }) => (
