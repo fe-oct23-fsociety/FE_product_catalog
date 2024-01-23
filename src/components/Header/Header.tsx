@@ -45,7 +45,7 @@ export const Header: FC = () => {
               <FavouritesIcon />
             </NavItem>
 
-            <NavItem href="/shop" isIcon count={3}>
+            <NavItem href="/shopCart" isIcon count={3}>
               <ShopBagIcon />
             </NavItem>
           </div>
@@ -70,7 +70,7 @@ export const Header: FC = () => {
           </NavItem>
 
           <NavItem
-            href="/shop"
+            href="/shopCart"
             isIcon
             count={3}
             onMobMenu
