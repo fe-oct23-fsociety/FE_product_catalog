@@ -1,0 +1,122 @@
+@import '../../styles/fonts.scss';
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+
+.card {
+  width: $card-width;
+  border: solid 1px $border-grey;
+  @include font-mont-regular;
+
+  padding: 32px;
+
+  display: flex;
+  flex-direction: column;
+
+  &__image {
+    height: 196px;
+    
+    margin-bottom: 24px;
+  }
+
+  &__nametag {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+
+    color: $primary-grey;
+
+    margin-bottom: 8px;
+  }
+
+  &__price {
+    padding-bottom: 8px;
+    border-bottom: 1px solid $border-grey;
+  }
+
+  &__newPrice {
+    @include font-mont-bold;
+    color: $primary-grey;
+
+    margin-right: 8px;
+  }
+
+  &__oldPrice {
+    @include font-mont-regular;
+    color: $light-grey;
+    text-decoration: line-through;
+  }
+
+  &__about {
+    margin-top: 8px;
+
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 16px;
+  }
+
+  &__spec {
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 12px;
+    line-height: 15.34px;
+  }
+
+  &__specName {
+    @include font-mont-regular;
+    color: $light-grey;
+  }
+
+  &__specValue {
+    @include font-mont-bold;
+    color: $primary-grey;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__btnAdd {
+    color: white;
+    font-size: 14px;
+    line-height: 21px;
+    height: 40px;
+    width: 160px;
+
+    background-color: $primary-grey;
+    border: 1px solid $primary-grey;
+    transition: box-shadow 0.2s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      box-shadow: 0px 3px 13px 0px $btn-shadow;
+    }
+
+    &:focus {
+      color: $focus-light-green;
+      background-color: $white;
+      border: 1px solid $border-grey;
+    }
+  }
+
+  &__btnLike {
+    border: 1px solid $border-grey-second;
+    background-color: transparent;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 40px;
+    height: 40px;
+
+    transition: border 0.2s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      border: 1px solid $primary-grey;
+    }
+  }
+}
