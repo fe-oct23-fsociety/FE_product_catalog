@@ -1,22 +1,22 @@
 import React from 'react';
 import './container.scss';
-import './card.scss';
+import { Card } from '../Card';
 
 export const PhonesPageGrid = () => (
   <div className="container">
-    <div className="card" />
-    <div className="card" />
-    <div className="card" />
-    <div className="card" />
-    <div className="card" />
-    <div className="card" />
-    <div className="card" />
-    <div className="card" />
-    <div className="card" />
-    <div className="card" />
-    <div className="card" />
-    <div className="card" />
-    <div className="card" />
+    <Card />
+    <Card />
+    <Card />
+    <Card />
+    <Card />
+    <Card />
+    <Card />
+    <Card />
+    <Card />
+    <Card />
+    <Card />
+    <Card />
+    <Card />
   </div>
 );
 
