@@ -1,13 +1,23 @@
 {
   "files": {
-    "main.css": "/FE_product_catalog/static/css/main.1d766016.css",
-    "main.js": "/FE_product_catalog/static/js/main.d1c2d1e3.js",
+    "main.css": "/FE_product_catalog/static/css/main.38315822.css",
+    "main.js": "/FE_product_catalog/static/js/main.1f801081.js",
+    "static/media/logo.svg": "/FE_product_catalog/static/media/logo.dfa7012d365a04960cf0a407eefb0049.svg",
+    "static/media/Mont-Regular.woff": "/FE_product_catalog/static/media/Mont-Regular.5f2dd0890a78d28216de.woff",
+    "static/media/Mont-Bold.woff": "/FE_product_catalog/static/media/Mont-Bold.bbedfa075d47682c0041.woff",
+    "static/media/Mont-Regular.woff2": "/FE_product_catalog/static/media/Mont-Regular.efd082cbd3e10b7e9c88.woff2",
+    "static/media/Mont-Bold.woff2": "/FE_product_catalog/static/media/Mont-Bold.8b7a4e0626328dd44205.woff2",
+    "static/media/iPhone.png": "/FE_product_catalog/static/media/iPhone.7d17d06e20be429ac8f3.png",
+    "static/media/shopping-bag.svg": "/FE_product_catalog/static/media/shopping-bag.6b6ebef2b16ee05b847f7de31b994897.svg",
+    "static/media/favourites.svg": "/FE_product_catalog/static/media/favourites.87fbe581c0493d3cf3f1c5b08aa5a250.svg",
+    "static/media/heart.svg": "/FE_product_catalog/static/media/heart.73331cc5187a77c7d93eb67ea775455e.svg",
+    "static/media/arrow-top.svg": "/FE_product_catalog/static/media/arrow-top.eadd4b1b07b5ba9bb8fd69a065c6ba67.svg",
     "index.html": "/FE_product_catalog/index.html",
-    "main.1d766016.css.map": "/FE_product_catalog/static/css/main.1d766016.css.map",
-    "main.d1c2d1e3.js.map": "/FE_product_catalog/static/js/main.d1c2d1e3.js.map"
+    "main.38315822.css.map": "/FE_product_catalog/static/css/main.38315822.css.map",
+    "main.1f801081.js.map": "/FE_product_catalog/static/js/main.1f801081.js.map"
   },
   "entrypoints": [
-    "static/css/main.1d766016.css",
-    "static/js/main.d1c2d1e3.js"
+    "static/css/main.38315822.css",
+    "static/js/main.1f801081.js"
   ]
 }

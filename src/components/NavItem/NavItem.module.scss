@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
 
-  @media(max-width: 768px) {
+  @media (max-width: 768px) {
     margin-inline: 20px;
   }
 
@@ -16,7 +16,7 @@
       padding: 24px;
       border-left: $header-border;
 
-      @media(max-width: 768px) {
+      @media (max-width: 768px) {
         padding: 15px;
       }
     }
@@ -43,7 +43,7 @@
         top: 25%;
         z-index: 999;
 
-        @media(max-width: 768px) {
+        @media (max-width: 768px) {
           right: 15%;
           top: 15%;
         }
@@ -59,7 +59,7 @@
       text-decoration: none;
       padding-block: 24px;
 
-      @media(max-width: 768px) {
+      @media (max-width: 768px) {
         padding-block: 15px;
       }
 

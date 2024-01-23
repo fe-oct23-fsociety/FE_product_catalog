@@ -23,10 +23,7 @@ const navList = [
 
 export const NavList: FC = () => {
   return (
-    <nav
-      className={styles['nav-bar']}
-      data-cy="Nav"
-    >
+    <nav className={styles['nav-bar']} data-cy="Nav">
       {navList.map(({ href, title }) => (
         <NavItem key={href} href={href}>
           {title}

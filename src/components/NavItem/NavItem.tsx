@@ -11,15 +11,10 @@ type Props = {
 };
 
 export const NavItem: FC<Props> = ({
-  href,
-  children,
-  isIcon,
-  count,
+  href, children, isIcon, count,
 }) => {
   return (
-    <div
-      className={cn({ [styles['navbar-item']]: !isIcon })}
-    >
+    <div className={cn({ [styles['navbar-item']]: !isIcon })}>
       <NavLink
         to={href}
         key={href}
