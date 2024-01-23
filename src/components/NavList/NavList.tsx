@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavItem } from '../NavItem';
-import './styles.scss';
+import styles from './NavList.module.scss';
 
 const navList = [
   {
@@ -23,7 +23,7 @@ const navList = [
 
 export const NavList: React.FC = () => {
   return (
-    <nav className="nav-bar" data-cy="Nav">
+    <nav className={styles['nav-bar']} data-cy="Nav">
       {navList.map(({ href, title }) => (
         <NavItem key={href} href={href}>
           {title}
