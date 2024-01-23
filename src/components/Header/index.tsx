@@ -25,7 +25,7 @@ export const Header: React.FC = () => {
             <FavouritesIcon />
           </NavItem>
 
-          <NavItem href="/shop" isIcon count={3}>
+          <NavItem href="/shopCart" isIcon count={3}>
             <ShopBagIcon />
           </NavItem>
         </div>
