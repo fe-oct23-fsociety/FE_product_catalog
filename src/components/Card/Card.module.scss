@@ -79,7 +79,7 @@
   }
 
   &__btnAdd {
-    color: white;
+    color: $white;
     font-size: 14px;
     line-height: 21px;
     height: 40px;
@@ -98,25 +98,6 @@
       color: $focus-light-green;
       background-color: $white;
       border: 1px solid $border-grey;
-    }
-  }
-
-  &__btnLike {
-    border: 1px solid $border-grey-second;
-    background-color: transparent;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 40px;
-    height: 40px;
-
-    transition: border 0.2s ease-in-out;
-
-    &:hover {
-      cursor: pointer;
-      border: 1px solid $primary-grey;
     }
   }
 }

@@ -4,6 +4,7 @@ import styles from './Card.module.scss';
 
 import iphoneImage from '../../images/iPhone.png';
 import heartIcon from '../../images/icons/heart.svg';
+import { BtnSquare } from '../BtnSquare';
 
 export const Card: React.FC = () => {
   return (
@@ -46,9 +47,7 @@ export const Card: React.FC = () => {
           Add to cart
         </button>
 
-        <button type="button" className={styles.card__btnLike}>
-          <img src={heartIcon} alt="Like icon" />
-        </button>
+        <BtnSquare srcValue={heartIcon} altValue="Heart icon" />
       </section>
     </article>
   );

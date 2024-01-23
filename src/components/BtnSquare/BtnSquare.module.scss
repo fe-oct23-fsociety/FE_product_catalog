@@ -1,0 +1,17 @@
+@import '../../styles/variables.scss';
+
+.btnSquare {
+  border: 1px solid $border-grey-second;
+  background-color: transparent;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: border 0.2s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    border: 1px solid $primary-grey;
+  }
+}
