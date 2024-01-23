@@ -1,0 +1,23 @@
+@import '../../styles/base-theme.scss';
+
+.header {
+  background: $white-color;
+  border-bottom: $header-border;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+
+  &__nav {
+    display: flex;
+    align-items: center;
+  }
+
+  &__icons {
+    display: flex;
+  }
+}
