@@ -5,3 +5,43 @@
 @mixin font-mont-bold {
   font-family: 'Mont-Bold', sans-serif;
 }
+
+@mixin transparent-btn {
+  cursor: pointer;
+  background-color: transparent;
+  background-position: center;
+  background-size: cover;
+}
+
+@mixin small-text {
+  font-size: 12px;
+  line-height: 15px;
+  @include font-mont-bold;
+}
+
+@mixin body-text {
+  @include font-mont-regular;
+  font-size: 14px;
+  line-height: 25px;
+}
+
+@mixin h1 {
+  @include font-mont-bold;
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: -0.01em;
+}
+
+@mixin h2 {
+  @include font-mont-bold;
+  font-size: 32px;
+  line-height: 41px;
+  letter-spacing: -0.01em;
+}
+
+@mixin h3 {
+  @include font-mont-bold;
+
+  font-size: 22px;
+  line-height: 31px;
+}
