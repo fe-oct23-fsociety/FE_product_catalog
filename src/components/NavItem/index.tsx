@@ -1,7 +1,7 @@
-import { ReactNode, FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 import './styles.scss';
+import React, { ReactNode } from 'react';
 
 type Props = {
   href: string;
@@ -10,16 +10,11 @@ type Props = {
   count?: number;
 };
 
-export const NavItem: FC<Props> = ({
-  href,
-  children,
-  isIcon,
-  count,
+export const NavItem: React.FC<Props> = ({
+  href, children, isIcon, count,
 }) => {
   return (
-    <div
-      className={cn({ 'navbar-item': !isIcon })}
-    >
+    <div className={cn({ 'navbar-item': !isIcon })}>
       <NavLink
         to={href}
         key={href}
