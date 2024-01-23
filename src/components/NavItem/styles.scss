@@ -1,0 +1,85 @@
+@import '../../styles/base-theme.scss';
+
+.navbar-item {
+  margin-inline: 32px;
+  display: flex;
+  align-items: center;
+
+  @media(max-width: 768px) {
+    margin-inline: 20px;
+  }
+
+  &__link {
+    position: relative;
+
+    &--icon {
+      padding: 24px;
+      border-left: $header-border;
+
+      @media(max-width: 768px) {
+        padding: 15px;
+      }
+    }
+
+    &--icon-count {
+      &::before {
+        content: attr(data-content);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+
+        background: $red-color;
+        color: $white-color;
+        font-family: $font-family;
+        border-radius: 50%;
+        width: 14px;
+        height: 14px;
+        border: 1px solid $white-color;
+        font-size: 9px;
+
+        position: absolute;
+        right: 25%;
+        top: 25%;
+        z-index: 999;
+
+        @media(max-width: 768px) {
+          right: 15%;
+          top: 15%;
+        }
+      }
+    }
+
+    &--text {
+      text-transform: Uppercase;
+      font-family: $font-family;
+      color: $secondary-color;
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      padding-block: 24px;
+
+      @media(max-width: 768px) {
+        padding-block: 15px;
+      }
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+
+    &--active {
+      color: $primary-color;
+
+      &::after {
+        content: '';
+        background: $primary-color;
+        height: 3px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+    }
+  }
+}
