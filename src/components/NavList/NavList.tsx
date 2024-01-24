@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 import { NavItem } from '../NavItem';
 import styles from './NavList.module.scss';
 
@@ -21,9 +22,18 @@ const navList = [
   },
 ];
 
-export const NavList: React.FC = () => {
+type Props = {
+  toColumn?: boolean;
+};
+
+export const NavList: React.FC<Props> = ({ toColumn }) => {
   return (
-    <nav className={styles['nav-bar']} data-cy="Nav">
+    <nav
+      className={cn(styles['nav-bar'], {
+        [styles['nav-bar--col']]: toColumn,
+      })}
+      data-cy="Nav"
+    >
       {navList.map(({ href, title }) => (
         <NavItem key={href} href={href}>
           {title}
