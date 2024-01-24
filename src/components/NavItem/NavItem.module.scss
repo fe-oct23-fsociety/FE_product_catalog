@@ -1,4 +1,5 @@
 @import '../../styles/base-theme.scss';
+@import '../../styles/mixins.scss';
 
 .navbar-item {
   margin-inline: 32px;
@@ -30,7 +31,7 @@
 
         background: $red-color;
         color: $white-color;
-        font-family: $font-family;
+        @include font-mont-regular;
         border-radius: 50%;
         min-width: 14px;
         height: 14px;
@@ -52,8 +53,8 @@
     }
 
     &--text {
+      @include font-mont-bold;
       text-transform: Uppercase;
-      font-family: $font-family;
       color: $secondary-color;
       font-size: 12px;
       font-weight: 800;

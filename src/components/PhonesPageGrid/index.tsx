@@ -1,1 +1,1 @@
-export * from './PhonesPageGrid';
+export * from './ProductPageGrid';
