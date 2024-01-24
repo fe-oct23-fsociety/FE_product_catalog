@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../../images/logo.svg';
-import './styles.scss';
+import styles from './Logo.module.scss';
 
-export const Logo = () => {
+export const Logo: React.FC = () => {
   return (
-    <h1 className="logo-wrapp">
+    <h1 className={styles.logo}>
       <NavLink to="/">
         <img src={logo} alt="nice gadgets" />
       </NavLink>
