@@ -1,4 +1,6 @@
 @import '../../styles/variables.scss';
+@import '../../styles/fonts.scss';
+@import '../../styles/mixins.scss';
 
 .btnSquare {
   border: 1px solid $border-grey-second;
@@ -8,7 +10,14 @@
   justify-content: center;
   align-items: center;
 
-  transition: border 0.2s ease-in-out;
+  transition:
+    border 0.2s ease-in-out,
+    color 0.2s ease-in-out,
+    background-color 0.2s ease-in-out;
+
+  @include font-mont-regular;
+  font-size: 14px;
+  line-height: 21px;
 
   &:hover {
     cursor: pointer;
