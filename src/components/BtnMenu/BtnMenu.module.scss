@@ -1,0 +1,55 @@
+@import '../../styles/base-theme.scss';
+
+@mixin icon-line {
+  background: $primary-color;
+  display: block;
+  width: 14px;
+  height: 2px;
+}
+
+@mixin icon-line-el {
+  position: absolute;
+  transition: 0.3s;
+}
+
+.btn-menu {
+  background: $white-color;
+  padding: 24px;
+  border-left: $header-border;
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
+
+  &__icon {
+    @include icon-line;
+    margin: 4px 0;
+    position: relative;
+
+    &::before {
+      @include icon-line;
+      @include icon-line-el;
+      content: '';
+      top: -5px;
+    }
+
+    &::after {
+      @include icon-line;
+      @include icon-line-el;
+      content: '';
+      top: 5px;
+    }
+
+    &--close {
+      background: transparent;
+
+      &::before {
+        transform: translate(0, 5px) rotate(45deg);
+      }
+
+      &::after {
+        transform: translate(0, -5px) rotate(-45deg);
+      }
+    }
+  }
+}

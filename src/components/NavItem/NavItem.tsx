@@ -7,14 +7,23 @@ type Props = {
   href: string;
   children: ReactNode;
   isIcon?: boolean;
+  onMobMenu?: boolean;
   count?: number;
 };
 
 export const NavItem: FC<Props> = ({
-  href, children, isIcon, count,
+  href,
+  children,
+  isIcon,
+  count,
+  onMobMenu,
 }) => {
   return (
-    <div className={cn({ [styles['navbar-item']]: !isIcon })}>
+    <div className={cn({
+      [styles['navbar-item']]: !isIcon,
+      [styles['navbar-item__link--footer-position']]: onMobMenu,
+    })}
+    >
       <NavLink
         to={href}
         key={href}
