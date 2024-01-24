@@ -60,21 +60,11 @@ export const Header: FC = () => {
         <NavList toColumn />
 
         <div className={styles['header__mob-menu-footer']}>
-          <NavItem
-            href="/"
-            isIcon
-            count={110}
-            onMobMenu
-          >
+          <NavItem href="/" isIcon count={110} onMobMenu>
             <FavouritesIcon />
           </NavItem>
 
-          <NavItem
-            href="/shopCart"
-            isIcon
-            count={3}
-            onMobMenu
-          >
+          <NavItem href="/shopCart" isIcon count={3} onMobMenu>
             <ShopBagIcon />
           </NavItem>
         </div>
