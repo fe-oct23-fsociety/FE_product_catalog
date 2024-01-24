@@ -11,17 +11,15 @@
       flex-grow: 1;
     }
   }
-  
 
   &__content {
     width: 100%;
     padding: 24px;
     text-align: center;
     position: relative;
-    
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       border: 1px solid $border-grey;
       top: 50%;
@@ -31,7 +29,7 @@
     }
 
     &-total {
-      @include h2;      
+      @include h2;
     }
 
     &-description {
