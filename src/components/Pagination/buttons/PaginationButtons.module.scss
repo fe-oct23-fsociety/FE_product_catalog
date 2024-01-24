@@ -1,8 +1,8 @@
-@import '../../styles/variables.scss';
-@import '../../styles/fonts.scss';
-@import '../../styles/mixins.scss';
+@import '../../../styles/variables.scss';
+@import '../../../styles/fonts.scss';
+@import '../../../styles/mixins.scss';
 
-.btnSquare {
+.paginationButton {
   border: 1px solid $border-grey-second;
   background-color: transparent;
 
@@ -20,5 +20,19 @@
   &:hover {
     cursor: pointer;
     border: 1px solid $primary-grey;
+  }
+
+  &__active {
+    border: 1px solid $primary-grey;
+    color: $white;
+    background-color: $primary-grey;
+  }
+
+  &__arrowLeft {
+    margin-right: 16px;
+  }
+
+  &__arrowRight {
+    margin-left: 16px;
   }
 }
