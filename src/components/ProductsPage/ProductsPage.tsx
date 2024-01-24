@@ -25,10 +25,15 @@ export const ProductsPage: React.FC = () => {
   // only test, before added limited select
   const limit = 7;
 
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   useEffect(() => {
     setCategory(pathname);
     setCurrentPage(0);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    scrollToTop();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   useEffect(() => {
@@ -42,6 +47,7 @@ export const ProductsPage: React.FC = () => {
 
   const handlePageClick = (selectedItem: { selected: number }) => {
     setCurrentPage(selectedItem.selected);
+    scrollToTop();
   };
 
   return (
