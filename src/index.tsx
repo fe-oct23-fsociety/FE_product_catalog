@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import { PhonesPage } from './components/phones/phones';
 import { ShopCart } from './components/ShopCart/ShopCart';
+import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 
 const router = createHashRouter([
   {
@@ -20,6 +21,7 @@ const router = createHashRouter([
         element: <ShopCart />,
       },
     ],
+    errorElement: <NotFoundPage />,
   },
 ]);
 

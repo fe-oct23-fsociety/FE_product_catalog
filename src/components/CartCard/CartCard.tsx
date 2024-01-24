@@ -40,7 +40,7 @@ export const CartCard: FC = () => {
             />
           </div>
 
-          <h3 className="cartItem__botom-pirce">$333</h3>
+          <h3 className="cartItem__bottom-price">$333</h3>
         </div>
       </div>
     </li>
