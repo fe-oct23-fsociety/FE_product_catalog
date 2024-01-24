@@ -1,0 +1,54 @@
+@import '../../styles/variables.scss';
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: 150px; // normal value is 80px, 150px for footer
+
+  > li:not(:first-child):not(:nth-last-child(2)):not(:last-child) {
+    margin-right: 8px;
+
+    @media (max-width: 330px) {
+      margin-right: 3px;
+    }
+  }
+
+  &__item {
+    transition:
+      border 0.2s ease-in-out,
+      color 0.2s ease-in-out,
+      background-color 0.2s ease-in-out;
+
+    &:focus {
+      border: 1px solid $primary-grey;
+      background-color: $primary-grey;
+      color: $white;
+    }
+  }
+
+  &__active {
+    > a > button {
+      border: 1px solid $primary-grey;
+      color: $white;
+      background-color: $primary-grey;
+    }
+  }
+
+  &__arrowLeft {
+    margin-right: 16px;
+
+    @media (max-width: 450px) {
+      display: none;
+    }
+  }
+
+  &__arrowRight {
+    margin-left: 16px;
+
+    @media (max-width: 450px) {
+      display: none;
+    }
+  }
+}

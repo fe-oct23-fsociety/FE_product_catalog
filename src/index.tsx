@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import App from './App';
-import { PhonesPage } from './components/phones/phones';
+import { PhonesPage } from './components/Phones/phones';
+import { ShopCart } from './components/ShopCart/ShopCart';
 
 const router = createHashRouter([
   {
@@ -13,6 +14,10 @@ const router = createHashRouter([
       {
         path: 'phones',
         element: <PhonesPage />,
+      },
+      {
+        path: 'shopCart',
+        element: <ShopCart />,
       },
     ],
   },

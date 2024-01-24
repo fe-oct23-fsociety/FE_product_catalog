@@ -1,18 +1,21 @@
 import React from 'react';
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
-import './App.css';
+import './styles/contentContainer.scss';
+import './styles/outlet-lorem-container.scss';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 
 function App() {
   return (
     <>
-      <Header />
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/phones">Phones</NavLink>
-      <Outlet />
-      <Footer />
+      <div className="main-container">
+        <Header />
+        <div className="contentContainer">
+          <Outlet />
+        </div>
+        <Footer />
+      </div>
     </>
   );
 }

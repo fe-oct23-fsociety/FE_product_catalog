@@ -1,0 +1,109 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.cartItem {
+  border: 2px solid $border-grey;
+  max-width: 100%;
+
+  &:hover {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  &__container {
+    max-width: 100%;
+    padding: 16px;
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+
+    @media (min-width: 640px) {
+      & {
+        flex-direction: row;
+        gap: 24px;
+      }
+    }
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
+    @media (min-width: 640px) {
+      & {
+        gap: 24px;
+      }
+    }
+
+    &-closeBtn {
+      background-image: url('../../images/icons/close-btn.svg');
+      width: 10px;
+      height: 10px;
+      border: none;
+
+      @include transparent-btn;
+    }
+
+    &-productImg {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+    }
+
+    &-title {
+      @include body-text;
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &-price {
+      @include h3;
+    }
+
+    @media (min-width: 640px) {
+      & {
+        justify-content: center;
+        gap: 24px;
+      }
+    }
+  }
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  &__increment {
+    @include transparent-btn;
+    background-image: url('../../images/icons/counter-plus.svg');
+    width: 32px;
+    height: 32px;
+    border: 1px solid $border-grey;
+
+    &:hover {
+      border-color: $border-grey-second;
+    }
+  }
+
+  &__current {
+    @include body-text;
+  }
+
+  &__decrement {
+    @include transparent-btn;
+    background-image: url('../../images/icons/counter-minus.svg');
+    width: 32px;
+    height: 32px;
+    border: 1px solid $border-grey;
+
+    &:hover {
+      border-color: $border-grey-second;
+    }
+  }
+}

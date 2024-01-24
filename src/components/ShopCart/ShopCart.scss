@@ -1,0 +1,36 @@
+@import '../../styles/base-theme.scss';
+@import '../../styles/mixins.scss';
+
+.shopCart {
+  padding-top: 100px;
+  margin-bottom: 150px;
+
+  &__back {
+    background-color: transparent;
+    color: $secondary-color;
+    border: none;
+    @include small-text;
+
+    cursor: pointer;
+
+    margin-bottom: 24px;
+  }
+
+  &__title {
+    @include h1;
+    margin-bottom: 32px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    @media (min-width: 640px) {
+      & {
+        flex-direction: row;
+        gap: 16px;
+      }
+    }
+  }
+}
