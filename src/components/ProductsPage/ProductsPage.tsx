@@ -4,7 +4,7 @@ import ReactPaginate from 'react-paginate';
 import { apiRoutes } from '../../const/routes';
 import { useAxios } from '../../hooks/useAxios';
 
-import { ProductPageGrid } from '../PhonesPageGrid';
+import { ProductsPageGrid } from '../ProductsPageGrid';
 import { BtnSquare } from '../BtnSquare';
 
 import arrowLeftIcon from '../../images/icons/arrow-left.svg';
@@ -12,7 +12,7 @@ import arrowRightIcon from '../../images/icons/arrow-right.svg';
 import styles from './Pagination.module.scss';
 import { Loader } from '../Loader';
 
-export const ProductPage: React.FC = () => {
+export const ProductsPage: React.FC = () => {
   const location = useLocation();
   const pathname = location.pathname.replace('/', '');
 
@@ -53,7 +53,7 @@ export const ProductPage: React.FC = () => {
       )}
 
       {data?.length > 0 && (
-        <ProductPageGrid productEntities={data} />
+        <ProductsPageGrid productEntities={data} />
       )}
 
       <ReactPaginate

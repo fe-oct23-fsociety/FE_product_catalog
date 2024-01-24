@@ -7,7 +7,7 @@ type Props = {
   productEntities: Product[];
 };
 
-export const ProductPageGrid: React.FC<Props> = ({ productEntities }) => {
+export const ProductsPageGrid: React.FC<Props> = ({ productEntities }) => {
   return (
     <div className="container">
       {productEntities.map((productEntity) => (
@@ -17,4 +17,4 @@ export const ProductPageGrid: React.FC<Props> = ({ productEntities }) => {
   );
 };
 
-export default ProductPageGrid;
+export default ProductsPageGrid;
