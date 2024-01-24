@@ -16,10 +16,12 @@ export const BtnMenu: FC<Props> = ({ onclick, onClose }) => {
     }
   }, [onClose, isOpen]);
 
-  const handleOnClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleOnClick = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
     e.preventDefault();
 
-    setIsOpen(isOpenPrev => !isOpenPrev);
+    setIsOpen((isOpenPrev) => !isOpenPrev);
     onclick(!isOpen);
   };
 

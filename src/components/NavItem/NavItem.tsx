@@ -19,10 +19,11 @@ export const NavItem: FC<Props> = ({
   onMobMenu,
 }) => {
   return (
-    <div className={cn({
-      [styles['navbar-item']]: !isIcon,
-      [styles['navbar-item__link--footer-position']]: onMobMenu,
-    })}
+    <div
+      className={cn({
+        [styles['navbar-item']]: !isIcon,
+        [styles['navbar-item__link--footer-position']]: onMobMenu,
+      })}
     >
       <NavLink
         to={href}
