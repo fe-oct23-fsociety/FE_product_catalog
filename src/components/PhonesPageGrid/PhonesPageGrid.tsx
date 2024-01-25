@@ -8,11 +8,13 @@ type Props = {
 
 export const PhonesPageGrid: React.FC<Props> = ({ phoneEntities }) => {
   return (
+
     <div className="container">
       {phoneEntities.map((phoneEntity) => (
         <Card key={phoneEntity} />
       ))}
     </div>
+
   );
 };
 
