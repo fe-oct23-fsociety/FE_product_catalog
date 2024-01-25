@@ -79,9 +79,11 @@
   }
 
   &__btnAdd {
+    @include font-mont-regular;
     color: $white;
     font-size: 14px;
     line-height: 21px;
+
     height: 40px;
     width: 100%;
 
