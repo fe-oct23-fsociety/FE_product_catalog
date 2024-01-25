@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './Card.module.scss';
 import heartIcon from '../../images/icons/heart.svg';
 import { BtnSquare } from '../BtnSquare';
@@ -24,10 +25,35 @@ export const Card: React.FC<Props> = ({ productData }) => {
   } = productData;
 
   const normalisedImage = `${PREF_TO_STATIC_SERVER}${image}`;
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate('/');
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      navigate('/');
+    }
+  };
+
+  const handleAddToCart = (event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.stopPropagation();
+  };
 
   return (
-    <article className={styles.card}>
-      <img className={styles.card__image} src={normalisedImage} alt={itemId} />
+    <div
+      className={styles.card}
+      onClick={handleCardClick}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex={0}
+    >
+      <img
+        className={styles.card__image}
+        src={normalisedImage}
+        alt={itemId}
+      />
 
       <section className="card__description">
         <h3 className={styles.card__nametag}>{name}</h3>
@@ -59,13 +85,17 @@ export const Card: React.FC<Props> = ({ productData }) => {
       </section>
 
       <section className={styles.card__actions}>
-        <button type="button" className={styles.card__btnAdd}>
+        <button
+          type="button"
+          className={styles.card__btnAdd}
+          onClick={handleAddToCart}
+        >
           Add to cart
         </button>
 
         <BtnSquare srcValue={heartIcon} altValue="Heart icon" />
       </section>
-    </article>
+    </div>
   );
 };
 
