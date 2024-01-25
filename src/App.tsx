@@ -19,7 +19,7 @@ const App = observer(() => {
           </div>
           <Footer />
         </div>
-      </CartProvider>
+      <C/CartProvider>
     </>
   );
 });

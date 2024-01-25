@@ -1,6 +1,5 @@
-import { useNavigate } from 'react-router-dom';
-import React, { useContext, useState } from 'react';
 import classNames from 'classnames';
+import React, { useContext, useState } from 'react';
 import styles from './Card.module.scss';
 import heartIcon from '../../images/icons/heart.svg';
 import { BtnSquare } from '../BtnSquare';
@@ -19,51 +18,30 @@ export const Card: React.FC<Props> = ({ productData }) => {
   const {
     itemId, name, fullPrice, price, screen, capacity, ram, image,
   }
-  = productData;
+    = productData;
 
   const { cartCount, setCartCount } = useContext(CartContext);
   const [isInCart, setIsInCart] = useState(false);
 
   const normalisedImage = `${PREF_TO_STATIC_SERVER}${image}`;
-  const navigate = useNavigate();
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Enter') {
-      navigate('/');
-    }
-  };
-
-  const handleCardClick = () => {
-    navigate('/');
-  };
-
-  const handleAddToCart = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
-    event.stopPropagation();
-
+  const handleClick = () => {
     if (isInCart) {
       setCartCount(cartCount - 1);
+      shopCart.deleteItem(productData);
     } else {
       setCartCount(cartCount + 1);
+      shopCart.addItem(productData);
     }
 
     setIsInCart(!isInCart);
-    // handleCardClick();
-  };
 
-  const handleAddtoCart = () => {
-    shopCart.addItem(productData);
+    // eslint-disable-next-line no-console
+    console.log(cartCount);
   };
 
   return (
-    <div
-      className={styles.card}
-      onClick={handleCardClick}
-      onKeyDown={handleKeyDown}
-      role="button"
-      tabIndex={0}
-    >
+    <article className={styles.card}>
       <img className={styles.card__image} src={normalisedImage} alt={itemId} />
 
       <section className="card__description">
@@ -98,19 +76,18 @@ export const Card: React.FC<Props> = ({ productData }) => {
       <section className={styles.card__actions}>
         <button
           type="button"
-
           className={classNames({
             [styles.card__btnAdd]: !isInCart,
             [styles.card__btnAdd__active]: isInCart,
           })}
-          onClick={handleAddToCart}
+          onClick={handleClick}
         >
           {isInCart ? 'Added to cart' : 'Add to cart'}
         </button>
 
         <BtnSquare srcValue={heartIcon} altValue="Heart icon" />
       </section>
-    </div>
+    </article>
   );
 };
 
