@@ -19,7 +19,10 @@ export const Card: React.FC<Props> = ({ productData }) => {
   const {
     itemId, name, fullPrice, price, screen, capacity, ram, image,
   }
-    = productData;
+  = productData;
+
+  const { cartCount, setCartCount } = useContext(CartContext);
+  const [isInCart, setIsInCart] = useState(false);
 
   const normalisedImage = `${PREF_TO_STATIC_SERVER}${image}`;
   const navigate = useNavigate();
@@ -30,12 +33,15 @@ export const Card: React.FC<Props> = ({ productData }) => {
     }
   };
 
-  const handleAddToCart = (event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    event.stopPropagation();
-  const { cartCount, setCartCount } = useContext(CartContext);
-  const [isInCart, setIsInCart] = useState(false);
+  const handleCardClick = () => {
+    navigate('/');
+  };
 
-  const handleClick = () => {
+  const handleAddToCart = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    event.stopPropagation();
+
     if (isInCart) {
       setCartCount(cartCount - 1);
     } else {
@@ -43,7 +49,7 @@ export const Card: React.FC<Props> = ({ productData }) => {
     }
 
     setIsInCart(!isInCart);
-    navigate('/');
+    handleCardClick();
   };
 
   return (
@@ -54,11 +60,7 @@ export const Card: React.FC<Props> = ({ productData }) => {
       role="button"
       tabIndex={0}
     >
-      <img
-        className={styles.card__image}
-        src={normalisedImage}
-        alt={itemId}
-      />
+      <img className={styles.card__image} src={normalisedImage} alt={itemId} />
 
       <section className="card__description">
         <h3 className={styles.card__nametag}>{name}</h3>
@@ -96,7 +98,7 @@ export const Card: React.FC<Props> = ({ productData }) => {
             [styles.card__btnAdd]: !isInCart,
             [styles.card__btnAdd__active]: isInCart,
           })}
-          onClick={handleClick}
+          onClick={handleAddToCart}
         >
           {isInCart ? 'Added to cart' : 'Add to cart'}
         </button>
