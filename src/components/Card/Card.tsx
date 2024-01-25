@@ -1,35 +1,28 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import classNames from 'classnames';
 import styles from './Card.module.scss';
 import heartIcon from '../../images/icons/heart.svg';
 import { BtnSquare } from '../BtnSquare';
 import { Product } from '../../types/ProductEntity';
+import { CartContext } from '../CartContext/CartContext';
 // import iphoneImage from '../../images/iPhone.png';
 
 type Props = {
   productData: Product;
 };
 
-const PREF_TO_STATIC_SERVER = 'https://fsociety-be-product-catalog.onrender.com/static/';
+const PREF_TO_STATIC_SERVER
+  = 'https://fsociety-be-product-catalog.onrender.com/static/';
 
 export const Card: React.FC<Props> = ({ productData }) => {
   const {
-    itemId,
-    name,
-    fullPrice,
-    price,
-    screen,
-    capacity,
-    ram,
-    image,
-  } = productData;
+    itemId, name, fullPrice, price, screen, capacity, ram, image,
+  }
+    = productData;
 
   const normalisedImage = `${PREF_TO_STATIC_SERVER}${image}`;
   const navigate = useNavigate();
-
-  const handleCardClick = () => {
-    navigate('/');
-  };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter') {
@@ -39,6 +32,18 @@ export const Card: React.FC<Props> = ({ productData }) => {
 
   const handleAddToCart = (event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.stopPropagation();
+  const { cartCount, setCartCount } = useContext(CartContext);
+  const [isInCart, setIsInCart] = useState(false);
+
+  const handleClick = () => {
+    if (isInCart) {
+      setCartCount(cartCount - 1);
+    } else {
+      setCartCount(cartCount + 1);
+    }
+
+    setIsInCart(!isInCart);
+    navigate('/');
   };
 
   return (
@@ -87,10 +92,13 @@ export const Card: React.FC<Props> = ({ productData }) => {
       <section className={styles.card__actions}>
         <button
           type="button"
-          className={styles.card__btnAdd}
-          onClick={handleAddToCart}
+          className={classNames({
+            [styles.card__btnAdd]: !isInCart,
+            [styles.card__btnAdd__active]: isInCart,
+          })}
+          onClick={handleClick}
         >
-          Add to cart
+          {isInCart ? 'Added to cart' : 'Add to cart'}
         </button>
 
         <BtnSquare srcValue={heartIcon} altValue="Heart icon" />
