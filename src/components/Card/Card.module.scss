@@ -11,6 +11,7 @@
 
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
   &__image {
     height: 196px;
@@ -79,9 +80,11 @@
   }
 
   &__btnAdd {
+    @include font-mont-regular;
     color: $white;
     font-size: 14px;
     line-height: 21px;
+
     height: 40px;
     width: 100%;
 

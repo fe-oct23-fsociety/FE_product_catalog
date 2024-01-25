@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import App from './App';
-import { PhonesPage } from './components/phones/phones';
+import { ProductsPage } from './components/ProductsPage/ProductsPage';
 import { ShopCart } from './components/ShopCart/ShopCart';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 
@@ -14,7 +14,15 @@ const router = createHashRouter([
     children: [
       {
         path: 'phones',
-        element: <PhonesPage />,
+        element: <ProductsPage />,
+      },
+      {
+        path: 'tablets',
+        element: <ProductsPage />,
+      },
+      {
+        path: 'accessories',
+        element: <ProductsPage />,
       },
       {
         path: 'shopCart',
