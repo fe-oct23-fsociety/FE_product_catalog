@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import React, { useContext, useState } from 'react';
 import classNames from 'classnames';
 import styles from './Card.module.scss';
@@ -21,6 +22,16 @@ export const Card: React.FC<Props> = ({ productData }) => {
     = productData;
 
   const normalisedImage = `${PREF_TO_STATIC_SERVER}${image}`;
+  const navigate = useNavigate();
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      navigate('/');
+    }
+  };
+
+  const handleAddToCart = (event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.stopPropagation();
   const { cartCount, setCartCount } = useContext(CartContext);
   const [isInCart, setIsInCart] = useState(false);
 
@@ -32,14 +43,22 @@ export const Card: React.FC<Props> = ({ productData }) => {
     }
 
     setIsInCart(!isInCart);
-
-    // eslint-disable-next-line no-console
-    console.log(cartCount);
+    navigate('/');
   };
 
   return (
-    <article className={styles.card}>
-      <img className={styles.card__image} src={normalisedImage} alt={itemId} />
+    <div
+      className={styles.card}
+      onClick={handleCardClick}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex={0}
+    >
+      <img
+        className={styles.card__image}
+        src={normalisedImage}
+        alt={itemId}
+      />
 
       <section className="card__description">
         <h3 className={styles.card__nametag}>{name}</h3>
@@ -84,7 +103,7 @@ export const Card: React.FC<Props> = ({ productData }) => {
 
         <BtnSquare srcValue={heartIcon} altValue="Heart icon" />
       </section>
-    </article>
+    </div>
   );
 };
 
