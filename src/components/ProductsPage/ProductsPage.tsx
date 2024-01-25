@@ -9,9 +9,9 @@ import { BtnSquare } from '../BtnSquare';
 
 import arrowLeftIcon from '../../images/icons/arrow-left.svg';
 import arrowRightIcon from '../../images/icons/arrow-right.svg';
-import { Product } from '../../types/ProductEntity';
 import styles from './Pagination.module.scss';
 import { Loader } from '../Loader';
+import { ItemsFromServer } from '../../types/ItemsFromServer';
 
 export const ProductsPage: React.FC = () => {
   const location = useLocation();
@@ -19,7 +19,7 @@ export const ProductsPage: React.FC = () => {
 
   const [currentPage, setCurrentPage] = useState(0);
   const [category, setCategory] = useState(pathname);
-  const [setAxios, loading, data, error] = useAxios<Product[]>(null);
+  const [setAxios, loading, data, error] = useAxios<ItemsFromServer>(null);
 
   // only for test, need response with data length
   const totalPages = 3;
@@ -40,7 +40,8 @@ export const ProductsPage: React.FC = () => {
   useEffect(() => {
     setAxios({
       method: 'get',
-      url: `${apiRoutes.SHOW_PRODUCTS}`
+      url:
+        `${apiRoutes.SHOW_PRODUCTS}`
         + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(limit, currentPage)}`,
     });
 
@@ -54,15 +55,13 @@ export const ProductsPage: React.FC = () => {
 
   return (
     <>
-      {(loading && !error) && (
+      {loading && !error && (
         <div className={styles['container-loading']}>
           <Loader />
         </div>
       )}
 
-      {data && data.length > 0 && (
-        <ProductsPageGrid productEntities={data} />
-      )}
+      {data && data.count > 0 && <ProductsPageGrid productEntities={data} />}
 
       <ReactPaginate
         previousLabel={

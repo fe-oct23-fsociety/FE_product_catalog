@@ -3,27 +3,27 @@ import styles from './Card.module.scss';
 import heartIcon from '../../images/icons/heart.svg';
 import { BtnSquare } from '../BtnSquare';
 import { Product } from '../../types/ProductEntity';
+import { shopCart } from '../../store/CartStorage';
 // import iphoneImage from '../../images/iPhone.png';
 
 type Props = {
   productData: Product;
 };
 
-const prefToStaticServer = 'https://fsociety-be-product-catalog.onrender.com/static/';
+const PREF_TO_STATIC_SERVER
+  = 'https://fsociety-be-product-catalog.onrender.com/static/';
 
 export const Card: React.FC<Props> = ({ productData }) => {
   const {
-    itemId,
-    name,
-    fullPrice,
-    price,
-    screen,
-    capacity,
-    ram,
-    image,
-  } = productData;
+    itemId, name, fullPrice, price, screen, capacity, ram, image,
+  }
+    = productData;
 
-  const normalisedImage = `${prefToStaticServer}${image}`;
+  const normalisedImage = `${PREF_TO_STATIC_SERVER}${image}`;
+
+  const handleAddtoCart = () => {
+    shopCart.addItem(productData);
+  };
 
   return (
     <article className={styles.card}>
@@ -59,7 +59,11 @@ export const Card: React.FC<Props> = ({ productData }) => {
       </section>
 
       <section className={styles.card__actions}>
-        <button type="button" className={styles.card__btnAdd}>
+        <button
+          type="button"
+          className={styles.card__btnAdd}
+          onClick={handleAddtoCart}
+        >
           Add to cart
         </button>
 
