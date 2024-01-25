@@ -16,9 +16,6 @@ export const useAxios = <T>(
   const fetchData = async (
     arg: AxiosRequestConfig<RequestParams>,
   ): Promise<void> => {
-    // eslint-disable-next-line no-console
-    console.log('Making axios request to URL:', arg.url);
-
     try {
       const response = await axios.request(arg);
 

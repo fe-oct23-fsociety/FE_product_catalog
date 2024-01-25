@@ -9,7 +9,7 @@ type Props = {
   productData: Product;
 };
 
-const prefToStaticServer = 'https://fsociety-be-product-catalog.onrender.com/static/';
+const PREF_TO_STATIC_SERVER = 'https://fsociety-be-product-catalog.onrender.com/static/';
 
 export const Card: React.FC<Props> = ({ productData }) => {
   const {
@@ -23,7 +23,7 @@ export const Card: React.FC<Props> = ({ productData }) => {
     image,
   } = productData;
 
-  const normalisedImage = `${prefToStaticServer}${image}`;
+  const normalisedImage = `${PREF_TO_STATIC_SERVER}${image}`;
 
   return (
     <article className={styles.card}>
