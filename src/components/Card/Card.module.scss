@@ -13,6 +13,10 @@
   flex-direction: column;
   justify-content: space-between;
 
+  &:hover {
+    cursor: pointer;
+  }
+  
   &__image {
     height: 196px;
     object-fit: contain;
@@ -96,11 +100,16 @@
       cursor: pointer;
       box-shadow: 0px 3px 13px 0px $btn-shadow;
     }
+  }
 
-    &:focus {
-      color: $focus-light-green;
-      background-color: $white;
-      border: 1px solid $border-grey;
-    }
+  &__btnAdd__active {
+    font-size: 14px;
+    line-height: 21px;
+
+    height: 40px;
+    width: 100%;
+    color: $focus-light-green;
+    background-color: $white;
+    border: 1px solid $border-grey;
   }
 }
