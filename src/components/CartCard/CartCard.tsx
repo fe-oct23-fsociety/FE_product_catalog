@@ -1,16 +1,40 @@
 import React, { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import iphoneCart from '../../images/iphone-cart.png';
 import './CartCard.scss';
 
 export const CartCard: FC = () => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate('/');
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      navigate('/');
+    }
+  };
+
+  const handleRemoveCard = (event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.stopPropagation();
+  };
+
   return (
     <li className="cartItem">
-      <div className="cartItem__container">
+      <div
+        className="cartItem__container"
+        onClick={handleCardClick}
+        onKeyDown={handleKeyDown}
+        role="button"
+        tabIndex={0}
+      >
         <div className="cartItem__top">
           <button
             aria-label="close-btn"
             type="button"
             className="cartItem__top-closeBtn"
+            onClick={handleRemoveCard}
           />
 
           <img
@@ -29,6 +53,7 @@ export const CartCard: FC = () => {
               type="button"
               aria-label="counter-btn"
               className="counter__decrement"
+              onClick={handleRemoveCard}
             />
 
             <p className="counter__current"> 1</p>
@@ -37,6 +62,7 @@ export const CartCard: FC = () => {
               type="button"
               aria-label="counter-btn"
               className="counter__increment"
+              onClick={handleRemoveCard}
             />
           </div>
 

@@ -1,4 +1,6 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, {
+  FC, useState, useEffect, useContext,
+} from 'react';
 import cn from 'classnames';
 import { useLocation } from 'react-router-dom';
 import { NavList } from '../NavList';
@@ -9,11 +11,14 @@ import { ReactComponent as FavouritesIcon } from '../../images/icons/favourites.
 import { ReactComponent as ShopBagIcon } from '../../images/icons/shopping-bag.svg';
 import { useWindowWidth } from '../../hooks/useWindowWidth';
 import styles from './Header.module.scss';
+import { CartContext } from '../CartContext/CartContext';
 
 export const Header: FC = () => {
   const [showMobMenu, setShowMobMenu] = useState(false);
   const isNotMob = useWindowWidth() >= 640;
   const location = useLocation();
+
+  const { cartCount } = useContext(CartContext);
 
   useEffect(() => {
     setShowMobMenu(false);
@@ -45,7 +50,7 @@ export const Header: FC = () => {
               <FavouritesIcon />
             </NavItem>
 
-            <NavItem href="/shopCart" isIcon count={3}>
+            <NavItem href="/shopCart" isIcon count={cartCount}>
               <ShopBagIcon />
             </NavItem>
           </div>
