@@ -49,7 +49,7 @@ export const Card: React.FC<Props> = ({ productData }) => {
     }
 
     setIsInCart(!isInCart);
-    handleCardClick();
+    // handleCardClick();
   };
 
   return (
