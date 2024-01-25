@@ -9,6 +9,9 @@
   padding-left: 24px;
   z-index: 999;
 
+  position: sticky;
+  top: 0;
+
   @media (max-width: 768px) {
     padding-left: 16px;
   }
