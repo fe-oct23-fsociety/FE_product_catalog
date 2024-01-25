@@ -5,8 +5,8 @@ import styles from './Card.module.scss';
 import heartIcon from '../../images/icons/heart.svg';
 import { BtnSquare } from '../BtnSquare';
 import { Product } from '../../types/ProductEntity';
+import { shopCart } from '../../store/CartStorage';
 import { CartContext } from '../CartContext/CartContext';
-// import iphoneImage from '../../images/iPhone.png';
 
 type Props = {
   productData: Product;
@@ -52,6 +52,10 @@ export const Card: React.FC<Props> = ({ productData }) => {
     // handleCardClick();
   };
 
+  const handleAddtoCart = () => {
+    shopCart.addItem(productData);
+  };
+
   return (
     <div
       className={styles.card}
@@ -94,6 +98,7 @@ export const Card: React.FC<Props> = ({ productData }) => {
       <section className={styles.card__actions}>
         <button
           type="button"
+
           className={classNames({
             [styles.card__btnAdd]: !isInCart,
             [styles.card__btnAdd__active]: isInCart,

@@ -40,7 +40,8 @@ export const ProductsPage: React.FC = () => {
   useEffect(() => {
     setAxios({
       method: 'get',
-      url: `${apiRoutes.SHOW_PRODUCTS}`
+      url:
+        `${apiRoutes.SHOW_PRODUCTS}`
         + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(limit, currentPage)}`,
     });
 
@@ -54,15 +55,13 @@ export const ProductsPage: React.FC = () => {
 
   return (
     <>
-      {(loading && !error) && (
+      {loading && !error && (
         <div className={styles['container-loading']}>
           <Loader />
         </div>
       )}
 
-      {data && data.count > 0 && (
-        <ProductsPageGrid productEntities={data} />
-      )}
+      {data && data.count > 0 && <ProductsPageGrid productEntities={data} />}
 
       <ReactPaginate
         previousLabel={
