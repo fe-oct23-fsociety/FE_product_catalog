@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 
@@ -8,17 +8,17 @@ import successIcon from '../../images/icons/success-icon.png';
 
 Modal.setAppElement('#root');
 
-export const CartPay: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+type Props = {
+  isModalOpen: boolean;
+  handleCheckout: () => void;
+  closeModal: () => void;
+};
 
-  const handleCheckout = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
+export const CartPay: React.FC<Props> = ({
+  isModalOpen,
+  handleCheckout,
+  closeModal,
+}) => {
   return (
     <div className="cartPay">
       <div className="cartPay__content">
@@ -36,21 +36,22 @@ export const CartPay: React.FC = () => {
           isOpen={isModalOpen}
           onRequestClose={closeModal}
           contentLabel="Checkout Modal"
-          className="modal"
+          className="cartPay__modal"
+          overlayClassName="cartPay__modal-overlay"
         >
-          <div className="modal__content">
+          <div className="cartPay__modal-content">
             <img
               src={successIcon}
               alt="success icon"
-              className="modal__successIcon"
+              className="cartPay__modal-successIcon"
             />
-            <p className="modal__message">Checkout Success!</p>
-            <p className="modal__price">UAH 58</p>
+            <p className="cartPay__modal-message">Checkout Success!</p>
+            <p className="cartPay__modal-price">UAH 58</p>
             <Link to="/">
               <button
                 type="button"
                 onClick={closeModal}
-                className="modal__button"
+                className="cartPay__modal-button"
               >
                 Back Home
               </button>
