@@ -1,8 +1,9 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import './CartCard.scss';
 import { observer } from 'mobx-react-lite';
 import { Product } from '../../types/ProductEntity';
 import { shopCart } from '../../store/CartStorage';
+import { CartContext } from '../CartContext/CartContext';
 
 interface Props {
   cart: Product,
@@ -15,6 +16,7 @@ export const CartCard: FC<Props> = observer(({ cart }) => {
   const { name, price, image } = cart;
   const normalisedImage = `${PREF_TO_STATIC_SERVER}${image}`;
   const [counter, setCounter] = useState(1);
+  const { cartCount, setCartCount } = useContext(CartContext);
 
   const handleIncrement = () => {
     setCounter(p => p + 1);
@@ -35,6 +37,7 @@ export const CartCard: FC<Props> = observer(({ cart }) => {
 
   const deleteFromCart = () => {
     shopCart.deleteItem(cart);
+    setCartCount(cartCount - 1);
   };
 
   return (

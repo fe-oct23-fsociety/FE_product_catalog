@@ -20,15 +20,15 @@ export const Card: React.FC<Props> = ({ productData }) => {
   }
     = productData;
 
-  const { cartCount, setCartCount } = useContext(CartContext);
   const [isInCart, setIsInCart] = useState(false);
+  const { cartCount, setCartCount } = useContext(CartContext);
 
   const normalisedImage = `${PREF_TO_STATIC_SERVER}${image}`;
 
   const handleClick = () => {
     if (isInCart) {
-      setCartCount(cartCount - 1);
       shopCart.deleteItem(productData);
+      setCartCount(cartCount - 1);
     } else {
       setCartCount(cartCount + 1);
       shopCart.addItem(productData);
