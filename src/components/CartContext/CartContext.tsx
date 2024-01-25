@@ -17,18 +17,19 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
     return savedCount !== null ? JSON.parse(savedCount) : 0;
   });
 
-  const cartState = useMemo(() => ({
-    cartCount,
-    setCartCount,
-  }), [cartCount]);
+  const cartState = useMemo(
+    () => ({
+      cartCount,
+      setCartCount,
+    }),
+    [cartCount],
+  );
 
   useEffect(() => {
     localStorage.setItem('cartCount', JSON.stringify(cartCount));
   }, [cartCount]);
 
   return (
-    <CartContext.Provider value={cartState}>
-      {children}
-    </CartContext.Provider>
+    <CartContext.Provider value={cartState}>{children}</CartContext.Provider>
   );
 };
