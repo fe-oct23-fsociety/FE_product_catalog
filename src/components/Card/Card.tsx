@@ -3,11 +3,13 @@ import styles from './Card.module.scss';
 import heartIcon from '../../images/icons/heart.svg';
 import { BtnSquare } from '../BtnSquare';
 import { Product } from '../../types/ProductEntity';
-import iphoneImage from '../../images/iPhone.png';
+// import iphoneImage from '../../images/iPhone.png';
 
 type Props = {
   productData: Product;
 };
+
+const prefToStaticServer = 'https://fsociety-be-product-catalog.onrender.com/static/';
 
 export const Card: React.FC<Props> = ({ productData }) => {
   const {
@@ -18,18 +20,17 @@ export const Card: React.FC<Props> = ({ productData }) => {
     screen,
     capacity,
     ram,
-    // image,
+    image,
   } = productData;
+
+  const normalisedImage = `${prefToStaticServer}${image}`;
 
   return (
     <article className={styles.card}>
-      {/* change src={image} */}
-      <img className={styles.card__image} src={iphoneImage} alt={itemId} />
+      <img className={styles.card__image} src={normalisedImage} alt={itemId} />
 
       <section className="card__description">
-        <h3 className={styles.card__nametag}>
-          {name}
-        </h3>
+        <h3 className={styles.card__nametag}>{name}</h3>
 
         <section className={styles.card__price}>
           <span className={styles.card__newPrice}>{`$${price}`}</span>

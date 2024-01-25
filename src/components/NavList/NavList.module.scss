@@ -1,5 +1,11 @@
+@import '../../styles/mixins.scss';
+
 .nav-bar {
   display: flex;
+
+  a {
+    @include font-mont-regular;
+  }
 
   &--col {
     flex-direction: column;

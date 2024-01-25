@@ -43,6 +43,7 @@ export const ProductsPage: React.FC = () => {
       url: `${apiRoutes.SHOW_PRODUCTS}`
         + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(limit, currentPage)}`,
     });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, limit, currentPage]);
 
