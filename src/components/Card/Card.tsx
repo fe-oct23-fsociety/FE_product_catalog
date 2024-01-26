@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import React, { useContext, useState } from 'react';
 import styles from './Card.module.scss';
@@ -6,6 +7,7 @@ import { BtnSquare } from '../BtnSquare';
 import { Product } from '../../types/ProductEntity';
 import { shopCart } from '../../store/CartStorage';
 import { CartContext } from '../CartContext/CartContext';
+import { BtnAdd } from '../BtnAdd';
 
 type Props = {
   productData: Product;
@@ -16,7 +18,7 @@ const PREF_TO_STATIC_SERVER
 
 export const Card: React.FC<Props> = ({ productData }) => {
   const {
-    itemId, name, fullPrice, price, screen, capacity, ram, image,
+    id, itemId, name, fullPrice, price, screen, capacity, ram, image,
   }
     = productData;
 
@@ -24,6 +26,22 @@ export const Card: React.FC<Props> = ({ productData }) => {
   const { cartCount, setCartCount } = useContext(CartContext);
 
   const normalisedImage = `${PREF_TO_STATIC_SERVER}${image}`;
+  const navigate = useNavigate();
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      navigate(`${id}`);
+    }
+  };
+
+  const handleCardClick = () => {
+    navigate(`${id}`);
+  };
+
+  const handleAddToCart = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    event.stopPropagation();
 
   const handleClick = () => {
     if (isInCart) {
@@ -74,6 +92,7 @@ export const Card: React.FC<Props> = ({ productData }) => {
       </section>
 
       <section className={styles.card__actions}>
+
         <button
           type="button"
           className={classNames({
