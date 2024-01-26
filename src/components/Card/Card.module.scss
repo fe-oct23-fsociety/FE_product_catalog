@@ -82,34 +82,4 @@
     display: flex;
     justify-content: space-between;
   }
-
-  &__btnAdd {
-    @include font-mont-regular;
-    color: $white;
-    font-size: 14px;
-    line-height: 21px;
-
-    height: 40px;
-    width: 100%;
-
-    background-color: $primary-grey;
-    border: 1px solid $primary-grey;
-    transition: box-shadow 0.2s ease-in-out;
-
-    &:hover {
-      cursor: pointer;
-      box-shadow: 0px 3px 13px 0px $btn-shadow;
-    }
-  }
-
-  &__btnAdd__active {
-    font-size: 14px;
-    line-height: 21px;
-
-    height: 40px;
-    width: 100%;
-    color: $focus-light-green;
-    background-color: $white;
-    border: 1px solid $border-grey;
-  }
 }
