@@ -12,6 +12,7 @@ import { useWindowWidth } from '../../hooks/useWindowWidth';
 import { Loader } from '../Loader';
 import iphoneImage from '../../images/iPhone.png';
 import styles from './ProductDetail.module.scss';
+import { shopCart } from '../../store/CartStorage';
 
 const shortSpecTitles = ['Screen', 'Resolution', 'Processor', 'RAM'];
 const specTitles = [
@@ -29,7 +30,13 @@ export const ProductDetail: React.FC = () => {
   const { id } = useParams();
   const isNotMob = useWindowWidth() >= 768;
   const { cartCount, setCartCount } = useContext(CartContext);
-  const [isInCart, setIsInCart] = useState(false);
+  const [isInCart, setIsInCart] = useState(() => {
+    if (!id) {
+      return false;
+    }
+
+    return shopCart.cartItems.some((item) => item.id === +id);
+  });
   const [setAxios, loading, data, error] = useAxios<ProductDetailItem>(null);
 
   useEffect(() => {
@@ -52,7 +59,6 @@ export const ProductDetail: React.FC = () => {
     }
 
     setIsInCart(!isInCart);
-    // handleCardClick();
   };
 
   const isCurrent = (a: string, b: string) => {
