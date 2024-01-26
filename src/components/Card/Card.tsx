@@ -1,9 +1,12 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
 import styles from './Card.module.scss';
 import heartIcon from '../../images/icons/heart.svg';
 import { BtnSquare } from '../BtnSquare';
 import { Product } from '../../types/ProductEntity';
-// import iphoneImage from '../../images/iPhone.png';
+import { CartContext } from '../CartContext/CartContext';
+import { BtnAdd } from '../BtnAdd';
+import { shopCart } from '../../store/CartStorage';
 
 type Props = {
   productData: Product;
@@ -13,20 +16,51 @@ const PREF_TO_STATIC_SERVER = 'https://fsociety-be-product-catalog.onrender.com/
 
 export const Card: React.FC<Props> = ({ productData }) => {
   const {
-    itemId,
-    name,
-    fullPrice,
-    price,
-    screen,
-    capacity,
-    ram,
-    image,
+    id, itemId, name, fullPrice, price, screen, capacity, ram, image,
   } = productData;
 
+  const [isInCart, setIsInCart] = useState(
+    shopCart.cartItems.some(item => item.id === id),
+  );
+  const { setCartCount } = useContext(CartContext);
+
   const normalisedImage = `${PREF_TO_STATIC_SERVER}${image}`;
+  const navigate = useNavigate();
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      navigate(`${id}`);
+    }
+  };
+
+  const handleCardClick = () => {
+    navigate(`${id}`);
+  };
+
+  const handleAddToCart = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    event.stopPropagation();
+
+    if (isInCart) {
+      shopCart.deleteItem(productData);
+      setCartCount(shopCart.cartItems.length);
+    } else {
+      shopCart.addItem(productData);
+      setCartCount(shopCart.cartItems.length);
+    }
+
+    setIsInCart(!isInCart);
+  };
 
   return (
-    <article className={styles.card}>
+    <div
+      className={styles.card}
+      onClick={() => handleCardClick()}
+      onKeyDown={(e) => handleKeyDown(e)}
+      role="button"
+      tabIndex={0}
+    >
       <img className={styles.card__image} src={normalisedImage} alt={itemId} />
 
       <section className="card__description">
@@ -59,13 +93,10 @@ export const Card: React.FC<Props> = ({ productData }) => {
       </section>
 
       <section className={styles.card__actions}>
-        <button type="button" className={styles.card__btnAdd}>
-          Add to cart
-        </button>
-
+        <BtnAdd onclick={handleAddToCart} isInCart={isInCart} />
         <BtnSquare srcValue={heartIcon} altValue="Heart icon" />
       </section>
-    </article>
+    </div>
   );
 };
 

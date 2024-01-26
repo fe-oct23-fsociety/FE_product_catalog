@@ -1,13 +1,17 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import cn from 'classnames';
 
 import './ShopCart.scss';
 import { useNavigate } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 import { CartList } from '../CartList/CartList';
 import { CartPay } from '../CartPay/CartPay';
+import { shopCart } from '../../store/CartStorage';
+import { CartContext } from '../CartContext/CartContext';
 
-export const ShopCart: FC = () => {
+export const ShopCart: FC = observer(() => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { setCartCount } = useContext(CartContext);
 
   const history = useNavigate();
   const returnToPreviousPage = () => {
@@ -20,6 +24,9 @@ export const ShopCart: FC = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+    shopCart.clearCart();
+    setCartCount(0);
+    localStorage.clear();
   };
 
   return (
@@ -47,4 +54,4 @@ export const ShopCart: FC = () => {
       </div>
     </div>
   );
-};
+});
