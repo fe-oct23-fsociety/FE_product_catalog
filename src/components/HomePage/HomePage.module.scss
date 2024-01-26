@@ -1,0 +1,110 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+
+.main {
+  @include homeGrid;
+  padding-bottom: 80px;
+}
+
+.title {
+  @include h1-mobile;
+  grid-column: 1 / -1;
+  margin-top: 56px;
+  margin-bottom: 56px;
+
+  @include onTablet {
+    @include h1;
+    grid-column: 1 / -1;
+  }
+
+  @include onDesktop {
+    @include h1;
+    grid-column: 1 / -1;
+  }
+}
+
+.subTitle {
+  @include h2-mobile;
+  grid-column: 1 / -1;
+  margin-top: 56px;
+
+  @include onTablet {
+    @include h2;
+  }
+
+  @include onDesktop {
+    @include h2;
+  }
+}
+
+.banner {
+  grid-column: span 4;
+  height: 400px;
+  background-image: url(../../images/Banner-mobile.png);
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  @include onTablet {
+    grid-column: 2 / -2;
+    background-image: url(../../images/Banner-tablets.png);
+    background-size: contain;
+    
+  }
+
+  @include onDesktop {
+    grid-column: 2 / -2;
+    background-image: url(../../images/Banner.png);
+  }
+}
+
+.productsContainer {
+  grid-column: 1 / -1;
+
+  @include onTablet {
+    grid-column: 2 / -2;
+  }
+
+  @include onDesktop {
+    grid-column: 2 / -2;
+  }
+}
+
+.cardContainer {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.categoriesContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+
+  @include onTablet {
+    flex-direction: row;
+  }
+
+  @include onDesktop {
+    flex-direction: row;
+  }
+}
+
+.categoryImg {
+  max-width: 100%;
+  cursor: pointer;
+  @include hover(transform, scale(106%));
+}
+
+.categoryTitle {
+  @include h4;
+  margin-top: 24px;
+}
+
+.categoryCount {
+  @include body-text;
+  color: $secondary-gray;
+}

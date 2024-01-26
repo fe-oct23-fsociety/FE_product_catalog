@@ -21,7 +21,7 @@ export const ProductsPage: React.FC = () => {
   const [category, setCategory] = useState(pathname);
   const [setAxios, loading, data, error] = useAxios<ItemsFromServer>(null);
   const [totalPages, setTotalPages] = useState(0);
-  // only test, before added limited select
+
   const limit = 10;
 
   const scrollToTop = () => {

@@ -7,12 +7,17 @@ import { ProductsPage } from './components/ProductsPage/ProductsPage';
 import { ProductDetailPage } from './components/ProductDetailPage';
 import { ShopCart } from './components/ShopCart/ShopCart';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
+import { HomePage } from './components/HomePage/HomePage';
 
 const router = createHashRouter([
   {
     path: '/',
     element: <App />,
     children: [
+      {
+        path: '/',
+        element: <HomePage />,
+      },
       {
         path: 'phones',
         element: <ProductsPage />,
