@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 @mixin font-mont-regular {
   font-family: 'Mont-Regular', sans-serif;
 }
@@ -22,7 +24,7 @@
 @mixin body-text {
   @include font-mont-regular;
   font-size: 14px;
-  line-height: 25px;
+  line-height: 21px;
 }
 
 @mixin h1 {
@@ -32,6 +34,13 @@
   letter-spacing: -0.01em;
 }
 
+@mixin h1-mobile {
+  @include font-mont-bold;
+  font-size: 32px;
+  line-height: 41px;
+  letter-spacing: -0.32px;
+}
+
 @mixin h2 {
   @include font-mont-bold;
   font-size: 32px;
@@ -39,9 +48,68 @@
   letter-spacing: -0.01em;
 }
 
+@mixin h2-mobile {
+  @include font-mont-bold;
+
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 30.8px;
+}
+
 @mixin h3 {
   @include font-mont-bold;
 
   font-size: 22px;
   line-height: 31px;
+}
+
+@mixin h4 {
+  @include font-mont-bold;
+
+  font-size: 16px;
+  line-height: 20px;
+}
+
+@mixin onMobile {
+  @media (min-width: $mobile-min-width) {
+    @content;
+  }
+}
+
+@mixin onTablet {
+  @media (min-width: $tablet-min-width) {
+    @content;
+  }
+}
+
+@mixin onDesktop {
+  @media (min-width: $desktop-min-width) {
+    @content;
+  }
+}
+
+@mixin homeGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 16px;
+  margin: 0 16px;
+
+
+  @include onTablet {
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 16px;
+    margin: 0 24px;
+  }
+
+  @include onDesktop {
+    grid-template-columns: repeat(24, 32px);
+  }
+}
+
+@mixin hover($property, $toValue) {
+  transition: #{$property} 0.3s;
+  &:hover {
+    #{$property}: #{$toValue};
+  }
 }

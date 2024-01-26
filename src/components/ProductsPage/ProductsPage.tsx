@@ -24,7 +24,7 @@ export const ProductsPage: React.FC = () => {
   // only for test, need response with data length
   const totalPages = 3;
   // only test, before added limited select
-  const limit = 7;
+  const limit = 8;
 
   const scrollToTop = () => {
     window.scrollTo(0, 0);
