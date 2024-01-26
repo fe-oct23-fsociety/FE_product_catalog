@@ -1,10 +1,9 @@
-import React, { FC, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import iphoneCart from '../../images/iphone-cart.png';
+import React, { FC, useContext, useState } from 'react';
 import './CartCard.scss';
 import { observer } from 'mobx-react-lite';
 import { Product } from '../../types/ProductEntity';
 import { shopCart } from '../../store/CartStorage';
+import { CartContext } from '../CartContext/CartContext';
 
 interface Props {
   cart: Product,
@@ -17,6 +16,7 @@ export const CartCard: FC<Props> = observer(({ cart }) => {
   const { name, price, image } = cart;
   const normalisedImage = `${PREF_TO_STATIC_SERVER}${image}`;
   const [counter, setCounter] = useState(1);
+  const { cartCount, setCartCount } = useContext(CartContext);
 
   const handleIncrement = () => {
     setCounter(p => p + 1);
@@ -37,34 +37,12 @@ export const CartCard: FC<Props> = observer(({ cart }) => {
 
   const deleteFromCart = () => {
     shopCart.deleteItem(cart);
-  };
-
-export const CartCard: FC = () => {
-  const navigate = useNavigate();
-
-  const handleCardClick = () => {
-    navigate('/');
-  };
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Enter') {
-      navigate('/');
-    }
-  };
-
-  const handleRemoveCard = (event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    event.stopPropagation();
+    setCartCount(cartCount - 1);
   };
 
   return (
     <li className="cartItem">
-      <div
-        className="cartItem__container"
-        onClick={handleCardClick}
-        onKeyDown={handleKeyDown}
-        role="button"
-        tabIndex={0}
-      >
+      <div className="cartItem__container">
         <div className="cartItem__top">
           <button
             aria-label="close-btn"

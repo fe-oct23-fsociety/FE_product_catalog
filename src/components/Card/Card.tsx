@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import classNames from 'classnames';
 import React, { useContext, useState } from 'react';
 import styles from './Card.module.scss';
 import heartIcon from '../../images/icons/heart.svg';
@@ -21,8 +22,8 @@ export const Card: React.FC<Props> = ({ productData }) => {
   }
     = productData;
 
-  const { cartCount, setCartCount } = useContext(CartContext);
   const [isInCart, setIsInCart] = useState(false);
+  const { cartCount, setCartCount } = useContext(CartContext);
 
   const normalisedImage = `${PREF_TO_STATIC_SERVER}${image}`;
   const navigate = useNavigate();
@@ -42,28 +43,23 @@ export const Card: React.FC<Props> = ({ productData }) => {
   ) => {
     event.stopPropagation();
 
+  const handleClick = () => {
     if (isInCart) {
+      shopCart.deleteItem(productData);
       setCartCount(cartCount - 1);
     } else {
       setCartCount(cartCount + 1);
+      shopCart.addItem(productData);
     }
 
     setIsInCart(!isInCart);
-    // handleCardClick();
-  };
 
-  const handleAddtoCart = () => {
-    shopCart.addItem(productData);
+    // eslint-disable-next-line no-console
+    console.log(cartCount);
   };
 
   return (
-    <div
-      className={styles.card}
-      onClick={handleCardClick}
-      onKeyDown={handleKeyDown}
-      role="button"
-      tabIndex={0}
-    >
+    <article className={styles.card}>
       <img className={styles.card__image} src={normalisedImage} alt={itemId} />
 
       <section className="card__description">
@@ -99,19 +95,18 @@ export const Card: React.FC<Props> = ({ productData }) => {
 
         <button
           type="button"
-
           className={classNames({
             [styles.card__btnAdd]: !isInCart,
             [styles.card__btnAdd__active]: isInCart,
           })}
-          onClick={handleAddToCart}
+          onClick={handleClick}
         >
           {isInCart ? 'Added to cart' : 'Add to cart'}
         </button>
 
         <BtnSquare srcValue={heartIcon} altValue="Heart icon" />
       </section>
-    </div>
+    </article>
   );
 };
 

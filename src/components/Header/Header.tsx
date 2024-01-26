@@ -10,8 +10,8 @@ import { BtnMenu } from '../BtnMenu';
 import { ReactComponent as FavouritesIcon } from '../../images/icons/favourites.svg';
 import { ReactComponent as ShopBagIcon } from '../../images/icons/shopping-bag.svg';
 import { useWindowWidth } from '../../hooks/useWindowWidth';
-import styles from './Header.module.scss';
 import { CartContext } from '../CartContext/CartContext';
+import styles from './Header.module.scss';
 
 export const Header: FC = () => {
   const [showMobMenu, setShowMobMenu] = useState(false);
@@ -69,7 +69,7 @@ export const Header: FC = () => {
             <FavouritesIcon />
           </NavItem>
 
-          <NavItem href="/shopCart" isIcon count={3} onMobMenu>
+          <NavItem href="/shopCart" isIcon count={cartCount} onMobMenu>
             <ShopBagIcon />
           </NavItem>
         </div>
