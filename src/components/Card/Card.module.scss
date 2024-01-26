@@ -6,7 +6,7 @@
   width: $card-width;
   border: solid 1px $border-grey;
   @include font-mont-regular;
-
+  cursor: pointer;
   padding: 32px;
 
   display: flex;

@@ -17,7 +17,7 @@ export const ProductsPage: React.FC = () => {
   const location = useLocation();
   const pathname = location.pathname.replace('/', '');
 
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const [category, setCategory] = useState(pathname);
   const [setAxios, loading, data, error] = useAxios<ItemsFromServer>(null);
   const [totalPages, setTotalPages] = useState(0);
@@ -30,7 +30,7 @@ export const ProductsPage: React.FC = () => {
 
   useEffect(() => {
     setCategory(pathname);
-    setCurrentPage(0);
+    setCurrentPage(1);
     scrollToTop();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
@@ -42,7 +42,7 @@ export const ProductsPage: React.FC = () => {
       method: 'get',
       url:
         `${apiRoutes.SHOW_PRODUCTS}`
-        + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(limit, currentPage)}`,
+        + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(offset, currentPage)}`,
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
