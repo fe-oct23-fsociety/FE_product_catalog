@@ -1,4 +1,5 @@
 @import '../../styles/base-theme.scss';
+@import '../../styles/mixins.scss';
 
 .header {
   background: $white-color;
@@ -8,6 +9,8 @@
   justify-content: space-between;
   padding-left: 24px;
   z-index: 999;
+
+  @include font-mont-bold;
 
   position: sticky;
   top: 0;
@@ -19,6 +22,10 @@
   &__nav {
     display: flex;
     align-items: center;
+
+    a {
+      @include font-mont-bold;
+    }
   }
 
   &__icons {

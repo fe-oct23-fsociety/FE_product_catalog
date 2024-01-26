@@ -96,6 +96,7 @@
 .categoryImg {
   max-width: 100%;
   cursor: pointer;
+  border-radius: 5%;
   @include hover(transform, scale(106%));
 }
 
