@@ -17,7 +17,7 @@ export const ProductsPage: React.FC = () => {
   const location = useLocation();
   const pathname = location.pathname.replace('/', '');
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   const [category, setCategory] = useState(pathname);
   const [setAxios, loading, data, error] = useAxios<ItemsFromServer>(null);
   const [totalPages, setTotalPages] = useState(0);
@@ -36,7 +36,7 @@ export const ProductsPage: React.FC = () => {
   }, [location]);
 
   useEffect(() => {
-    const offset = currentPage * limit;
+    const offset = (currentPage + 1) * limit;
 
     setAxios({
       method: 'get',
