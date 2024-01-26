@@ -7,6 +7,10 @@ import arrowTopIcon from '../../images/icons/arrow-top.svg';
 import { BtnSquare } from '../BtnSquare';
 
 export const Footer: React.FC = () => {
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <footer className={styles.footer}>
       <a href="##" className={styles.footer__logo}>
@@ -34,6 +38,7 @@ export const Footer: React.FC = () => {
           sizeValue={32}
           srcValue={arrowTopIcon}
           altValue="arror top icon"
+          onClick={scrollToTop}
         />
       </label>
     </footer>

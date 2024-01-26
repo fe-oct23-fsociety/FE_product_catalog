@@ -1,5 +1,5 @@
 import React, {
-  FC, useState, useEffect, useContext,
+  FC, useState, useEffect, useContext, forwardRef,
 } from 'react';
 import cn from 'classnames';
 import { useLocation } from 'react-router-dom';
@@ -13,7 +13,7 @@ import { useWindowWidth } from '../../hooks/useWindowWidth';
 import { CartContext } from '../CartContext/CartContext';
 import styles from './Header.module.scss';
 
-export const Header: FC = () => {
+export const Header: FC = forwardRef<HTMLElement>((props, ref) => {
   const [showMobMenu, setShowMobMenu] = useState(false);
   const isNotMob = useWindowWidth() >= 640;
   const location = useLocation();
@@ -34,7 +34,7 @@ export const Header: FC = () => {
 
   return (
     <>
-      <header className={styles.header}>
+      <header ref={ref} className={styles.header}>
         <div className={styles.header__nav}>
           <Logo />
           {isNotMob && <NavList />}
@@ -76,4 +76,6 @@ export const Header: FC = () => {
       </div>
     </>
   );
-};
+});
+
+Header.displayName = 'Header';
