@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import { useNavigate } from 'react-router-dom';
 import styles from './HomePage.module.scss';
 import { useAxios } from '../../hooks/useAxios';
 import { ItemsFromServer } from '../../types/ItemsFromServer';
@@ -22,6 +23,21 @@ export const HomePage: React.FC = () => {
   }, []);
 
   const productsData = data?.products;
+
+  const navigate = useNavigate();
+
+  const handleKeyDown = (
+    event: React.KeyboardEvent<HTMLDivElement>,
+    category: string,
+  ) => {
+    if (event.key === 'Enter') {
+      navigate(`${category}`);
+    }
+  };
+
+  const handleCardClick = (category: string) => {
+    navigate(`${category}`);
+  };
 
   return (
     <main className={styles.main}>
@@ -50,7 +66,13 @@ export const HomePage: React.FC = () => {
       <section className={styles.productsContainer}>
         <h2 className={styles.subTitle}>Shop by category</h2>
         <div className={styles.categoriesContainer}>
-          <article className={styles.category}>
+          <div
+            className={styles.category}
+            onClick={() => handleCardClick('phones')}
+            onKeyDown={(e) => handleKeyDown(e, 'phones')}
+            role="button"
+            tabIndex={0}
+          >
             <img
               src={phoneCategoryImg}
               alt="Mobile phones"
@@ -58,8 +80,14 @@ export const HomePage: React.FC = () => {
             />
             <h4 className={styles.categoryTitle}>Mobile phones</h4>
             <p className={styles.categoryCount}>95 models</p>
-          </article>
-          <article className={styles.category}>
+          </div>
+          <div
+            className={styles.category}
+            onClick={() => handleCardClick('tablets')}
+            onKeyDown={(e) => handleKeyDown(e, 'tablets')}
+            role="button"
+            tabIndex={0}
+          >
             <img
               src={tabletsCategoryImg}
               alt="Tablets"
@@ -67,8 +95,14 @@ export const HomePage: React.FC = () => {
             />
             <h4 className={styles.categoryTitle}>Tablets</h4>
             <p className={styles.categoryCount}>24 models</p>
-          </article>
-          <article className={styles.category}>
+          </div>
+          <div
+            className={styles.category}
+            onClick={() => handleCardClick('accessories')}
+            onKeyDown={(e) => handleKeyDown(e, 'accessories')}
+            role="button"
+            tabIndex={0}
+          >
             <img
               src={accessoriesCategoryImg}
               alt="Accessories"
@@ -76,7 +110,7 @@ export const HomePage: React.FC = () => {
             />
             <h4 className={styles.categoryTitle}>Accessories</h4>
             <p className={styles.categoryCount}>100 models</p>
-          </article>
+          </div>
         </div>
       </section>
 
@@ -97,7 +131,6 @@ export const HomePage: React.FC = () => {
           </div>
         )}
       </section>
-      {/* <section className={styles.shopByCategory}>Shop by category</section> */}
     </main>
   );
 };
