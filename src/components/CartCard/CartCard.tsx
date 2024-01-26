@@ -23,21 +23,21 @@ export const CartCard: FC<Props> = observer(({ cart }) => {
     shopCart.totalPrice += +price;
   };
 
+  const deleteFromCart = () => {
+    shopCart.deleteItem(cart);
+    setCartCount(cartCount - 1);
+  };
+
   const handleDecrement = () => {
     setCounter((prevCounter) => {
       if (prevCounter === 1) {
-        shopCart.deleteItem(cart);
+        deleteFromCart();
       } else {
         shopCart.totalPrice -= +price;
       }
 
       return prevCounter > 0 ? prevCounter - 1 : 0;
     });
-  };
-
-  const deleteFromCart = () => {
-    shopCart.deleteItem(cart);
-    setCartCount(cartCount - 1);
   };
 
   return (
