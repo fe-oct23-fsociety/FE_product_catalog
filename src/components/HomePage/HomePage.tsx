@@ -19,7 +19,7 @@ export const HomePage: React.FC = () => {
       url: `${apiRoutes.SHOW_PRODUCTS}`
         + `?${apiRoutes.CATEGORY('phones')}&${apiRoutes.PAGINATION(4, 0)}`,
     });
-  }, []);
+  }, [setAxios]);
 
   const productsData = data?.products;
 
