@@ -1,12 +1,13 @@
 {
   "files": {
-    "main.css": "/FE_product_catalog/static/css/main.dfaaaba9.css",
-    "main.js": "/FE_product_catalog/static/js/main.7aed3446.js",
+    "main.css": "/FE_product_catalog/static/css/main.7f8d8782.css",
+    "main.js": "/FE_product_catalog/static/js/main.efa90868.js",
     "static/media/logo.svg": "/FE_product_catalog/static/media/logo.8d9701d3a3d9b9371273d63b2ee047b3.svg",
     "static/media/Mont-Regular.woff": "/FE_product_catalog/static/media/Mont-Regular.5f2dd0890a78d28216de.woff",
     "static/media/Mont-Bold.woff": "/FE_product_catalog/static/media/Mont-Bold.bbedfa075d47682c0041.woff",
     "static/media/Mont-Regular.woff2": "/FE_product_catalog/static/media/Mont-Regular.efd082cbd3e10b7e9c88.woff2",
     "static/media/Mont-Bold.woff2": "/FE_product_catalog/static/media/Mont-Bold.8b7a4e0626328dd44205.woff2",
+    "static/media/iPhone.png": "/FE_product_catalog/static/media/iPhone.7d17d06e20be429ac8f3.png",
     "static/media/shopping-bag.svg": "/FE_product_catalog/static/media/shopping-bag.13acbe4f48e4538900d85556f5d53763.svg",
     "static/media/favourites.svg": "/FE_product_catalog/static/media/favourites.eb3c4a009d993d21928480f93c725f68.svg",
     "static/media/heart.svg": "/FE_product_catalog/static/media/heart.dbd5bfb9c3bafc92b9b402bff325383f.svg",
@@ -17,11 +18,11 @@
     "static/media/arrow-top.svg": "/FE_product_catalog/static/media/arrow-top.11522d037be5ce34a980560400d2b004.svg",
     "index.html": "/FE_product_catalog/index.html",
     "static/media/counter-minus.svg": "/FE_product_catalog/static/media/counter-minus.4f727ec4693f6105d0f6.svg",
-    "main.dfaaaba9.css.map": "/FE_product_catalog/static/css/main.dfaaaba9.css.map",
-    "main.7aed3446.js.map": "/FE_product_catalog/static/js/main.7aed3446.js.map"
+    "main.7f8d8782.css.map": "/FE_product_catalog/static/css/main.7f8d8782.css.map",
+    "main.efa90868.js.map": "/FE_product_catalog/static/js/main.efa90868.js.map"
   },
   "entrypoints": [
-    "static/css/main.dfaaaba9.css",
-    "static/js/main.7aed3446.js"
+    "static/css/main.7f8d8782.css",
+    "static/js/main.efa90868.js"
   ]
 }
