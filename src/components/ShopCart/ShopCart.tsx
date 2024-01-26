@@ -3,10 +3,12 @@ import cn from 'classnames';
 
 import './ShopCart.scss';
 import { useNavigate } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 import { CartList } from '../CartList/CartList';
 import { CartPay } from '../CartPay/CartPay';
+import { shopCart } from '../../store/CartStorage';
 
-export const ShopCart: FC = () => {
+export const ShopCart: FC = observer(() => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const history = useNavigate();
@@ -20,6 +22,7 @@ export const ShopCart: FC = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+    shopCart.clearCart();
   };
 
   return (
@@ -47,4 +50,4 @@ export const ShopCart: FC = () => {
       </div>
     </div>
   );
-};
+});

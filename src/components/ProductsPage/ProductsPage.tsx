@@ -40,8 +40,9 @@ export const ProductsPage: React.FC = () => {
 
     setAxios({
       method: 'get',
-      url: `${apiRoutes.SHOW_PRODUCTS}`
-        + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(limit, offset)}`,
+      url:
+        `${apiRoutes.SHOW_PRODUCTS}`
+        + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(limit, currentPage)}`,
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -68,15 +69,13 @@ export const ProductsPage: React.FC = () => {
 
   return (
     <>
-      {(loading && !error) && (
+      {loading && !error && (
         <div className={styles['container-loading']}>
           <Loader />
         </div>
       )}
 
-      {data && data.count > 0 && (
-        <ProductsPageGrid productEntities={data} />
-      )}
+      {data && data.count > 0 && <ProductsPageGrid productEntities={data} />}
 
       <ReactPaginate
         previousLabel={
