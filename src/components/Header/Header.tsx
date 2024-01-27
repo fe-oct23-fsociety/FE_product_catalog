@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import cn from 'classnames';
 import { useLocation } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 import { NavList } from '../NavList';
 import { Logo } from '../Logo';
 import { NavItem } from '../NavItem';
@@ -12,13 +13,15 @@ import { ReactComponent as ShopBagIcon } from '../../images/icons/shopping-bag.s
 import { useWindowWidth } from '../../hooks/useWindowWidth';
 import { CartContext } from '../CartContext/CartContext';
 import styles from './Header.module.scss';
+import { favourites } from '../../store/FavouritesStorage';
 
-export const Header: FC = forwardRef<HTMLElement>((props, ref) => {
+export const Header: FC = observer(forwardRef<HTMLElement>((props, ref) => {
   const [showMobMenu, setShowMobMenu] = useState(false);
   const isNotMob = useWindowWidth() >= 640;
   const location = useLocation();
 
   const { cartCount } = useContext(CartContext);
+  const { itemsInFavourites } = favourites;
 
   useEffect(() => {
     setShowMobMenu(false);
@@ -46,7 +49,11 @@ export const Header: FC = forwardRef<HTMLElement>((props, ref) => {
 
         {isNotMob && (
           <div className={styles.header__icons}>
-            <NavItem href="/" isIcon count={0}>
+            <NavItem
+              href="/favourites"
+              isIcon
+              count={itemsInFavourites}
+            >
               <FavouritesIcon />
             </NavItem>
 
@@ -65,17 +72,26 @@ export const Header: FC = forwardRef<HTMLElement>((props, ref) => {
         <NavList toColumn />
 
         <div className={styles['header__mob-menu-footer']}>
-          <NavItem href="/" isIcon count={110} onMobMenu>
+          <NavItem
+            href="/favourites"
+            isIcon
+            count={itemsInFavourites}
+            onMobMenu
+          >
             <FavouritesIcon />
           </NavItem>
 
-          <NavItem href="/shopCart" isIcon count={cartCount} onMobMenu>
+          <NavItem
+            href="/shopCart"
+            isIcon
+            count={cartCount}
+            onMobMenu
+          >
             <ShopBagIcon />
           </NavItem>
         </div>
       </div>
     </>
   );
-});
-
+}));
 Header.displayName = 'Header';

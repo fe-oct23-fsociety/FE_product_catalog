@@ -50,7 +50,7 @@ export const ProductsPage: React.FC = () => {
 
   const memoizedCount = useMemo(() => {
     if (data && data.count > 0) {
-      return (Math.ceil(data.count / limit));
+      return Math.ceil(data.count / limit);
     }
 
     return 0;

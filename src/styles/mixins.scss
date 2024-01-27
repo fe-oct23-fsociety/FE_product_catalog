@@ -95,7 +95,6 @@
   column-gap: 16px;
   margin: 0 16px;
 
-
   @include onTablet {
     grid-template-columns: repeat(12, 1fr);
     column-gap: 16px;
@@ -111,12 +110,11 @@
   transition: 0.3s ease;
   &:hover {
     #{$property}: #{$toValue};
-    
+
     @if $borderRadius {
       border-radius: $borderRadius;
     }
 
     transition: 0.3s ease;
-
   }
 }
