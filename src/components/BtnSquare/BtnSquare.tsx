@@ -10,7 +10,7 @@ type Props = {
   buttonContent?: string;
   classNameValue?: string;
   disabled?: boolean;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 
 export const BtnSquare: React.FC<Props> = ({

@@ -67,7 +67,7 @@ export const ProductDetail: React.FC = () => {
 
   return (
     <section>
-      {(loading && !error) && (
+      {loading && !error && (
         <div className={styles['container-loading']}>
           <Loader />
         </div>
@@ -75,43 +75,42 @@ export const ProductDetail: React.FC = () => {
 
       {data && (
         <>
-          <h2 className={styles['product__main-title']}>
-            {data.name}
-          </h2>
+          <h2 className={styles['product__main-title']}>{data.name}</h2>
           <div className={styles.product__wrapp}>
-            <div className={cn(
-              styles.product__container,
-              styles['product__container--top'],
-            )}
+            <div
+              className={cn(
+                styles.product__container,
+                styles['product__container--top'],
+              )}
             >
               <div className={styles['product__container--part-50']}>
                 {/* add photos here */}
                 <img src={iphoneImage} alt={data.name} />
               </div>
 
-              <div className={cn(
-                styles.product__container,
-                styles['product__container--part-50'],
-              )}
+              <div
+                className={cn(
+                  styles.product__container,
+                  styles['product__container--part-50'],
+                )}
               >
                 <div className={styles['product__container--part-60']}>
                   <div className={styles.product__line}>
-                    <div className={cn(
-                      styles['product__title-container-mob'],
-                    )}
-                    >
-                      <p className={cn(
-                        styles['product__small-title'],
-                        styles['product__small-title--ligth'],
-                      )}
+                    <div className={cn(styles['product__title-container-mob'])}>
+                      <p
+                        className={cn(
+                          styles['product__small-title'],
+                          styles['product__small-title--ligth'],
+                        )}
                       >
                         Available colors
                       </p>
                       {!isNotMob && (
-                        <p className={cn(
-                          styles['product__small-title'],
-                          styles['product__small-title--ligth'],
-                        )}
+                        <p
+                          className={cn(
+                            styles['product__small-title'],
+                            styles['product__small-title--ligth'],
+                          )}
                         >
                           {`ID: ${data.namespaceId}`}
                         </p>
@@ -119,38 +118,36 @@ export const ProductDetail: React.FC = () => {
                     </div>
 
                     <div className={styles.product__specific}>
-                      {data.colorsAvailable.map(color => (
+                      {data.colorsAvailable.map((color) => (
                         <div
                           style={{ background: color }}
-                          className={cn(
-                            styles['product__color-round'],
-                            {
-                              [styles['product__color-round--current']]:
-                                color === data.color,
-                            },
-                          )}
+                          className={cn(styles['product__color-round'], {
+                            [styles['product__color-round--current']]:
+                              color === data.color,
+                          })}
                         />
                       ))}
                     </div>
                   </div>
 
                   <div className={styles.product__line}>
-                    <p className={cn(
-                      styles['product__small-title'],
-                      styles['product__small-title--ligth'],
-                    )}
+                    <p
+                      className={cn(
+                        styles['product__small-title'],
+                        styles['product__small-title--ligth'],
+                      )}
                     >
                       Select capacity
                     </p>
                     <div className={styles.product__specific}>
-                      {data.capacityAvailable.map(capacity => (
-                        <p className={cn(
-                          styles.product__capacity,
-                          {
-                            [styles['product__capacity--active']]:
-                              isCurrent(capacity, data.capacity),
-                          },
-                        )}
+                      {data.capacityAvailable.map((capacity) => (
+                        <p
+                          className={cn(styles.product__capacity, {
+                            [styles['product__capacity--active']]: isCurrent(
+                              capacity,
+                              data.capacity,
+                            ),
+                          })}
                         >
                           {capacity}
                         </p>
@@ -168,25 +165,29 @@ export const ProductDetail: React.FC = () => {
                       </p>
                     </div>
                     <div className={styles.product__cta}>
-                      <BtnAdd onclick={e => handleAddToCart(e)} isInCart={isInCart} />
+                      <BtnAdd
+                        onclick={(e) => handleAddToCart(e)}
+                        isInCart={isInCart}
+                      />
 
                       <BtnSquare srcValue={heartIcon} altValue="Heart icon" />
                     </div>
 
                     <div>
-                      {shortSpecTitles.map(title => {
-                        const key = title
-                          .toLocaleLowerCase() as keyof ProductDetailItem;
+                      {shortSpecTitles.map((title) => {
+                        const key
+                          = title.toLocaleLowerCase() as keyof ProductDetailItem;
 
                         return (
                           <div
                             className={styles['product__spec-wrapp']}
                             key={key}
                           >
-                            <p className={cn(
-                              styles['product__small-title'],
-                              styles['product__small-title--ligth'],
-                            )}
+                            <p
+                              className={cn(
+                                styles['product__small-title'],
+                                styles['product__small-title--ligth'],
+                              )}
                             >
                               {title}
                             </p>
@@ -202,10 +203,11 @@ export const ProductDetail: React.FC = () => {
 
                 {isNotMob && (
                   <div>
-                    <p className={cn(
-                      styles['product__small-title'],
-                      styles['product__small-title--ligth'],
-                    )}
+                    <p
+                      className={cn(
+                        styles['product__small-title'],
+                        styles['product__small-title--ligth'],
+                      )}
                     >
                       {`ID: ${data.namespaceId}`}
                     </p>
@@ -214,43 +216,35 @@ export const ProductDetail: React.FC = () => {
               </div>
             </div>
 
-            <div className={cn(
-              styles.product__container,
-              styles['product__container--bottom'],
-            )}
+            <div
+              className={cn(
+                styles.product__container,
+                styles['product__container--bottom'],
+              )}
             >
               <div className={styles['product__container--part-50']}>
-                <h3 className={cn(
-                  styles.product__title,
-                  styles.product__line,
-                )}
-                >
+                <h3 className={cn(styles.product__title, styles.product__line)}>
                   About
                 </h3>
               </div>
 
               <div className={styles['product__container--part-50']}>
-                <h3 className={cn(
-                  styles.product__title,
-                  styles.product__line,
-                )}
-                >
+                <h3 className={cn(styles.product__title, styles.product__line)}>
                   Tech specs
                 </h3>
 
                 <div>
-                  {specTitles.map(item => {
-                    const key = item.toLocaleLowerCase() as keyof ProductDetailItem;
+                  {specTitles.map((item) => {
+                    const key
+                      = item.toLocaleLowerCase() as keyof ProductDetailItem;
 
                     return (
-                      <div
-                        className={styles['product__spec-wrapp']}
-                        key={key}
-                      >
-                        <p className={cn(
-                          styles['product__body-text'],
-                          styles['product__body-text--ligth'],
-                        )}
+                      <div className={styles['product__spec-wrapp']} key={key}>
+                        <p
+                          className={cn(
+                            styles['product__body-text'],
+                            styles['product__body-text--ligth'],
+                          )}
                         >
                           {item}
                         </p>

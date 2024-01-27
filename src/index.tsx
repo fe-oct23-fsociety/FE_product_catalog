@@ -8,6 +8,7 @@ import { ProductDetailPage } from './components/ProductDetailPage';
 import { ShopCart } from './components/ShopCart/ShopCart';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 import { HomePage } from './components/HomePage/HomePage';
+import { FavouritesPage } from './components/FavouritesPage/FavoritesPage';
 
 const router = createHashRouter([
   {
@@ -37,6 +38,10 @@ const router = createHashRouter([
       {
         path: 'shopCart',
         element: <ShopCart />,
+      },
+      {
+        path: 'favourites',
+        element: <FavouritesPage />,
       },
     ],
     errorElement: <NotFoundPage />,

@@ -1,28 +1,35 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useContext, useState } from 'react';
+import { observer } from 'mobx-react-lite';
 import styles from './Card.module.scss';
 import heartIcon from '../../images/icons/heart.svg';
+import heartIconActive from '../../images/icons/heart-active.svg';
 import { BtnSquare } from '../BtnSquare';
 import { Product } from '../../types/ProductEntity';
 import { CartContext } from '../CartContext/CartContext';
 import { BtnAdd } from '../BtnAdd';
 import { shopCart } from '../../store/CartStorage';
+import { favourites } from '../../store/FavouritesStorage';
 
 type Props = {
   productData: Product;
 };
 
-const PREF_TO_STATIC_SERVER = 'https://fsociety-be-product-catalog.onrender.com/static/';
+const PREF_TO_STATIC_SERVER
+  = 'https://fsociety-be-product-catalog.onrender.com/static/';
 
-export const Card: React.FC<Props> = ({ productData }) => {
+export const Card: React.FC<Props> = observer(({ productData }) => {
   const {
     id, itemId, name, fullPrice, price, screen, capacity, ram, image,
-  } = productData;
+  }
+    = productData;
 
   const [isInCart, setIsInCart] = useState(
-    shopCart.cartItems.some(item => item.id === id),
+    shopCart.cartItems.some((item) => item.id === id),
   );
   const { setCartCount } = useContext(CartContext);
+
+  const isInFavourites = favourites.favourites.some(el => el.id === productData.id);
 
   const normalisedImage = `${PREF_TO_STATIC_SERVER}${image}`;
   const navigate = useNavigate();
@@ -34,7 +41,7 @@ export const Card: React.FC<Props> = ({ productData }) => {
   };
 
   const handleCardClick = () => {
-    navigate(`${id}`);
+    navigate(`/phones/${id}`);
   };
 
   const handleAddToCart = (
@@ -51,6 +58,13 @@ export const Card: React.FC<Props> = ({ productData }) => {
     }
 
     setIsInCart(!isInCart);
+  };
+
+  const handleToggleAddTofavourites = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    event.stopPropagation();
+    favourites.toggleAddToFavourites(productData);
   };
 
   return (
@@ -93,11 +107,17 @@ export const Card: React.FC<Props> = ({ productData }) => {
       </section>
 
       <section className={styles.card__actions}>
-        <BtnAdd onclick={handleAddToCart} isInCart={isInCart} />
-        <BtnSquare srcValue={heartIcon} altValue="Heart icon" />
+        <BtnAdd
+          onclick={handleAddToCart}
+          isInCart={isInCart}
+        />
+        <BtnSquare
+          srcValue={isInFavourites ? heartIconActive : heartIcon}
+          altValue="Heart icon"
+          onClick={handleToggleAddTofavourites}
+        />
       </section>
     </div>
   );
-};
-
+});
 export default Card;

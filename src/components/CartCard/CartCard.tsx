@@ -6,7 +6,7 @@ import { shopCart } from '../../store/CartStorage';
 import { CartContext } from '../CartContext/CartContext';
 
 interface Props {
-  cart: Product,
+  cart: Product;
 }
 
 const PREF_TO_STATIC_SERVER
@@ -19,7 +19,7 @@ export const CartCard: FC<Props> = observer(({ cart }) => {
   const { cartCount, setCartCount } = useContext(CartContext);
 
   const handleIncrement = () => {
-    setCounter(p => p + 1);
+    setCounter((p) => p + 1);
     shopCart.totalPrice += +price;
   };
 
@@ -57,9 +57,7 @@ export const CartCard: FC<Props> = observer(({ cart }) => {
             alt="product"
           />
 
-          <h3 className="cartItem__top-title">
-            {name}
-          </h3>
+          <h3 className="cartItem__top-title">{name}</h3>
         </div>
         <div className="cartItem__bottom">
           <div className="cartItem__bottom-counter counter">
@@ -70,9 +68,7 @@ export const CartCard: FC<Props> = observer(({ cart }) => {
               onClick={handleDecrement}
             />
 
-            <p className="counter__current">
-              {counter}
-            </p>
+            <p className="counter__current">{counter}</p>
 
             <button
               type="button"

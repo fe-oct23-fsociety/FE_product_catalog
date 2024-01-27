@@ -17,7 +17,8 @@ export const HomePage: React.FC = () => {
   useEffect(() => {
     setAxios({
       method: 'get',
-      url: `${apiRoutes.SHOW_PRODUCTS}`
+      url:
+        `${apiRoutes.SHOW_PRODUCTS}`
         + `?${apiRoutes.CATEGORY('phones')}&${apiRoutes.PAGINATION(4, 0)}`,
     });
   }, [setAxios]);
@@ -48,7 +49,7 @@ export const HomePage: React.FC = () => {
       <section className={styles.productsContainer}>
         <h2 className={styles.subTitle}>Brand new models</h2>
 
-        {(loading && !error) && (
+        {loading && !error && (
           <div className={styles['container-loading']}>
             <Loader />
           </div>
@@ -117,7 +118,7 @@ export const HomePage: React.FC = () => {
       <section className={styles.productsContainer}>
         <h2 className={styles.subTitle}>Hot prices</h2>
 
-        {(loading && !error) && (
+        {loading && !error && (
           <div className={styles['container-loading']}>
             <Loader />
           </div>
