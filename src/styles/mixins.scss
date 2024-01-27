@@ -107,9 +107,16 @@
   }
 }
 
-@mixin hover($property, $toValue) {
-  transition: #{$property} 0.3s;
+@mixin hover($property, $toValue, $borderRadius: null) {
+  transition: 0.3s ease;
   &:hover {
     #{$property}: #{$toValue};
+    
+    @if $borderRadius {
+      border-radius: $borderRadius;
+    }
+
+    transition: 0.3s ease;
+
   }
 }
