@@ -25,7 +25,10 @@ export const FavouritesPage:React.FC = observer(() => {
         className={styles.container}
       >
         {favourites.favourites.map(product => (
-          <Card productData={product} />
+          <Card
+            productData={product}
+            key={product.id}
+          />
         ))}
       </div>
     </div>
