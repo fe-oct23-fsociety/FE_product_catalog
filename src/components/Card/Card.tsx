@@ -20,7 +20,7 @@ const PREF_TO_STATIC_SERVER
 
 export const Card: React.FC<Props> = observer(({ productData }) => {
   const {
-    id, itemId, name, fullPrice, price, screen, capacity, ram, image,
+    id, itemId, name, fullPrice, price, screen, capacity, ram, image, category,
   }
     = productData;
 
@@ -41,7 +41,7 @@ export const Card: React.FC<Props> = observer(({ productData }) => {
   };
 
   const handleCardClick = () => {
-    navigate(`/phones/${id}`);
+    navigate(`/${category}/${id}`);
   };
 
   const handleAddToCart = (

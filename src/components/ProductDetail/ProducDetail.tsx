@@ -1,18 +1,24 @@
+/* eslint-disable no-console */
 import React, { useContext, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import cn from 'classnames';
+import { observer } from 'mobx-react-lite';
+import axios from 'axios';
 import { apiRoutes } from '../../const/routes';
 import { useAxios } from '../../hooks/useAxios';
 import { CartContext } from '../CartContext/CartContext';
 import { ProductDetailItem } from '../../types/ProductDetailItem';
 import { BtnAdd } from '../BtnAdd';
 import heartIcon from '../../images/icons/heart.svg';
+import heartIconActive from '../../images/icons/heart-active.svg';
 import { BtnSquare } from '../BtnSquare';
 import { useWindowWidth } from '../../hooks/useWindowWidth';
 import { Loader } from '../Loader';
 import iphoneImage from '../../images/iPhone.png';
 import styles from './ProductDetail.module.scss';
 import { shopCart } from '../../store/CartStorage';
+import { favourites } from '../../store/FavouritesStorage';
+import { Product } from '../../types/ProductEntity';
 
 const shortSpecTitles = ['Screen', 'Resolution', 'Processor', 'RAM'];
 const specTitles = [
@@ -26,7 +32,7 @@ const specTitles = [
   'Cell',
 ];
 
-export const ProductDetail: React.FC = () => {
+export const ProductDetail: React.FC = observer(() => {
   const { id } = useParams();
   const isNotMob = useWindowWidth() >= 768;
   const { cartCount, setCartCount } = useContext(CartContext);
@@ -38,12 +44,27 @@ export const ProductDetail: React.FC = () => {
     return shopCart.cartItems.some((item) => item.id === +id);
   });
   const [setAxios, loading, data, error] = useAxios<ProductDetailItem>(null);
+  const [productsArray, setProductsArray] = useState<Product[]>([]);
+
+  const getProductsFromServer = async () => {
+    try {
+      const response = await axios
+        .get('https://fsociety-be-product-catalog.onrender.com/products');
+      const { products } = response.data;
+
+      setProductsArray(products);
+    } catch (err) {
+      console.error('Error while adding product to favorites:', err);
+    }
+  };
 
   useEffect(() => {
     setAxios({
       method: 'get',
       url: `${apiRoutes.SHOW_PRODUCTS}/${id}`,
     });
+    getProductsFromServer();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
@@ -61,9 +82,21 @@ export const ProductDetail: React.FC = () => {
     setIsInCart(!isInCart);
   };
 
+  const handleAddToFav = () => {
+    const productToAdd = productsArray.find(el => el.itemId === data?.id);
+
+    console.log(productToAdd);
+
+    if (productToAdd) {
+      favourites.toggleAddToFavourites(productToAdd);
+    }
+  };
+
   const isCurrent = (a: string, b: string) => {
     return parseInt(a, 10) === parseInt(b, 10);
   };
+
+  const isInFavourites = favourites.favourites.some(el => el.itemId === data?.id);
 
   return (
     <section>
@@ -170,7 +203,11 @@ export const ProductDetail: React.FC = () => {
                         isInCart={isInCart}
                       />
 
-                      <BtnSquare srcValue={heartIcon} altValue="Heart icon" />
+                      <BtnSquare
+                        srcValue={isInFavourites ? heartIconActive : heartIcon}
+                        altValue="Heart icon"
+                        onClick={handleAddToFav}
+                      />
                     </div>
 
                     <div>
@@ -262,4 +299,4 @@ export const ProductDetail: React.FC = () => {
       )}
     </section>
   );
-};
+});
