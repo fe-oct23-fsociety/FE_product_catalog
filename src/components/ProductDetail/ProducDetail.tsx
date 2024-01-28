@@ -19,6 +19,7 @@ import styles from './ProductDetail.module.scss';
 import { shopCart } from '../../store/CartStorage';
 import { favourites } from '../../store/FavouritesStorage';
 import { Product } from '../../types/ProductEntity';
+import { Card } from '../Card';
 
 const shortSpecTitles = ['Screen', 'Resolution', 'Processor', 'RAM'];
 const specTitles = [
@@ -45,6 +46,7 @@ export const ProductDetail: React.FC = observer(() => {
   });
   const [setAxios, loading, data, error] = useAxios<ProductDetailItem>(null);
   const [productsArray, setProductsArray] = useState<Product[]>([]);
+  const [recommendedProducts, setRecommendedProducts] = useState<Product[]>([]);
 
   const getProductsFromServer = async () => {
     try {
@@ -54,7 +56,17 @@ export const ProductDetail: React.FC = observer(() => {
 
       setProductsArray(products);
     } catch (err) {
-      console.error('Error while adding product to favorites:', err);
+      console.error(err);
+    }
+  };
+
+  const getRecomendedProducts = async () => {
+    try {
+      const response = await axios.get(`${apiRoutes.SHOW_PRODUCTS}/${id}/recommended`);
+
+      setRecommendedProducts(response.data);
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -64,6 +76,7 @@ export const ProductDetail: React.FC = observer(() => {
       url: `${apiRoutes.SHOW_PRODUCTS}/${id}`,
     });
     getProductsFromServer();
+    getRecomendedProducts();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
@@ -297,6 +310,19 @@ export const ProductDetail: React.FC = observer(() => {
           </div>
         </>
       )}
+
+      <div>
+        <h2
+          className={styles.recomended__title}
+        >
+          You May also like
+        </h2>
+        <div className="recommended__container">
+          {recommendedProducts.map(product => (
+            <Card productData={product} key={product.id} />
+          ))}
+        </div>
+      </div>
     </section>
   );
 });
