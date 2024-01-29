@@ -16,7 +16,10 @@
     position: relative;
 
     &--icon {
-      padding: 20px;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding-inline: 20px;
       border-left: $header-border;
 
       @media (max-width: 768px) {
@@ -98,7 +101,7 @@
 
       & .navbar-item__link--icon {
         width: 100%;
-        text-align: center;
+        justify-content: center;
 
         &::before {
           right: 40%;
