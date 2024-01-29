@@ -7,6 +7,7 @@ import { ProductDetailItem } from '../../types/ProductDetailItem';
 import { useWindowWidth } from '../../hooks/useWindowWidth';
 
 import heartIcon from '../../images/icons/heart.svg';
+import heartIconActive from '../../images/icons/heart-active.svg';
 import styles from './ProductShowcase.module.scss';
 
 import { BtnSquare } from '../BtnSquare';
@@ -16,6 +17,8 @@ import { BtnAdd } from '../BtnAdd';
 type Props = {
   data: ProductDetailItem;
   handleAddToCart: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  handleAddToFav: () => void;
+  isInFavourites: boolean;
   isInCart: boolean;
   shortSpecTitles: string[];
 };
@@ -26,6 +29,8 @@ const PREF_TO_STATIC_SERVER
 export const ProductShowcase: React.FC<Props> = ({
   data,
   handleAddToCart,
+  handleAddToFav,
+  isInFavourites,
   isInCart,
   shortSpecTitles,
 }) => {
@@ -152,7 +157,11 @@ export const ProductShowcase: React.FC<Props> = ({
             />
           </div>
 
-          <BtnSquare srcValue={heartIcon} />
+          <BtnSquare
+            srcValue={isInFavourites ? heartIconActive : heartIcon}
+            altValue="Heart icon"
+            onClick={handleAddToFav}
+          />
         </div>
 
         <div className={styles.productSpecs}>

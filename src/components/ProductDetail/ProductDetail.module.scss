@@ -12,24 +12,6 @@ $custom-background: attr(data-bg);
     padding-inline: 16px;
   }
 
-  &__title-container-mob {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  &__color-round {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-
-    border: 2px solid $white;
-    box-shadow: 0px 0px 1px 1px $border-grey-second;
-
-    &--current {
-      box-shadow: 0px 0px 1px 1px $primary-grey;
-    }
-  }
-
   &__main-title {
     @include h2;
     margin-bottom: 40px;
@@ -48,38 +30,9 @@ $custom-background: attr(data-bg);
     margin-bottom: 24px;
   }
 
-  &__specific {
-    display: flex;
-    gap: 8px;
-  }
-
-  &__capacity {
-    @include body-text;
-    color: $primary-grey;
-    border: 1px solid $border-grey-second;
-    padding: 7px 8px;
-    line-height: 1;
-
-    &--active {
-      background: $primary-grey;
-      color: $white;
-    }
-  }
-
   &__title {
     @include h3;
     color: $primary-grey;
-  }
-
-  &__small-title {
-    @include small-text;
-    @include font-mont-regular;
-    color: $primary-grey;
-    margin-bottom: 8px;
-
-    &--ligth {
-      color: $light-grey;
-    }
   }
 
   &__body-text {
@@ -99,21 +52,6 @@ $custom-background: attr(data-bg);
       flex-basis: 50%;
     }
 
-    &--part-60 {
-      flex-basis: 60%;
-
-      @media (max-width: 768px) {
-        flex-basis: 100%;
-      }
-    }
-
-    &--top {
-      @media (max-width: 576px) {
-        flex-direction: column;
-        gap: 40px;
-      }
-    }
-
     &--bottom {
       margin-bottom: 80px;
       @media (max-width: 768px) {
@@ -127,31 +65,6 @@ $custom-background: attr(data-bg);
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
-  }
-
-  &__price {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-
-  &__price-discount {
-    @include h2;
-    color: $primary-grey;
-  }
-
-  &__price-regular {
-    @include h3;
-    @include font-mont-regular;
-    color: $border-grey;
-    text-decoration: line-through;
-  }
-
-  &__cta {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 32px;
   }
 }
 

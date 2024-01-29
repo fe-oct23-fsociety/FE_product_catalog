@@ -8,11 +8,6 @@ import { apiRoutes } from '../../const/routes';
 import { useAxios } from '../../hooks/useAxios';
 import { CartContext } from '../CartContext/CartContext';
 import { ProductDetailItem } from '../../types/ProductDetailItem';
-import { BtnAdd } from '../BtnAdd';
-import heartIcon from '../../images/icons/heart.svg';
-import heartIconActive from '../../images/icons/heart-active.svg';
-import { BtnSquare } from '../BtnSquare';
-import { useWindowWidth } from '../../hooks/useWindowWidth';
 import { Loader } from '../Loader';
 import styles from './ProductDetail.module.scss';
 import { shopCart } from '../../store/CartStorage';
@@ -35,7 +30,6 @@ const specTitles = [
 
 export const ProductDetail: React.FC = observer(() => {
   const { id } = useParams();
-  const isNotMob = useWindowWidth() >= 768;
   const { setCartCount } = useContext(CartContext);
   const [isInCart, setIsInCart] = useState(() => {
     if (!id) {
@@ -113,10 +107,6 @@ export const ProductDetail: React.FC = observer(() => {
     }
   };
 
-  const isCurrent = (a: string, b: string) => {
-    return parseInt(a, 10) === parseInt(b, 10);
-  };
-
   const isInFavourites = favourites.favourites.some(
     (el) => el.itemId === data?.id,
   );
@@ -138,6 +128,8 @@ export const ProductDetail: React.FC = observer(() => {
               handleAddToCart={handleAddToCart}
               isInCart={isInCart}
               shortSpecTitles={shortSpecTitles}
+              handleAddToFav={handleAddToFav}
+              isInFavourites={isInFavourites}
             />
 
             <div
