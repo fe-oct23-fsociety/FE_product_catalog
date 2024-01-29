@@ -4,6 +4,14 @@
 $custom-background: attr(data-bg);
 
 .product {
+  @media (max-width: 1199px) {
+    padding-inline: 24px;
+  }
+
+  @media (max-width: 576px) {
+    padding-inline: 16px;
+  }
+
   &__title-container-mob {
     display: flex;
     justify-content: space-between;
@@ -143,6 +151,20 @@ $custom-background: attr(data-bg);
     display: flex;
     gap: 10px;
     margin-bottom: 32px;
+  }
+}
+
+.about-content {
+  margin-top: 32px;
+  &__title {
+    @include font-mont-regular;
+    font-size: 20px;
+    color: $primary-grey;
+    font-weight: 600;
+  }
+
+  &__text {
+    margin-top: 16px;
   }
 }
 
