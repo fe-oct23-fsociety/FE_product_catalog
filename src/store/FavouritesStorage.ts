@@ -25,10 +25,10 @@ class Favourites {
   }
 
   toggleAddToFavourites(product: Product) {
-    if (!this.favourites.find(el => el.id === product.id)) {
+    if (!this.favourites.find((el) => el.id === product.id)) {
       this.favourites = [...this.favourites, product];
     } else {
-      this.favourites = this.favourites.filter(el => el.id !== product.id);
+      this.favourites = this.favourites.filter((el) => el.id !== product.id);
     }
   }
 
