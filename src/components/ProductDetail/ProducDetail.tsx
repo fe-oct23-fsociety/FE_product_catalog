@@ -122,7 +122,7 @@ export const ProductDetail: React.FC = observer(() => {
   );
 
   return (
-    <section>
+    <section className={styles.product}>
       {loading && !error && (
         <div className={styles['container-loading']}>
           <Loader />
@@ -286,6 +286,28 @@ export const ProductDetail: React.FC = observer(() => {
                 <h3 className={cn(styles.product__title, styles.product__line)}>
                   About
                 </h3>
+                {data.description.map(({ title, text }) => (
+                  <div
+                    className={styles['about-content']}
+                    key={title}
+                  >
+                    <p
+                      className={styles['about-content__title']}
+                    >
+                      {title}
+                    </p>
+                    {text.map(content => (
+                      <p className={cn(
+                        styles['product__body-text'],
+                        styles['product__body-text--ligth'],
+                        styles['about-content__text'],
+                      )}
+                      >
+                        {content}
+                      </p>
+                    ))}
+                  </div>
+                ))}
               </div>
 
               <div className={styles['product__container--part-50']}>
