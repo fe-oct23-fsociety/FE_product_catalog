@@ -20,16 +20,26 @@ const PREF_TO_STATIC_SERVER
 
 export const Card: React.FC<Props> = observer(({ productData }) => {
   const {
-    id, itemId, name, fullPrice, price, screen, capacity, ram, image, category,
-  }
-    = productData;
+    id,
+    itemId,
+    name,
+    fullPrice,
+    price,
+    screen,
+    capacity,
+    ram,
+    image,
+    category,
+  } = productData;
 
   const [isInCart, setIsInCart] = useState(
     shopCart.cartItems.some((item) => item.id === id),
   );
   const { setCartCount } = useContext(CartContext);
 
-  const isInFavourites = favourites.favourites.some(el => el.id === productData.id);
+  const isInFavourites = favourites.favourites.some(
+    (el) => el.id === productData.id,
+  );
 
   const normalisedImage = `${PREF_TO_STATIC_SERVER}${image}`;
   const navigate = useNavigate();
@@ -107,10 +117,7 @@ export const Card: React.FC<Props> = observer(({ productData }) => {
       </section>
 
       <section className={styles.card__actions}>
-        <BtnAdd
-          onclick={handleAddToCart}
-          isInCart={isInCart}
-        />
+        <BtnAdd onclick={handleAddToCart} isInCart={isInCart} />
         <BtnSquare
           srcValue={isInFavourites ? heartIconActive : heartIcon}
           altValue="Heart icon"

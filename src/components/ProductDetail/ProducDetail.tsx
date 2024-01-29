@@ -236,7 +236,7 @@ export const ProductDetail: React.FC = observer(() => {
                     <div>
                       {shortSpecTitles.map((title) => {
                         const key
-                        = title.toLocaleLowerCase() as keyof ProductDetailItem;
+                          = title.toLocaleLowerCase() as keyof ProductDetailItem;
 
                         return (
                           <div
@@ -295,7 +295,8 @@ export const ProductDetail: React.FC = observer(() => {
 
                 <div>
                   {specTitles.map((item) => {
-                    const key = item.toLocaleLowerCase() as keyof ProductDetailItem;
+                    const key
+                      = item.toLocaleLowerCase() as keyof ProductDetailItem;
 
                     return (
                       <div className={styles['product__spec-wrapp']} key={key}>
