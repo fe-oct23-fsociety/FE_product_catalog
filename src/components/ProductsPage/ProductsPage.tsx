@@ -50,9 +50,6 @@ export const ProductsPage: React.FC = () => {
 
   const memoizedCount = useMemo(() => {
     if (data && data.count > 0) {
-      // eslint-disable-next-line no-console
-      console.log(data.count / limit);
-
       return Math.ceil(data.count / limit);
     }
 
