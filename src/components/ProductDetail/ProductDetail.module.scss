@@ -107,6 +107,7 @@ $custom-background: attr(data-bg);
     }
 
     &--bottom {
+      margin-bottom: 80px;
       @media (max-width: 768px) {
         flex-direction: column;
         gap: 56px;
@@ -151,4 +152,14 @@ $custom-background: attr(data-bg);
   justify-content: center;
   align-items: center;
   height: 60vh;
+}
+
+
+.recomended {
+  
+
+  &__tittle {
+    @include h2;
+    margin-bottom: 24px;
+  }
 }
