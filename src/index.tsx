@@ -4,8 +4,11 @@ import { createHashRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import { ProductsPage } from './components/ProductsPage/ProductsPage';
+import { ProductDetailPage } from './components/ProductDetailPage';
 import { ShopCart } from './components/ShopCart/ShopCart';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
+import { HomePage } from './components/HomePage/HomePage';
+import { FavouritesPage } from './components/FavouritesPage/FavoritesPage';
 
 const router = createHashRouter([
   {
@@ -13,8 +16,24 @@ const router = createHashRouter([
     element: <App />,
     children: [
       {
+        path: '/',
+        element: <HomePage />,
+      },
+      {
         path: 'phones',
         element: <ProductsPage />,
+      },
+      {
+        path: 'phones/:id',
+        element: <ProductDetailPage />,
+      },
+      {
+        path: 'tablets/:id',
+        element: <ProductDetailPage />,
+      },
+      {
+        path: 'accessories/:id',
+        element: <ProductDetailPage />,
       },
       {
         path: 'tablets',
@@ -27,6 +46,10 @@ const router = createHashRouter([
       {
         path: 'shopCart',
         element: <ShopCart />,
+      },
+      {
+        path: 'favourites',
+        element: <FavouritesPage />,
       },
     ],
     errorElement: <NotFoundPage />,

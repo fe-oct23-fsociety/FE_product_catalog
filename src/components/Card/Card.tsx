@@ -1,12 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useContext, useState } from 'react';
-import classNames from 'classnames';
+import { observer } from 'mobx-react-lite';
 import styles from './Card.module.scss';
 import heartIcon from '../../images/icons/heart.svg';
+import heartIconActive from '../../images/icons/heart-active.svg';
 import { BtnSquare } from '../BtnSquare';
 import { Product } from '../../types/ProductEntity';
-import { shopCart } from '../../store/CartStorage';
 import { CartContext } from '../CartContext/CartContext';
+import { BtnAdd } from '../BtnAdd';
+import { shopCart } from '../../store/CartStorage';
+import { favourites } from '../../store/FavouritesStorage';
 
 type Props = {
   productData: Product;
@@ -15,26 +18,30 @@ type Props = {
 const PREF_TO_STATIC_SERVER
   = 'https://fsociety-be-product-catalog.onrender.com/static/';
 
-export const Card: React.FC<Props> = ({ productData }) => {
+export const Card: React.FC<Props> = observer(({ productData }) => {
   const {
-    itemId, name, fullPrice, price, screen, capacity, ram, image,
+    id, itemId, name, fullPrice, price, screen, capacity, ram, image, category,
   }
-  = productData;
+    = productData;
 
-  const { cartCount, setCartCount } = useContext(CartContext);
-  const [isInCart, setIsInCart] = useState(false);
+  const [isInCart, setIsInCart] = useState(
+    shopCart.cartItems.some((item) => item.id === id),
+  );
+  const { setCartCount } = useContext(CartContext);
+
+  const isInFavourites = favourites.favourites.some(el => el.id === productData.id);
 
   const normalisedImage = `${PREF_TO_STATIC_SERVER}${image}`;
   const navigate = useNavigate();
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter') {
-      navigate('/');
+      navigate(`${id}`);
     }
   };
 
   const handleCardClick = () => {
-    navigate('/');
+    navigate(`/${category}/${id}`);
   };
 
   const handleAddToCart = (
@@ -43,24 +50,28 @@ export const Card: React.FC<Props> = ({ productData }) => {
     event.stopPropagation();
 
     if (isInCart) {
-      setCartCount(cartCount - 1);
+      shopCart.deleteItem(productData);
+      setCartCount(shopCart.cartItems.length);
     } else {
-      setCartCount(cartCount + 1);
+      shopCart.addItem(productData);
+      setCartCount(shopCart.cartItems.length);
     }
 
     setIsInCart(!isInCart);
-    // handleCardClick();
   };
 
-  const handleAddtoCart = () => {
-    shopCart.addItem(productData);
+  const handleToggleAddTofavourites = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    event.stopPropagation();
+    favourites.toggleAddToFavourites(productData);
   };
 
   return (
     <div
       className={styles.card}
-      onClick={handleCardClick}
-      onKeyDown={handleKeyDown}
+      onClick={() => handleCardClick()}
+      onKeyDown={(e) => handleKeyDown(e)}
       role="button"
       tabIndex={0}
     >
@@ -96,22 +107,17 @@ export const Card: React.FC<Props> = ({ productData }) => {
       </section>
 
       <section className={styles.card__actions}>
-        <button
-          type="button"
-
-          className={classNames({
-            [styles.card__btnAdd]: !isInCart,
-            [styles.card__btnAdd__active]: isInCart,
-          })}
-          onClick={handleAddToCart}
-        >
-          {isInCart ? 'Added to cart' : 'Add to cart'}
-        </button>
-
-        <BtnSquare srcValue={heartIcon} altValue="Heart icon" />
+        <BtnAdd
+          onclick={handleAddToCart}
+          isInCart={isInCart}
+        />
+        <BtnSquare
+          srcValue={isInFavourites ? heartIconActive : heartIcon}
+          altValue="Heart icon"
+          onClick={handleToggleAddTofavourites}
+        />
       </section>
     </div>
   );
-};
-
+});
 export default Card;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import { apiRoutes } from '../../const/routes';
@@ -20,11 +20,9 @@ export const ProductsPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [category, setCategory] = useState(pathname);
   const [setAxios, loading, data, error] = useAxios<ItemsFromServer>(null);
+  const [totalPages, setTotalPages] = useState(0);
 
-  // only for test, need response with data length
-  const totalPages = 3;
-  // only test, before added limited select
-  const limit = 7;
+  const limit = 10;
 
   const scrollToTop = () => {
     window.scrollTo(0, 0);
@@ -32,21 +30,37 @@ export const ProductsPage: React.FC = () => {
 
   useEffect(() => {
     setCategory(pathname);
-    setCurrentPage(0);
+    setCurrentPage(1);
     scrollToTop();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   useEffect(() => {
+    const offset = (currentPage + 1) * limit;
+
     setAxios({
       method: 'get',
       url:
         `${apiRoutes.SHOW_PRODUCTS}`
-        + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(limit, currentPage)}`,
+        + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(offset, currentPage)}`,
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, limit, currentPage]);
+
+  const memoizedCount = useMemo(() => {
+    if (data && data.count > 0) {
+      return Math.ceil(data.count / limit);
+    }
+
+    return 0;
+  }, [data, limit]);
+
+  useEffect(() => {
+    if (memoizedCount) {
+      setTotalPages(memoizedCount);
+    }
+  }, [memoizedCount]);
 
   const handlePageClick = (selectedItem: { selected: number }) => {
     setCurrentPage(selectedItem.selected);

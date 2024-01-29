@@ -1,5 +1,9 @@
 .contentContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100vw;
+
   max-width: 1156px;
   margin: 0 auto;
-  padding: 0 10px;
 }

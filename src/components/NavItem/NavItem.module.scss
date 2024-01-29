@@ -4,6 +4,8 @@
 .navbar-item {
   margin-inline: 32px;
   display: flex;
+  box-sizing: border-box;
+  justify-content: center;
   align-items: center;
 
   @media (max-width: 768px) {
@@ -14,7 +16,7 @@
     position: relative;
 
     &--icon {
-      padding: 24px;
+      padding: 20px;
       border-left: $header-border;
 
       @media (max-width: 768px) {

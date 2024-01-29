@@ -8,14 +8,30 @@ class Cart {
 
   constructor() {
     makeAutoObservable(this);
+    this.initCart();
     this.deleteItem = this.deleteItem.bind(this);
 
     reaction(
       () => this.cartItems.slice(),
-      () => {
+      (cartItems: Product[]) => {
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
         this.calculateTotalPrice();
+        localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice));
       },
     );
+  }
+
+  initCart() {
+    const storedCartItems = localStorage.getItem('cartItems');
+    const totalPrice = localStorage.getItem('totalPrice');
+
+    if (storedCartItems) {
+      this.cartItems = JSON.parse(storedCartItems);
+    }
+
+    if (totalPrice) {
+      this.totalPrice = JSON.parse(totalPrice);
+    }
   }
 
   addItem(item: Product) {
@@ -29,11 +45,15 @@ class Cart {
   }
 
   calculateTotalPrice() {
-    this.totalPrice = this.cartItems.reduce((acc, item) => acc + (+item.price), 0);
+    this.totalPrice = this.cartItems.reduce(
+      (acc, item) => acc + +item.price,
+      0,
+    );
   }
 
   clearCart() {
     this.cartItems = [];
+    localStorage.clear();
   }
 }
 

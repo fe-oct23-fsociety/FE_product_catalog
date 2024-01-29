@@ -9,6 +9,8 @@ type Props = {
   sizeValue?: number;
   buttonContent?: string;
   classNameValue?: string;
+  disabled?: boolean;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 
 export const BtnSquare: React.FC<Props> = ({
@@ -17,6 +19,8 @@ export const BtnSquare: React.FC<Props> = ({
   buttonContent,
   sizeValue = 40,
   classNameValue,
+  disabled,
+  onClick,
 }) => {
   const btnsSize = {
     width: `${sizeValue}px`,
@@ -28,6 +32,8 @@ export const BtnSquare: React.FC<Props> = ({
       style={btnsSize}
       type="button"
       className={cn(styles.btnSquare, classNameValue)}
+      disabled={disabled}
+      onClick={onClick}
     >
       {buttonContent || <img src={srcValue} alt={`${altValue}`} />}
     </button>

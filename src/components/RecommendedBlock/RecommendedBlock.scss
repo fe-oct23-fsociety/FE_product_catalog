@@ -1,0 +1,10 @@
+@import '../../styles/fonts.scss';
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+
+.contain {
+  margin-top: 100px;
+  display: flex;
+  gap: 16px;
+  overflow: hidden;
+}

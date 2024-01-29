@@ -1,0 +1,40 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/base-theme.scss';
+
+.container {
+  padding: 50px 40px;
+
+  display: grid;
+  grid-template-columns: repeat(1, 272px);
+  row-gap: 40px;
+  column-gap: 16px;
+  justify-content: center;
+
+  @media (min-width: 640px) {
+    & {
+      grid-template-columns: repeat(2, 272px);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    & {
+      grid-template-columns: repeat(4, 272px);
+    }
+  }
+}
+
+.title {
+  @include h1;
+  margin-bottom: 8px;
+  padding-left: 10px;
+}
+
+.description {
+  @include body-text;
+  color: $secondary-color;
+  padding-left: 10px;
+}
+
+.favourites {
+  padding-top: 80px;
+}

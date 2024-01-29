@@ -9,11 +9,8 @@ export const CartList: FC = observer(() => {
 
   return (
     <ul className="cartList">
-      {cartList.map(cart => (
-        <CartCard
-          cart={cart}
-          key={cart.id}
-        />
+      {cartList.map((cart) => (
+        <CartCard cart={cart} key={cart.id} />
       ))}
     </ul>
   );

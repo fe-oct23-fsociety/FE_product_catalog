@@ -1,8 +1,9 @@
 import React, {
-  FC, useState, useEffect, useContext,
+  FC, useState, useEffect, useContext, forwardRef,
 } from 'react';
 import cn from 'classnames';
 import { useLocation } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 import { NavList } from '../NavList';
 import { Logo } from '../Logo';
 import { NavItem } from '../NavItem';
@@ -10,15 +11,17 @@ import { BtnMenu } from '../BtnMenu';
 import { ReactComponent as FavouritesIcon } from '../../images/icons/favourites.svg';
 import { ReactComponent as ShopBagIcon } from '../../images/icons/shopping-bag.svg';
 import { useWindowWidth } from '../../hooks/useWindowWidth';
-import styles from './Header.module.scss';
 import { CartContext } from '../CartContext/CartContext';
+import styles from './Header.module.scss';
+import { favourites } from '../../store/FavouritesStorage';
 
-export const Header: FC = () => {
+export const Header: FC = observer(forwardRef<HTMLElement>((props, ref) => {
   const [showMobMenu, setShowMobMenu] = useState(false);
   const isNotMob = useWindowWidth() >= 640;
   const location = useLocation();
 
   const { cartCount } = useContext(CartContext);
+  const { itemsInFavourites } = favourites;
 
   useEffect(() => {
     setShowMobMenu(false);
@@ -34,7 +37,7 @@ export const Header: FC = () => {
 
   return (
     <>
-      <header className={styles.header}>
+      <header ref={ref} className={styles.header}>
         <div className={styles.header__nav}>
           <Logo />
           {isNotMob && <NavList />}
@@ -46,7 +49,11 @@ export const Header: FC = () => {
 
         {isNotMob && (
           <div className={styles.header__icons}>
-            <NavItem href="/" isIcon count={0}>
+            <NavItem
+              href="/favourites"
+              isIcon
+              count={itemsInFavourites}
+            >
               <FavouritesIcon />
             </NavItem>
 
@@ -65,15 +72,26 @@ export const Header: FC = () => {
         <NavList toColumn />
 
         <div className={styles['header__mob-menu-footer']}>
-          <NavItem href="/" isIcon count={110} onMobMenu>
+          <NavItem
+            href="/favourites"
+            isIcon
+            count={itemsInFavourites}
+            onMobMenu
+          >
             <FavouritesIcon />
           </NavItem>
 
-          <NavItem href="/shopCart" isIcon count={3} onMobMenu>
+          <NavItem
+            href="/shopCart"
+            isIcon
+            count={cartCount}
+            onMobMenu
+          >
             <ShopBagIcon />
           </NavItem>
         </div>
       </div>
     </>
   );
-};
+}));
+Header.displayName = 'Header';
