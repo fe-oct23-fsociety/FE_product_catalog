@@ -22,6 +22,7 @@
   &--active {
     font-size: 14px;
     line-height: 21px;
+    @include font-mont-regular;
 
     height: 40px;
     width: 100%;
