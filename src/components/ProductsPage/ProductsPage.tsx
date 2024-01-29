@@ -30,19 +30,19 @@ export const ProductsPage: React.FC = () => {
 
   useEffect(() => {
     setCategory(pathname);
-    setCurrentPage(1);
+    setCurrentPage(0);
     scrollToTop();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   useEffect(() => {
-    const offset = (currentPage + 1) * limit;
+    const offset = currentPage * limit;
 
     setAxios({
       method: 'get',
       url:
         `${apiRoutes.SHOW_PRODUCTS}`
-        + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(offset, currentPage)}`,
+        + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(limit, offset)}`,
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

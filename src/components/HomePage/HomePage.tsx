@@ -10,9 +10,16 @@ import { Card } from '../Card';
 import phoneCategoryImg from '../../images/phone-category.png';
 import tabletsCategoryImg from '../../images/tablets-category.png';
 import accessoriesCategoryImg from '../../images/accessories-category.png';
+import { Product } from '../../types/ProductEntity';
 
 export const HomePage: React.FC = () => {
   const [setAxios, loading, data, error] = useAxios<ItemsFromServer>(null);
+  const [
+    setHotPrices,
+    loadingHotPrices,
+    dataHotPrices,
+    errorHotPrices,
+  ] = useAxios<Product[]>(null);
 
   useEffect(() => {
     setAxios({
@@ -21,7 +28,15 @@ export const HomePage: React.FC = () => {
         `${apiRoutes.SHOW_PRODUCTS}`
         + `?${apiRoutes.CATEGORY('phones')}&${apiRoutes.PAGINATION(4, 0)}`,
     });
-  }, [setAxios]);
+
+    setHotPrices({
+      method: 'get',
+      url:
+        `${apiRoutes.SHOW_PRODUCTS}`
+        + `${apiRoutes.DISCOUNT}?${apiRoutes.PAGINATION(4, 0)}`,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const productsData = data?.products;
 
@@ -118,15 +133,15 @@ export const HomePage: React.FC = () => {
       <section className={styles.productsContainer}>
         <h2 className={styles.subTitle}>Hot prices</h2>
 
-        {loading && !error && (
+        {loadingHotPrices && !errorHotPrices && (
           <div className={styles['container-loading']}>
             <Loader />
           </div>
         )}
 
-        {data && data.count > 0 && (
+        {dataHotPrices && dataHotPrices.length > 0 && (
           <div className={styles.cardContainer}>
-            {productsData?.map((product) => (
+            {dataHotPrices.map((product) => (
               <Card productData={product} key={product.id} />
             ))}
           </div>

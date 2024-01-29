@@ -4,6 +4,14 @@
 $custom-background: attr(data-bg);
 
 .product {
+  @media (max-width: 1199px) {
+    padding-inline: 24px;
+  }
+
+  @media (max-width: 576px) {
+    padding-inline: 16px;
+  }
+
   &__title-container-mob {
     display: flex;
     justify-content: space-between;
@@ -107,6 +115,7 @@ $custom-background: attr(data-bg);
     }
 
     &--bottom {
+      margin-bottom: 80px;
       @media (max-width: 768px) {
         flex-direction: column;
         gap: 56px;
@@ -146,9 +155,30 @@ $custom-background: attr(data-bg);
   }
 }
 
+.about-content {
+  margin-top: 32px;
+  &__title {
+    @include font-mont-bold;
+    font-size: 20px;
+    color: $primary-grey;
+    font-weight: 600;
+  }
+
+  &__text {
+    margin-top: 16px;
+  }
+}
+
 .container-loading {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 60vh;
+}
+
+.recomended {
+  &__tittle {
+    @include h2;
+    margin-bottom: 24px;
+  }
 }

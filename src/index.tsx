@@ -28,6 +28,14 @@ const router = createHashRouter([
         element: <ProductDetailPage />,
       },
       {
+        path: 'tablets/:id',
+        element: <ProductDetailPage />,
+      },
+      {
+        path: 'accessories/:id',
+        element: <ProductDetailPage />,
+      },
+      {
         path: 'tablets',
         element: <ProductsPage />,
       },

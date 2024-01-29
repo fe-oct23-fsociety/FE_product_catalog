@@ -1,0 +1,47 @@
+@import '../../styles/base-theme.scss';
+@import '../../styles/mixins.scss';
+
+.crumbs {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 40px;
+  padding-top: 25px;
+  font-size: 12px;
+  @include small-text;
+  color: black;
+}
+
+.crumbs > * {
+  position: relative;
+}
+
+.crumbs > :not(:last-child) {
+  
+  &::after {
+    content: "";
+    width: 16px;
+    height: 16px;
+    background-image: url('../../images/icons/arrow-right.svg');
+    background-repeat: no-repeat;
+    background-position: center right;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -20px;
+  }
+}
+
+.crumbs > :last-child {
+  color: $secondary-color;
+}
+
+.homepageLink {
+  background-image: url('../../images/icons/Home.svg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+}
