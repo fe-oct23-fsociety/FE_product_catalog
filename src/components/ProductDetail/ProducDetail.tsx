@@ -36,7 +36,7 @@ const specTitles = [
 export const ProductDetail: React.FC = observer(() => {
   const { id } = useParams();
   const isNotMob = useWindowWidth() >= 768;
-  const { cartCount, setCartCount } = useContext(CartContext);
+  const { setCartCount } = useContext(CartContext);
   const [isInCart, setIsInCart] = useState(() => {
     if (!id) {
       return false;
@@ -50,8 +50,9 @@ export const ProductDetail: React.FC = observer(() => {
 
   const getProductsFromServer = async () => {
     try {
-      const response = await axios
-        .get('https://fsociety-be-product-catalog.onrender.com/products');
+      const response = await axios.get(
+        'https://fsociety-be-product-catalog.onrender.com/products',
+      );
       const { products } = response.data;
 
       setProductsArray(products);
@@ -62,11 +63,14 @@ export const ProductDetail: React.FC = observer(() => {
 
   const getRecomendedProducts = async () => {
     try {
-      const response = await axios.get(`${apiRoutes.SHOW_PRODUCTS}/${id}/recommended`);
+      const response = await axios.get(
+        `${apiRoutes.SHOW_PRODUCTS}/${id}/recommended`,
+      );
 
       setRecommendedProducts(response.data);
     } catch (err) {
-      console.log(err);
+      // eslint-disable-next-line no-useless-return
+      return;
     }
   };
 
@@ -86,19 +90,23 @@ export const ProductDetail: React.FC = observer(() => {
   ) => {
     event.stopPropagation();
 
-    if (isInCart) {
-      setCartCount(cartCount - 1);
-    } else {
-      setCartCount(cartCount + 1);
+    const productToAdd = productsArray.find((el) => el.itemId === data?.id);
+
+    if (productToAdd) {
+      if (isInCart) {
+        shopCart.deleteItem(productToAdd);
+        setCartCount(shopCart.cartItems.length);
+      } else {
+        shopCart.addItem(productToAdd);
+        setCartCount(shopCart.cartItems.length);
+      }
     }
 
     setIsInCart(!isInCart);
   };
 
   const handleAddToFav = () => {
-    const productToAdd = productsArray.find(el => el.itemId === data?.id);
-
-    console.log(productToAdd);
+    const productToAdd = productsArray.find((el) => el.itemId === data?.id);
 
     if (productToAdd) {
       favourites.toggleAddToFavourites(productToAdd);
@@ -109,7 +117,9 @@ export const ProductDetail: React.FC = observer(() => {
     return parseInt(a, 10) === parseInt(b, 10);
   };
 
-  const isInFavourites = favourites.favourites.some(el => el.itemId === data?.id);
+  const isInFavourites = favourites.favourites.some(
+    (el) => el.itemId === data?.id,
+  );
 
   return (
     <section>
@@ -226,7 +236,7 @@ export const ProductDetail: React.FC = observer(() => {
                     <div>
                       {shortSpecTitles.map((title) => {
                         const key
-                          = title.toLocaleLowerCase() as keyof ProductDetailItem;
+                        = title.toLocaleLowerCase() as keyof ProductDetailItem;
 
                         return (
                           <div
@@ -285,8 +295,7 @@ export const ProductDetail: React.FC = observer(() => {
 
                 <div>
                   {specTitles.map((item) => {
-                    const key
-                      = item.toLocaleLowerCase() as keyof ProductDetailItem;
+                    const key = item.toLocaleLowerCase() as keyof ProductDetailItem;
 
                     return (
                       <div className={styles['product__spec-wrapp']} key={key}>
@@ -312,13 +321,9 @@ export const ProductDetail: React.FC = observer(() => {
       )}
 
       <div>
-        <h2
-          className={styles.recomended__title}
-        >
-          You May also like
-        </h2>
+        <h2 className={styles.recomended__title}>You May also like</h2>
         <div className="recommended__container">
-          {recommendedProducts.map(product => (
+          {recommendedProducts.map((product) => (
             <Card productData={product} key={product.id} />
           ))}
         </div>

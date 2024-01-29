@@ -40,8 +40,5 @@ export const useAxios = <T>(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // eslint-disable-next-line no-console
-  console.log(data);
-
   return [fetchData, loading, data, error] as const;
 };
