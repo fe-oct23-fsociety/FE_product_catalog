@@ -61,12 +61,12 @@
 
   &__link {
     text-transform: uppercase;
-    @include font-mont-regular;
+    @include font-mont-bold;
     color: $light-grey;
   }
 
   &__anchor {
-    @include font-mont-regular;
+    @include font-mont-bold;
     color: $light-grey;
     cursor: pointer;
 
