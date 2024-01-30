@@ -42,7 +42,7 @@
 .productSlider {
   display: flex;
 
-  @media (max-width: 640px) {  
+  @media (max-width: 640px) {
     flex-direction: column-reverse;
   }
 
@@ -72,7 +72,7 @@
   }
 
   &__navItem {
-    > img {
+    >img {
       object-fit: contain;
       width: 135%;
       height: 100%;
@@ -160,7 +160,6 @@
         color: $light-grey;
         font-size: 12px;
         line-height: 15.34px;
-  
         margin-bottom: 8px;
       }
 
@@ -228,7 +227,6 @@
       font-size: 14px;
       line-height: 21px;
       color: $primary-grey;
-      
       height: 32px;
       min-width: 65px;
 
@@ -241,7 +239,7 @@
         border: 1px solid $primary-grey;
       }
 
-      &:focus {
+      &.selected {
         background-color: $primary-grey;
         border: 1px solid $primary-grey;
         color: $white;
