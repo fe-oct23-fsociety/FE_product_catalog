@@ -77,7 +77,8 @@ export const ProductShowcase: React.FC<Props> = ({
               sizeValue={Number(getSizeValue())}
               srcValue={PREF_TO_STATIC_SERVER + img}
               classNameValue={cn(styles.productSlider__navItem, {
-                [styles['productSlider__navItem--active']]: activeSlide === index,
+                [styles['productSlider__navItem--active']]:
+                  activeSlide === index,
               })}
               key={crypto.randomUUID()}
             />
@@ -136,9 +137,7 @@ export const ProductShowcase: React.FC<Props> = ({
         </div>
 
         <div className={styles.capacitySelector}>
-          <p className={styles.capacitySelector__title}>
-            Select capacity
-          </p>
+          <p className={styles.capacitySelector__title}>Select capacity</p>
 
           <div className={styles.capacitySelector__capacityes}>
             {data.capacityAvailable.map(capacity => {
@@ -173,10 +172,7 @@ export const ProductShowcase: React.FC<Props> = ({
 
         <div className={styles.productActions}>
           <div className={styles.productActions__firstBtn}>
-            <BtnAdd
-              isInCart={isInCart}
-              onclick={e => handleAddToCart(e)}
-            />
+            <BtnAdd isInCart={isInCart} onclick={(e) => handleAddToCart(e)} />
           </div>
 
           <BtnSquare
@@ -196,9 +192,7 @@ export const ProductShowcase: React.FC<Props> = ({
                 key={crypto.randomUUID()}
                 className={styles.productSpecs__params}
               >
-                <p className={styles.productSpecs__title}>
-                  {title}
-                </p>
+                <p className={styles.productSpecs__title}>{title}</p>
 
                 <p className={styles.productSpecs__subtitle}>
                   {`${data[key]}`}

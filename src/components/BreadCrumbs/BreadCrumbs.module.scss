@@ -17,9 +17,8 @@
 }
 
 .crumbs > :not(:last-child) {
-  
   &::after {
-    content: "";
+    content: '';
     width: 16px;
     height: 16px;
     background-image: url('../../images/icons/arrow-right.svg');
