@@ -14,12 +14,8 @@ import { Product } from '../../types/ProductEntity';
 
 export const HomePage: React.FC = () => {
   const [setAxios, loading, data, error] = useAxios<ItemsFromServer>(null);
-  const [
-    setHotPrices,
-    loadingHotPrices,
-    dataHotPrices,
-    errorHotPrices,
-  ] = useAxios<Product[]>(null);
+  const [setHotPrices, loadingHotPrices, dataHotPrices, errorHotPrices]
+    = useAxios<Product[]>(null);
 
   useEffect(() => {
     setAxios({

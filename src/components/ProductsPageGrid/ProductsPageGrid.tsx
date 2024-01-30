@@ -6,11 +6,11 @@ import { Product } from '../../types/ProductEntity';
 
 type Props = {
   productEntities: ItemsFromServer;
+  products: Product[];
 };
 
-export const ProductsPageGrid: React.FC<Props> = ({ productEntities }) => {
+export const ProductsPageGrid: React.FC<Props> = ({ productEntities, products }) => {
   const countOfGoods = productEntities.count;
-  const goodsToRender: Product[] = productEntities.products;
 
   return (
     <>
@@ -20,7 +20,7 @@ export const ProductsPageGrid: React.FC<Props> = ({ productEntities }) => {
         {countOfGoods}
       </p>
       <div className="container">
-        {goodsToRender.map((good) => (
+        {products.map((good) => (
           <Card productData={good} key={good.id} />
         ))}
       </div>

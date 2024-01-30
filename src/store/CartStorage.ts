@@ -50,7 +50,7 @@ class Cart {
 
   calculateTotalPrice() {
     this.totalPrice = this.cartItems.reduce(
-      (acc, item) => acc + (+item.price * item.counter),
+      (acc, item) => acc + +item.price * item.counter,
       0,
     );
   }
