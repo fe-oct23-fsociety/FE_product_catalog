@@ -12,6 +12,8 @@ import arrowRightIcon from '../../images/icons/arrow-right.svg';
 import styles from './Pagination.module.scss';
 import { Loader } from '../Loader';
 import { ItemsFromServer } from '../../types/ItemsFromServer';
+import { SortType } from '../../types/sortType';
+import { getProductsToRender } from './helper';
 
 export const ProductsPage: React.FC = () => {
   const location = useLocation();
@@ -21,6 +23,7 @@ export const ProductsPage: React.FC = () => {
   const [category, setCategory] = useState(pathname);
   const [setAxios, loading, data, error] = useAxios<ItemsFromServer>(null);
   const [totalPages, setTotalPages] = useState(0);
+  const [sortType, setSortType] = useState<SortType | string>('');
 
   const limit = 10;
 
@@ -67,6 +70,8 @@ export const ProductsPage: React.FC = () => {
     scrollToTop();
   };
 
+  const productsToRender = getProductsToRender(data?.products || [], sortType);
+
   return (
     <>
       {loading && !error && (
@@ -75,7 +80,38 @@ export const ProductsPage: React.FC = () => {
         </div>
       )}
 
-      {data && data.count > 0 && <ProductsPageGrid productEntities={data} />}
+      <select
+        name=""
+        id=""
+        className="select"
+        onChange={(event) => {
+          setSortType(event.target.value);
+        }}
+      >
+        <option
+          value={SortType.Newest}
+        >
+          {SortType.Newest}
+        </option>
+        <option
+          value={SortType.PriceAsc}
+        >
+          {SortType.PriceAsc}
+        </option>
+        <option
+          value={SortType.PriceDesc}
+        >
+          {SortType.PriceDesc}
+        </option>
+        <option
+          value={SortType.Screen}
+        >
+          {SortType.Screen}
+        </option>
+      </select>
+
+      {data && data.count > 0
+      && <ProductsPageGrid productEntities={data} products={productsToRender} />}
 
       <ReactPaginate
         previousLabel={

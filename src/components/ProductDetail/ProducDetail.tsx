@@ -143,21 +143,15 @@ export const ProductDetail: React.FC = observer(() => {
                   About
                 </h3>
                 {data.description.map(({ title, text }) => (
-                  <div
-                    className={styles['about-content']}
-                    key={title}
-                  >
-                    <p
-                      className={styles['about-content__title']}
-                    >
-                      {title}
-                    </p>
-                    {text.map(content => (
-                      <p className={cn(
-                        styles['product__body-text'],
-                        styles['product__body-text--ligth'],
-                        styles['about-content__text'],
-                      )}
+                  <div className={styles['about-content']} key={title}>
+                    <p className={styles['about-content__title']}>{title}</p>
+                    {text.map((content) => (
+                      <p
+                        className={cn(
+                          styles['product__body-text'],
+                          styles['product__body-text--ligth'],
+                          styles['about-content__text'],
+                        )}
                       >
                         {content}
                       </p>

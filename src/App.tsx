@@ -15,10 +15,11 @@ const App = observer(() => {
   const [route, setRoute] = useState<string[]>([]);
   const location = useLocation();
 
-  const isCrumbsShown = location.pathname !== '/' && location.pathname !== '/shopCart';
+  const isCrumbsShown
+    = location.pathname !== '/' && location.pathname !== '/shopCart';
 
   useEffect(() => {
-    const routes = location.pathname.split('/').filter(el => el.length > 0);
+    const routes = location.pathname.split('/').filter((el) => el.length > 0);
 
     const handleRoute = async () => {
       const resolvedData = await getRoutes(routes);
