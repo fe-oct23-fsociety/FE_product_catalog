@@ -37,27 +37,6 @@
   }
 }
 
-.banner {
-  grid-column: span 4;
-  height: 400px;
-  background-image: url(../../images/Banner-mobile.png);
-  background-position: top;
-  background-size: cover;
-  background-repeat: no-repeat;
-  cursor: pointer;
-
-  @include onTablet {
-    grid-column: 2 / -2;
-    background-image: url(../../images/Banner-tablets.png);
-    background-size: contain;
-  }
-
-  @include onDesktop {
-    grid-column: 2 / -2;
-    background-image: url(../../images/Banner.png);
-  }
-}
-
 .productsContainer {
   grid-column: 1 / -1;
 

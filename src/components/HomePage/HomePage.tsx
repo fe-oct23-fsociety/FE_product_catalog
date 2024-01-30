@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-
 import { useNavigate } from 'react-router-dom';
+
 import styles from './HomePage.module.scss';
 import { useAxios } from '../../hooks/useAxios';
 import { ItemsFromServer } from '../../types/ItemsFromServer';
@@ -11,6 +11,7 @@ import phoneCategoryImg from '../../images/phone-category.png';
 import tabletsCategoryImg from '../../images/tablets-category.png';
 import accessoriesCategoryImg from '../../images/accessories-category.png';
 import { Product } from '../../types/ProductEntity';
+import { PromoSlider } from '../PromoSlider';
 
 export const HomePage: React.FC = () => {
   const [setAxios, loading, data, error] = useAxios<ItemsFromServer>(null);
@@ -59,7 +60,7 @@ export const HomePage: React.FC = () => {
     <main className={styles.main}>
       <h1 className={styles.title}>Welcome to Nice Gadgets store!</h1>
 
-      <section className={styles.banner} />
+      <PromoSlider />
 
       <section className={styles.productsContainer}>
         <h2 className={styles.subTitle}>Brand new models</h2>
