@@ -2,6 +2,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable no-console */
 import React, { useContext, useState, useEffect } from 'react';
+import '../../styles/base-theme.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import cn from 'classnames';
 import axios from 'axios';
@@ -18,6 +19,7 @@ import { favourites } from '../../store/FavouritesStorage';
 import { Product } from '../../types/ProductEntity';
 import { Card } from '../Card';
 import { ProductShowcase } from '../ProductShowcase';
+import { BtnBack } from '../BtnBack';
 import { preperedColor } from '../../utils/helpers';
 
 const shortSpecTitles = ['Screen', 'Resolution', 'Processor', 'RAM'];
@@ -154,6 +156,10 @@ export const ProductDetail: React.FC = observer(() => {
 
   return (
     <section className={styles.product}>
+      <div className="mb-24">
+        <BtnBack />
+      </div>
+
       {loading && !error && (
         <div className={styles['container-loading']}>
           <Loader />
