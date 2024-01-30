@@ -4,3 +4,9 @@ export enum SortType {
   PriceAsc = 'Price ascending',
   PriceDesc = 'Price descending',
 }
+
+export enum Pagination {
+  Sixteen = '16',
+  ThirtyTwo = '32',
+  SixtyFour = '64',
+}
