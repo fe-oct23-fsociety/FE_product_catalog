@@ -12,7 +12,7 @@ import arrowRightIcon from '../../images/icons/arrow-right.svg';
 import styles from './Pagination.module.scss';
 import { Loader } from '../Loader';
 import { ItemsFromServer } from '../../types/ItemsFromServer';
-import { SortType } from '../../types/sortType';
+import { Pagination, SortType } from '../../types/sortType';
 import { getProductsToRender } from './helper';
 
 export const ProductsPage: React.FC = () => {
@@ -24,8 +24,7 @@ export const ProductsPage: React.FC = () => {
   const [setAxios, loading, data, error] = useAxios<ItemsFromServer>(null);
   const [totalPages, setTotalPages] = useState(0);
   const [sortType, setSortType] = useState<SortType | string>('');
-
-  const limit = 10;
+  const [limit, setLimit] = useState<Pagination | string>(Pagination.Sixteen);
 
   const scrollToTop = () => {
     window.scrollTo(0, 0);
@@ -39,13 +38,13 @@ export const ProductsPage: React.FC = () => {
   }, [location]);
 
   useEffect(() => {
-    const offset = currentPage * limit;
+    const offset = currentPage * +limit;
 
     setAxios({
       method: 'get',
       url:
         `${apiRoutes.SHOW_PRODUCTS}`
-        + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(limit, offset)}`,
+        + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(+limit, offset)}`,
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -53,7 +52,7 @@ export const ProductsPage: React.FC = () => {
 
   const memoizedCount = useMemo(() => {
     if (data && data.count > 0) {
-      return Math.ceil(data.count / limit);
+      return Math.ceil(data.count / +limit);
     }
 
     return 0;
@@ -111,7 +110,13 @@ export const ProductsPage: React.FC = () => {
       </select>
 
       {data && data.count > 0
-      && <ProductsPageGrid productEntities={data} products={productsToRender} />}
+      && (
+        <ProductsPageGrid
+          productEntities={data}
+          products={productsToRender}
+          onPaginationSelect={setLimit}
+        />
+      )}
 
       <ReactPaginate
         previousLabel={

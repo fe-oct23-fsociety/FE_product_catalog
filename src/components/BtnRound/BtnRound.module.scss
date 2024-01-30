@@ -17,4 +17,8 @@
   &:focus {
     border: 1px solid $primary-grey;
   }
+
+  &.selected {
+    border: 1px solid $primary-grey;
+  }
 }
