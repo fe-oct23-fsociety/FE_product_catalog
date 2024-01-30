@@ -16,7 +16,9 @@ import { BtnAdd } from '../BtnAdd';
 
 type Props = {
   data: ProductDetailItem;
-  handleAddToCart: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  handleAddToCart: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => void;
   handleAddToFav: () => void;
   isInFavourites: boolean;
   isInCart: boolean;
@@ -69,7 +71,8 @@ export const ProductShowcase: React.FC<Props> = ({
               sizeValue={Number(getSizeValue())}
               srcValue={PREF_TO_STATIC_SERVER + img}
               classNameValue={cn(styles.productSlider__navItem, {
-                [styles['productSlider__navItem--active']]: activeSlide === index,
+                [styles['productSlider__navItem--active']]:
+                  activeSlide === index,
               })}
             />
           ))}
@@ -115,19 +118,17 @@ export const ProductShowcase: React.FC<Props> = ({
           </div>
 
           <div className={styles.colorSelector__colors}>
-            {data.colorsAvailable.map(color => (
+            {data.colorsAvailable.map((color) => (
               <BtnRount key={crypto.randomUUID()} color={color} />
             ))}
           </div>
         </div>
 
         <div className={styles.capacitySelector}>
-          <p className={styles.capacitySelector__title}>
-            Select capacity
-          </p>
+          <p className={styles.capacitySelector__title}>Select capacity</p>
 
           <div className={styles.capacitySelector__capacityes}>
-            {data.capacityAvailable.map(capacity => (
+            {data.capacityAvailable.map((capacity) => (
               <button
                 type="button"
                 className={styles.capacitySelector__capacity}
@@ -151,10 +152,7 @@ export const ProductShowcase: React.FC<Props> = ({
 
         <div className={styles.productActions}>
           <div className={styles.productActions__firstBtn}>
-            <BtnAdd
-              isInCart={isInCart}
-              onclick={e => handleAddToCart(e)}
-            />
+            <BtnAdd isInCart={isInCart} onclick={(e) => handleAddToCart(e)} />
           </div>
 
           <BtnSquare
@@ -165,18 +163,15 @@ export const ProductShowcase: React.FC<Props> = ({
         </div>
 
         <div className={styles.productSpecs}>
-          {shortSpecTitles.map(title => {
-            const key
-            = title.toLocaleLowerCase() as keyof ProductDetailItem;
+          {shortSpecTitles.map((title) => {
+            const key = title.toLocaleLowerCase() as keyof ProductDetailItem;
 
             return (
               <div
                 key={crypto.randomUUID()}
                 className={styles.productSpecs__params}
               >
-                <p className={styles.productSpecs__title}>
-                  {title}
-                </p>
+                <p className={styles.productSpecs__title}>{title}</p>
 
                 <p className={styles.productSpecs__subtitle}>
                   {`${data[key]}`}

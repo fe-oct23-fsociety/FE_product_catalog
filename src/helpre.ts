@@ -4,7 +4,9 @@ import { apiRoutes } from './const/routes';
 
 const getProductNameById = async (id: string | number) => {
   try {
-    const response = await (await axios.get(`${apiRoutes.SHOW_PRODUCTS}/${id}`)).data;
+    const response = await (
+      await axios.get(`${apiRoutes.SHOW_PRODUCTS}/${id}`)
+    ).data;
 
     const productName = response.name;
 
