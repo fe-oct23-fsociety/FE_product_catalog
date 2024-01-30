@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import React, { useContext, useState, useEffect } from 'react';
+import '../../styles/base-theme.scss';
 import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { observer } from 'mobx-react-lite';
@@ -15,6 +16,7 @@ import { favourites } from '../../store/FavouritesStorage';
 import { Product } from '../../types/ProductEntity';
 import { Card } from '../Card';
 import { ProductShowcase } from '../ProductShowcase';
+import { BtnBack } from '../BtnBack';
 
 const shortSpecTitles = ['Screen', 'Resolution', 'Processor', 'RAM'];
 const specTitles = [
@@ -113,6 +115,10 @@ export const ProductDetail: React.FC = observer(() => {
 
   return (
     <section className={styles.product}>
+      <div className="mb-24">
+        <BtnBack />
+      </div>
+
       {loading && !error && (
         <div className={styles['container-loading']}>
           <Loader />
