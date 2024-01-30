@@ -3,7 +3,6 @@
 /* eslint-disable no-console */
 import React, { useContext, useState, useEffect } from 'react';
 import '../../styles/base-theme.scss';
-import { useParams } from 'react-router-dom';
 import { useNavigate, useParams } from 'react-router-dom';
 import cn from 'classnames';
 import axios from 'axios';
