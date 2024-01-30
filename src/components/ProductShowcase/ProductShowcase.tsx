@@ -16,9 +16,11 @@ import { BtnAdd } from '../BtnAdd';
 
 type Props = {
   data: ProductDetailItem;
-  handleAddToCart: (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => void;
+  selectedColor: string | undefined;
+  selectedCapacity: string | undefined;
+  handleChangeColor: (color: string) => void;
+  handleChangeCapacity: (capacity: string) => void;
+  handleAddToCart: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   handleAddToFav: () => void;
   isInFavourites: boolean;
   isInCart: boolean;
@@ -30,6 +32,10 @@ const PREF_TO_STATIC_SERVER
 
 export const ProductShowcase: React.FC<Props> = ({
   data,
+  selectedColor,
+  selectedCapacity,
+  handleChangeColor,
+  handleChangeCapacity,
   handleAddToCart,
   handleAddToFav,
   isInFavourites,
@@ -74,6 +80,7 @@ export const ProductShowcase: React.FC<Props> = ({
                 [styles['productSlider__navItem--active']]:
                   activeSlide === index,
               })}
+              key={crypto.randomUUID()}
             />
           ))}
         </div>
@@ -118,8 +125,13 @@ export const ProductShowcase: React.FC<Props> = ({
           </div>
 
           <div className={styles.colorSelector__colors}>
-            {data.colorsAvailable.map((color) => (
-              <BtnRount key={crypto.randomUUID()} color={color} />
+            {data.colorsAvailable.map(color => (
+              <BtnRount
+                key={crypto.randomUUID()}
+                color={color}
+                selectedColor={selectedColor}
+                handleChangeColor={handleChangeColor}
+              />
             ))}
           </div>
         </div>
@@ -128,15 +140,23 @@ export const ProductShowcase: React.FC<Props> = ({
           <p className={styles.capacitySelector__title}>Select capacity</p>
 
           <div className={styles.capacitySelector__capacityes}>
-            {data.capacityAvailable.map((capacity) => (
-              <button
-                type="button"
-                className={styles.capacitySelector__capacity}
-                key={crypto.randomUUID()}
-              >
-                {capacity}
-              </button>
-            ))}
+            {data.capacityAvailable.map(capacity => {
+              const isSelected = selectedCapacity === capacity.toLowerCase();
+
+              return (
+                <button
+                  onClick={() => handleChangeCapacity(capacity)}
+                  type="button"
+                  className={
+                    cn(styles.capacitySelector__capacity,
+                      { [styles.selected]: isSelected })
+                  }
+                  key={crypto.randomUUID()}
+                >
+                  {capacity}
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -163,8 +183,9 @@ export const ProductShowcase: React.FC<Props> = ({
         </div>
 
         <div className={styles.productSpecs}>
-          {shortSpecTitles.map((title) => {
-            const key = title.toLocaleLowerCase() as keyof ProductDetailItem;
+          {shortSpecTitles.map(title => {
+            const key
+              = title.toLocaleLowerCase() as keyof ProductDetailItem;
 
             return (
               <div
