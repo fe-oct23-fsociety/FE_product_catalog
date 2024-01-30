@@ -36,7 +36,11 @@ class Cart {
 
   addItem(item: Product) {
     if (!this.cartItems.find((el) => el.id === item.id)) {
+      // eslint-disable-next-line no-param-reassign
+      item.counter = 1;
       this.cartItems = [...this.cartItems, item];
+      // eslint-disable-next-line no-console
+      console.log(item.counter);
     }
   }
 
@@ -46,7 +50,7 @@ class Cart {
 
   calculateTotalPrice() {
     this.totalPrice = this.cartItems.reduce(
-      (acc, item) => acc + +item.price,
+      (acc, item) => acc + (+item.price * item.counter),
       0,
     );
   }
