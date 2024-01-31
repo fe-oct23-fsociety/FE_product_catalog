@@ -6,11 +6,11 @@ import { useAxios } from '../../hooks/useAxios';
 
 import { ProductsPageGrid } from '../ProductsPageGrid';
 import { BtnSquare } from '../BtnSquare';
+import { scrollToTop } from '../../helpers';
 
 import arrowLeftIcon from '../../images/icons/arrow-left.svg';
 import arrowRightIcon from '../../images/icons/arrow-right.svg';
 import styles from './Pagination.module.scss';
-import { Loader } from '../Loader';
 import { ItemsFromServer } from '../../types/ItemsFromServer';
 import { Pagination, SortType } from '../../types/sortType';
 import { getProductsToRender } from './helper';
@@ -26,10 +26,7 @@ export const ProductsPage: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [sortType, setSortType] = useState<SortType | string>('');
   const [limit, setLimit] = useState<Pagination | string>(Pagination.Sixteen);
-
-  const scrollToTop = () => {
-    window.scrollTo(0, 0);
-  };
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     setCategory(pathname);
@@ -50,6 +47,17 @@ export const ProductsPage: React.FC = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, limit, currentPage]);
+
+  useEffect(() => {
+    setAxios({
+      method: 'get',
+      url:
+        `${apiRoutes.SHOW_PRODUCTS}`
+        + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(+limit, 0)}`
+        + `&${apiRoutes.SEARCH(searchValue)}`,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchValue]);
 
   const memoizedCount = useMemo(() => {
     if (data && data.count > 0) {
@@ -74,20 +82,14 @@ export const ProductsPage: React.FC = () => {
 
   return (
     <>
-      {loading && !error && (
-        <div className={styles['container-loading']}>
-          <Loader />
-        </div>
-      )}
-
-      {data && data.count > 0
-      && (
-        <ProductsPageGrid
-          productEntities={data}
-          products={productsToRender}
-          onPaginationSelect={setLimit}
-        />
-      )}
+      <ProductsPageGrid
+        productEntities={data}
+        products={productsToRender}
+        onPaginationSelect={setLimit}
+        getSearch={setSearchValue}
+        isLoading={loading}
+        isError={error}
+      />
 
       <ReactPaginate
         previousLabel={

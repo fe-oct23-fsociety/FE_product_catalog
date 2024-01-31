@@ -5,4 +5,5 @@ export const apiRoutes = {
   CATEGORY: (category: string) => `category=${category}`,
   DISCOUNT: '/discount',
   PAGINATION: (limit: number, offset: number) => `limit=${limit}&offset=${offset}`,
+  SEARCH: (value: string) => `search=${value}`,
 };

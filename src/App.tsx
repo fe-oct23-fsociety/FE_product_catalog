@@ -8,7 +8,7 @@ import './styles/outlet-lorem-container.scss';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { CartProvider } from './components/CartContext/CartContext';
-import { getRoutes } from './helpre';
+import { getRoutes } from './helpers';
 import { BreadCrumbs } from './components/BreadCrumbs/BreadCrumbs';
 
 const App = observer(() => {

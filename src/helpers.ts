@@ -34,3 +34,7 @@ export const getRoutes = async (array: string[]) => {
 
   return [normalizedCategory, productName];
 };
+
+export const scrollToTop = () => {
+  window.scrollTo(0, 0);
+};
