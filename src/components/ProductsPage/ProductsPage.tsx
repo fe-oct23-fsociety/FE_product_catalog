@@ -6,6 +6,7 @@ import { useAxios } from '../../hooks/useAxios';
 
 import { ProductsPageGrid } from '../ProductsPageGrid';
 import { BtnSquare } from '../BtnSquare';
+import { scrollToTop } from '../../helpers';
 
 import arrowLeftIcon from '../../images/icons/arrow-left.svg';
 import arrowRightIcon from '../../images/icons/arrow-right.svg';
@@ -26,10 +27,6 @@ export const ProductsPage: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [sortType, setSortType] = useState<SortType | string>('');
   const [limit, setLimit] = useState<Pagination | string>(Pagination.Sixteen);
-
-  const scrollToTop = () => {
-    window.scrollTo(0, 0);
-  };
 
   useEffect(() => {
     setCategory(pathname);
