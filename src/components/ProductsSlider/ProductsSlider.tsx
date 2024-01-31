@@ -74,7 +74,7 @@ export const ProductsSlider: React.FC<Props> = ({
 
       <div className={styles.productSlider__swiperRoot}>
         <Swiper
-          rewind
+          loop
           navigation
           spaceBetween={16}
           slidesPerView={Number(getColumsCount())}
