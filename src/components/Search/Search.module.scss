@@ -1,0 +1,36 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/base-theme.scss';
+
+.search {
+  display: flex;
+  align-items: center;
+  border: 1px solid $secondary-color;
+
+  &__input {
+    border: none;
+    @include body-text;
+
+    &:focus {
+      outline: none;
+
+      &::placeholder {
+        color: transparent;
+      }
+    }
+
+    &::placeholder {
+      color: $secondary-color;
+    }
+  }
+
+  &__icon-wrapp {
+    & svg {
+      width: 16px;
+      height: 16px;
+
+      path {
+        fill: $primary-color;
+      }
+    }
+  }
+}

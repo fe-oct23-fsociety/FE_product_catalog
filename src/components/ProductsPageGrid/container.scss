@@ -3,8 +3,6 @@
 
 .container {
   $column-count: 1;
- 
-
   display: grid;
   grid-template-columns: repeat($column-count, 272px);
   row-gap: 40px;
@@ -31,6 +29,12 @@
   @include body-text;
 }
 
+.params-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .sort {
   display: flex;
   align-items: center;
@@ -38,10 +42,30 @@
   margin-bottom: 24px;
 }
 
-.pagination {
+.sorter {
   display: flex;
   flex-direction: column;
   gap: 4px;
   color: $secondary-color;
   @include body-text;
+}
+
+.sort-by {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: $secondary-color;
+  @include body-text;
+}
+
+.sort-order {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: $secondary-color;
+  @include body-text;
+}
+
+h1 {
+  @include h1;
 }

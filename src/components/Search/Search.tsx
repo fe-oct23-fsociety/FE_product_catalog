@@ -1,5 +1,8 @@
 import React, { FC, useState, useEffect } from 'react';
 import { debounce } from '../../helpers/debounce';
+import { ReactComponent as SearchIcon } from '../../images/icons/search.svg';
+import { ReactComponent as Close } from '../../images/icons/close-btn.svg';
+import styles from './Search.module.scss';
 
 type Props = {
   handleSearch: (querye: string) => void;
@@ -11,7 +14,7 @@ export const Search: FC<Props> = ({ handleSearch }) => {
 
   useEffect(() => {
     handleSearch(searchQuery);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   const debouncedSearchQuery = debounce<string>((arg) => {
@@ -26,15 +29,20 @@ export const Search: FC<Props> = ({ handleSearch }) => {
   };
 
   return (
-    <div className="dropdown is-active">
-      <div className="dropdown-trigger">
+    <div className={styles.search}>
+      <div className={styles['search__input-wrapp']}>
         <input
-          type="search"
-          placeholder="Enter the name"
-          className="input"
+          type="text"
+          placeholder="Search..."
+          className={styles.search__input}
           value={currentValue}
           onChange={handleInputOnChange}
         />
+      </div>
+
+      <div className={styles['search__icon-wrapp']}>
+        <SearchIcon />
+        <Close />
       </div>
     </div>
   );

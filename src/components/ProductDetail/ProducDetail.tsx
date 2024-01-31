@@ -256,7 +256,7 @@ export const ProductDetail: React.FC = observer(() => {
       <section className={styles.recommendedProducts}>
         {recommendedProducts && recommendedProducts.length > 0 && (
           <ProductsSlider
-            sectionTitle="You May also like"
+            sectionTitle="You may also like"
             productsData={recommendedProducts}
           />
         )}
