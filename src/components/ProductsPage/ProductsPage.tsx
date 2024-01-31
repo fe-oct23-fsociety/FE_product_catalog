@@ -26,6 +26,7 @@ export const ProductsPage: React.FC = () => {
   const [totalPages, setTotalPages] = useState(0);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [sortType, setSortType] = useState<SortType | string>('');
+  const [sortBy, setSortBy] = useState<SortType | string>('');
   const [limit, setLimit] = useState<Pagination | string>(Pagination.Sixteen);
 
   useEffect(() => {
@@ -42,11 +43,18 @@ export const ProductsPage: React.FC = () => {
       method: 'get',
       url:
         `${apiRoutes.SHOW_PRODUCTS}`
-        + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(+limit, offset)}`,
+        + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(+limit, offset)}`
+        + `&${apiRoutes.SORT_BY(sortBy)}&${apiRoutes.SORT_TYPE(sortType)}`,
     });
+    // eslint-disable-next-line no-console
+    console.log(
+      `${apiRoutes.SHOW_PRODUCTS}`
+        + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(+limit, offset)}`
+        + `&${apiRoutes.SORT_BY(sortBy)}&${apiRoutes.SORT_TYPE(sortType)}`,
+    );
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, limit, currentPage]);
+  }, [category, limit, currentPage, sortType, sortBy]);
 
   const memoizedCount = useMemo(() => {
     if (data && data.count > 0) {
@@ -77,12 +85,13 @@ export const ProductsPage: React.FC = () => {
         </div>
       )}
 
-      {data && data.count > 0
-      && (
+      {data && data.count > 0 && (
         <ProductsPageGrid
           productEntities={data}
           products={productsToRender}
           onPaginationSelect={setLimit}
+          onSortBySelect={setSortBy}
+          onSortTypeSelect={setSortType}
         />
       )}
 

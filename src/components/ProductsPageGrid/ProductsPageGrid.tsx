@@ -6,23 +6,29 @@ import './container.scss';
 import { Card } from '../Card';
 import { ItemsFromServer } from '../../types/ItemsFromServer';
 import { Product } from '../../types/ProductEntity';
-import { Pagination, SortBy, SortOrder } from '../../types/sortType';
+import { Pagination, SortType, SortOrder } from '../../types/sortType';
 import { Categories } from '../../types/categories';
 
 type Props = {
   productEntities: ItemsFromServer;
   products: Product[];
   onPaginationSelect: Dispatch<SetStateAction<string>>;
+  onSortBySelect: Dispatch<SetStateAction<string>>;
+  onSortTypeSelect: Dispatch<SetStateAction<string>>;
 };
 
 export const ProductsPageGrid: React.FC<Props> = ({
   productEntities,
   products,
   onPaginationSelect,
+  onSortBySelect,
+  onSortTypeSelect,
 }) => {
   const countOfGoods = productEntities.count;
 
-  const [categoryHeaderName, setCategoryHeaderName] = useState<string | undefined>('');
+  const [categoryHeaderName, setCategoryHeaderName] = useState<
+  string | undefined
+  >('');
 
   useEffect(() => {
     const { hash } = window.location;
@@ -45,7 +51,8 @@ export const ProductsPageGrid: React.FC<Props> = ({
         break;
       }
 
-      default: break;
+      default:
+        break;
     }
 
     setCategoryHeaderName(categoryName?.toString());
@@ -55,13 +62,14 @@ export const ProductsPageGrid: React.FC<Props> = ({
     <>
       <div className="card-container">
         <br />
-        <h1 className="category__title">
-          {categoryHeaderName}
-        </h1>
+        <h1 className="category__title">{categoryHeaderName}</h1>
         <p className="description">{`${countOfGoods} models`}</p>
         <div className="sort">
           <div className="sorter">
-            <label htmlFor="sort__pagination" className="pagination__description">
+            <label
+              htmlFor="sort__pagination"
+              className="pagination__description"
+            >
               Items on page
             </label>
             <select
@@ -71,8 +79,12 @@ export const ProductsPageGrid: React.FC<Props> = ({
               onChange={(event) => onPaginationSelect(event.target.value)}
             >
               <option value={Pagination.Sixteen}>{Pagination.Sixteen}</option>
-              <option value={Pagination.ThirtyTwo}>{Pagination.ThirtyTwo}</option>
-              <option value={Pagination.SixtyFour}>{Pagination.SixtyFour}</option>
+              <option value={Pagination.ThirtyTwo}>
+                {Pagination.ThirtyTwo}
+              </option>
+              <option value={Pagination.SixtyFour}>
+                {Pagination.SixtyFour}
+              </option>
             </select>
           </div>
           <div className="sorter">
@@ -83,22 +95,25 @@ export const ProductsPageGrid: React.FC<Props> = ({
               name=""
               id=""
               className="sort__sort-by"
-              onChange={(event) => onPaginationSelect(event.target.value)}
+              onChange={(event) => onSortBySelect(event.target.value)}
             >
-              <option value={SortBy.Newest}>{SortBy.Newest}</option>
-              <option value={SortBy.Price}>{SortBy.Price}</option>
-              <option value={SortBy.Screen}>{SortBy.Screen}</option>
+              <option value={SortType.Newest}>{SortType.Newest}</option>
+              <option value={SortType.Price}>{SortType.Price}</option>
+              <option value={SortType.Screen}>{SortType.Screen}</option>
             </select>
           </div>
           <div className="sorter">
-            <label htmlFor="sort__sort-order" className="sort-order__description">
+            <label
+              htmlFor="sort__sort-order"
+              className="sort-order__description"
+            >
               Sort order
             </label>
             <select
               name=""
               id=""
               className="sort__sort-order"
-              onChange={(event) => onPaginationSelect(event.target.value)}
+              onChange={(event) => onSortTypeSelect(event.target.value)}
             >
               <option value={SortOrder.DESC}>From high to low</option>
               <option value={SortOrder.ASC}>From low to high</option>
