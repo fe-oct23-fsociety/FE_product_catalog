@@ -28,6 +28,22 @@
   margin-bottom: 25px;
 }
 
+.select__pagination,
+.sort__sort-by,
+.sort__sort-order {
+  outline: 2px solid #B4BDC3;
+  border: none;
+  display: inline-block;
+  padding: 0 5px;
+  height: 30px;
+  @include body-text;
+
+  &:focus {
+    outline: 2px solid black;
+  }
+}
+
+
 .description {
   color: $secondary-color;
   margin-bottom: 40px;
