@@ -10,3 +10,14 @@ export enum Pagination {
   ThirtyTwo = '32',
   SixtyFour = '64',
 }
+
+export enum SortOrder {
+  ASC = 'ASC',
+  DESC = 'DESC',
+}
+
+export enum SortBy {
+  Screen = 'Screen',
+  Newest = 'Newest',
+  Price = 'Price',
+}

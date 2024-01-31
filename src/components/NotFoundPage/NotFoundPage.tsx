@@ -2,12 +2,16 @@ import React, { FC } from 'react';
 import { Header } from '../Header';
 import { Footer } from '../Footer';
 import './NotFoundPage.scss';
+import { BtnBack } from '../BtnBack';
 // import notFound from '../../images/wasted.png';
 
 export const NotFoundPage: FC = () => {
   return (
     <>
       <Header />
+      <div className="go-back-btn">
+        <BtnBack />
+      </div>
       <div className="img">
         <img
           // eslint-disable-next-line max-len

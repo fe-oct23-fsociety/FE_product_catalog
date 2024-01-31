@@ -12,11 +12,9 @@ const getProductNameById = async (id: string | number) => {
 
     return productName;
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.log(err);
+    // eslint-disable-next-line no-useless-return
+    return; // HERE'LL BE SOME REACT TOASTER
   }
-
-  return 'ok';
 };
 
 export const getRoutes = async (array: string[]) => {
