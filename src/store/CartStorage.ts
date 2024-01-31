@@ -39,8 +39,6 @@ class Cart {
       // eslint-disable-next-line no-param-reassign
       item.counter = 1;
       this.cartItems = [...this.cartItems, item];
-      // eslint-disable-next-line no-console
-      console.log(item.counter);
     }
   }
 

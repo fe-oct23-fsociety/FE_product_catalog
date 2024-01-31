@@ -38,7 +38,23 @@
   margin-bottom: 24px;
 }
 
-.pagination {
+.sorter {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: $secondary-color;
+  @include body-text;
+}
+
+.sort-by {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: $secondary-color;
+  @include body-text;
+}
+
+.sort-order {
   display: flex;
   flex-direction: column;
   gap: 4px;

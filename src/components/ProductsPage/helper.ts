@@ -34,7 +34,5 @@ export const getProductsToRender = (products: Product[], sortType: SortType | st
       break;
   }
 
-  console.log(productsToRender);
-
   return productsToRender;
 };

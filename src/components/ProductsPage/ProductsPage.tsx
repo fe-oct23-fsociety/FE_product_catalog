@@ -23,6 +23,7 @@ export const ProductsPage: React.FC = () => {
   const [category, setCategory] = useState(pathname);
   const [setAxios, loading, data, error] = useAxios<ItemsFromServer>(null);
   const [totalPages, setTotalPages] = useState(0);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [sortType, setSortType] = useState<SortType | string>('');
   const [limit, setLimit] = useState<Pagination | string>(Pagination.Sixteen);
 
@@ -78,36 +79,6 @@ export const ProductsPage: React.FC = () => {
           <Loader />
         </div>
       )}
-
-      <select
-        name=""
-        id=""
-        className="select"
-        onChange={(event) => {
-          setSortType(event.target.value);
-        }}
-      >
-        <option
-          value={SortType.Newest}
-        >
-          {SortType.Newest}
-        </option>
-        <option
-          value={SortType.PriceAsc}
-        >
-          {SortType.PriceAsc}
-        </option>
-        <option
-          value={SortType.PriceDesc}
-        >
-          {SortType.PriceDesc}
-        </option>
-        <option
-          value={SortType.Screen}
-        >
-          {SortType.Screen}
-        </option>
-      </select>
 
       {data && data.count > 0
       && (
