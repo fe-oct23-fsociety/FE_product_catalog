@@ -115,8 +115,8 @@ export const ProductsPageGrid: React.FC<Props> = ({
               className="sort__sort-order"
               onChange={(event) => onSortTypeSelect(event.target.value)}
             >
-              <option value={SortOrder.DESC}>From high to low</option>
               <option value={SortOrder.ASC}>From low to high</option>
+              <option value={SortOrder.DESC}>From high to low</option>
             </select>
           </div>
         </div>
