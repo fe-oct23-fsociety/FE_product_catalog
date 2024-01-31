@@ -89,9 +89,6 @@ $custom-background: attr(data-bg);
   height: 60vh;
 }
 
-.recomended {
-  &__tittle {
-    @include h2;
-    margin-bottom: 24px;
-  }
+.recommendedProducts {
+  margin-bottom: 81px;
 }

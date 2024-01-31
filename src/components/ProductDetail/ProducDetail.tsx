@@ -17,10 +17,10 @@ import styles from './ProductDetail.module.scss';
 import { shopCart } from '../../store/CartStorage';
 import { favourites } from '../../store/FavouritesStorage';
 import { Product } from '../../types/ProductEntity';
-import { Card } from '../Card';
 import { ProductShowcase } from '../ProductShowcase';
 import { BtnBack } from '../BtnBack';
 import { preperedColor } from '../../utils/helpers';
+import { ProductsSlider } from '../ProductsSlider';
 
 const shortSpecTitles = ['Screen', 'Resolution', 'Processor', 'RAM'];
 const specTitles = [
@@ -72,8 +72,7 @@ export const ProductDetail: React.FC = observer(() => {
 
       setRecommendedProducts(response.data);
     } catch (err) {
-      // eslint-disable-next-line no-useless-return
-      return;
+      console.log(err);
     }
   };
 
@@ -254,14 +253,14 @@ export const ProductDetail: React.FC = observer(() => {
         </>
       )}
 
-      <div>
-        <h2 className={styles.recomended__title}>You May also like</h2>
-        <div className="recommended__container">
-          {recommendedProducts.map((product) => (
-            <Card productData={product} key={product.id} />
-          ))}
-        </div>
-      </div>
+      <section className={styles.recommendedProducts}>
+        {recommendedProducts && recommendedProducts.length > 0 && (
+          <ProductsSlider
+            sectionTitle="You May also like"
+            productsData={recommendedProducts}
+          />
+        )}
+      </section>
     </section>
   );
 });

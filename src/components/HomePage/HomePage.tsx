@@ -1,21 +1,32 @@
 import React, { useEffect } from 'react';
-
 import { useNavigate } from 'react-router-dom';
+
 import styles from './HomePage.module.scss';
 import { useAxios } from '../../hooks/useAxios';
 import { ItemsFromServer } from '../../types/ItemsFromServer';
 import { apiRoutes } from '../../const/routes';
 import { Loader } from '../Loader';
-import { Card } from '../Card';
 import phoneCategoryImg from '../../images/phone-category.png';
 import tabletsCategoryImg from '../../images/tablets-category.png';
 import accessoriesCategoryImg from '../../images/accessories-category.png';
 import { Product } from '../../types/ProductEntity';
+import { PromoSlider } from '../PromoSlider';
+import { ProductsSlider } from '../ProductsSlider';
 
 export const HomePage: React.FC = () => {
-  const [setAxios, loading, data, error] = useAxios<ItemsFromServer>(null);
-  const [setHotPrices, loadingHotPrices, dataHotPrices, errorHotPrices]
-    = useAxios<Product[]>(null);
+  const [setAxios] = useAxios<ItemsFromServer>(null);
+  const [
+    setHotPrices,
+    loadingHotPrices,
+    dataHotPrices,
+    errorHotPrices,
+  ] = useAxios<Product[]>(null);
+  const [
+    setNewProducts,
+    loadingNewProducts,
+    dataNewProducts,
+    errorNewProducts,
+  ] = useAxios<Product[]>(null);
 
   useEffect(() => {
     setAxios({
@@ -31,10 +42,15 @@ export const HomePage: React.FC = () => {
         `${apiRoutes.SHOW_PRODUCTS}`
         + `${apiRoutes.DISCOUNT}?${apiRoutes.PAGINATION(4, 0)}`,
     });
+
+    setNewProducts({
+      method: 'get',
+      url:
+        `${apiRoutes.SHOW_PRODUCTS}`
+        + `/new?${apiRoutes.PAGINATION(4, 0)}`,
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const productsData = data?.products;
 
   const navigate = useNavigate();
 
@@ -55,23 +71,20 @@ export const HomePage: React.FC = () => {
     <main className={styles.main}>
       <h1 className={styles.title}>Welcome to Nice Gadgets store!</h1>
 
-      <section className={styles.banner} />
+      <PromoSlider />
 
       <section className={styles.productsContainer}>
-        <h2 className={styles.subTitle}>Brand new models</h2>
-
-        {loading && !error && (
+        {loadingNewProducts && !errorNewProducts && (
           <div className={styles['container-loading']}>
             <Loader />
           </div>
         )}
 
-        {data && data.count > 0 && (
-          <div className={styles.cardContainer}>
-            {productsData?.map((product) => (
-              <Card productData={product} key={product.id} />
-            ))}
-          </div>
+        {dataNewProducts && (
+          <ProductsSlider
+            sectionTitle="Brand new models"
+            productsData={dataNewProducts}
+          />
         )}
       </section>
 
@@ -127,8 +140,6 @@ export const HomePage: React.FC = () => {
       </section>
 
       <section className={styles.productsContainer}>
-        <h2 className={styles.subTitle}>Hot prices</h2>
-
         {loadingHotPrices && !errorHotPrices && (
           <div className={styles['container-loading']}>
             <Loader />
@@ -136,11 +147,10 @@ export const HomePage: React.FC = () => {
         )}
 
         {dataHotPrices && dataHotPrices.length > 0 && (
-          <div className={styles.cardContainer}>
-            {dataHotPrices.map((product) => (
-              <Card productData={product} key={product.id} />
-            ))}
-          </div>
+          <ProductsSlider
+            sectionTitle="Hot prices"
+            productsData={dataHotPrices}
+          />
         )}
       </section>
     </main>

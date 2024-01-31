@@ -1,0 +1,101 @@
+@import '../../styles//variables.scss';
+
+.promoSlider {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(4, 1fr);
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  @media (min-width: 1199px) {
+    grid-template-columns: repeat(24, 1fr);
+  }
+
+  &__btnBack {
+    grid-row: 1;
+    grid-column: 1/1;
+    height: 100%;
+    justify-self: right;
+    align-self: center;
+    margin-right: 17px;
+    width: 32px;
+    border: 1px solid $border-grey-second;
+    background-color: $white;
+
+    transition: border 0.3s ease-in-out;
+
+    &:hover {
+      border: 1px solid $primary-grey;
+    }
+
+    @media (max-width: 640px) {
+      display: none;
+    }
+  }
+
+  &__btnForward {
+    grid-column: -2;
+    grid-row: 1;
+    justify-self: left;
+    margin-left: 17px;
+    width: 32px;
+    border: 1px solid $border-grey-second;
+    background-color: $white;
+
+    transition: border 0.3s ease-in-out;
+
+    &:hover {
+      border: 1px solid $primary-grey;
+    }
+
+    @media (max-width: 640px) {
+      display: none;
+    }
+  }
+
+  &__swiperRoot {
+    overflow: hidden;
+
+    grid-column: 2 / -2;
+    grid-row: 1;
+
+    @media (max-width: 640px) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  &__swiperWrapper {
+    display: flex;
+    cursor: grab;
+
+    @media (min-width: 1199px) {
+      max-height: none;
+    }
+  }
+
+  &__swiperSlide {
+    flex: 0 0 100%;
+
+    >img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &__swiperPagination {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    width: 100%;
+
+    @media (max-width: 640px) {
+      position: relative;
+      left: 0;
+      right: 0;
+    }
+  }
+}
