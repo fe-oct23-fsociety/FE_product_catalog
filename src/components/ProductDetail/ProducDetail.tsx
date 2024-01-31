@@ -1,9 +1,13 @@
+/* eslint-disable consistent-return */
+/* eslint-disable array-callback-return */
 /* eslint-disable no-console */
 import React, { useContext, useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import '../../styles/base-theme.scss';
+import { useNavigate, useParams } from 'react-router-dom';
 import cn from 'classnames';
-import { observer } from 'mobx-react-lite';
 import axios from 'axios';
+import { observer } from 'mobx-react-lite';
+
 import { apiRoutes } from '../../const/routes';
 import { useAxios } from '../../hooks/useAxios';
 import { CartContext } from '../CartContext/CartContext';
@@ -14,6 +18,8 @@ import { shopCart } from '../../store/CartStorage';
 import { favourites } from '../../store/FavouritesStorage';
 import { Product } from '../../types/ProductEntity';
 import { ProductShowcase } from '../ProductShowcase';
+import { BtnBack } from '../BtnBack';
+import { preperedColor } from '../../utils/helpers';
 import { ProductsSlider } from '../ProductsSlider';
 
 const shortSpecTitles = ['Screen', 'Resolution', 'Processor', 'RAM'];
@@ -30,6 +36,7 @@ const specTitles = [
 
 export const ProductDetail: React.FC = observer(() => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { setCartCount } = useContext(CartContext);
   const [isInCart, setIsInCart] = useState(() => {
     if (!id) {
@@ -41,6 +48,8 @@ export const ProductDetail: React.FC = observer(() => {
   const [setAxios, loading, data, error] = useAxios<ProductDetailItem>(null);
   const [productsArray, setProductsArray] = useState<Product[]>([]);
   const [recommendedProducts, setRecommendedProducts] = useState<Product[]>([]);
+  const [selectedColor, setSelectedColor] = useState<string | undefined>('');
+  const [selectedCapacity, setSelectedCapacity] = useState<string | undefined>('');
 
   const getProductsFromServer = async () => {
     try {
@@ -74,9 +83,43 @@ export const ProductDetail: React.FC = observer(() => {
     });
     getProductsFromServer();
     getRecomendedProducts();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
+
+  useEffect(() => {
+    if (data && data.color) {
+      setSelectedColor(preperedColor(data.color));
+    }
+
+    if (data && data.capacity) {
+      setSelectedCapacity(data.capacity.toLowerCase());
+    }
+  }, [data]);
+
+  const handleChangeId = () => {
+    const newId
+      = `${data?.namespaceId}-${selectedCapacity?.toLowerCase()}-${selectedColor}`;
+    const changedId = productsArray.find((el) => el.itemId === newId);
+
+    if (changedId) {
+      navigate(`/${changedId.category}/${changedId.id}`);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedColor) {
+      handleChangeId();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedColor, selectedCapacity]);
+
+  const handleChangeColor = (color: string) => {
+    setSelectedColor(preperedColor(color));
+  };
+
+  const handleChangeCapacity = (capacity: string) => {
+    setSelectedCapacity(capacity);
+  };
 
   const handleAddToCart = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -112,6 +155,10 @@ export const ProductDetail: React.FC = observer(() => {
 
   return (
     <section className={styles.product}>
+      <div className="mb-24">
+        <BtnBack />
+      </div>
+
       {loading && !error && (
         <div className={styles['container-loading']}>
           <Loader />
@@ -124,6 +171,10 @@ export const ProductDetail: React.FC = observer(() => {
           <div className={styles.product__wrapp}>
             <ProductShowcase
               data={data}
+              selectedColor={selectedColor}
+              selectedCapacity={selectedCapacity}
+              handleChangeColor={handleChangeColor}
+              handleChangeCapacity={handleChangeCapacity}
               handleAddToCart={handleAddToCart}
               isInCart={isInCart}
               shortSpecTitles={shortSpecTitles}
@@ -152,11 +203,13 @@ export const ProductDetail: React.FC = observer(() => {
                       {title}
                     </p>
                     {text.map(content => (
-                      <p className={cn(
-                        styles['product__body-text'],
-                        styles['product__body-text--ligth'],
-                        styles['about-content__text'],
-                      )}
+                      <p
+                        className={cn(
+                          styles['product__body-text'],
+                          styles['product__body-text--ligth'],
+                          styles['about-content__text'],
+                        )}
+                        key={crypto.randomUUID()}
                       >
                         {content}
                       </p>
@@ -175,21 +228,23 @@ export const ProductDetail: React.FC = observer(() => {
                     const key
                       = item.toLocaleLowerCase() as keyof ProductDetailItem;
 
-                    return (
-                      <div className={styles['product__spec-wrapp']} key={key}>
-                        <p
-                          className={cn(
-                            styles['product__body-text'],
-                            styles['product__body-text--ligth'],
-                          )}
-                        >
-                          {item}
-                        </p>
-                        <p className={styles['product__body-text']}>
-                          {`${data[key]}`}
-                        </p>
-                      </div>
-                    );
+                    if (data[key] !== null) {
+                      return (
+                        <div className={styles['product__spec-wrapp']} key={key}>
+                          <p
+                            className={cn(
+                              styles['product__body-text'],
+                              styles['product__body-text--ligth'],
+                            )}
+                          >
+                            {item}
+                          </p>
+                          <p className={styles['product__body-text']}>
+                            {`${data[key]}`}
+                          </p>
+                        </div>
+                      );
+                    }
                   })}
                 </div>
               </div>

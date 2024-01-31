@@ -1,22 +1,16 @@
 import React, { FC, useContext, useState } from 'react';
-import cn from 'classnames';
-
 import './ShopCart.scss';
-import { useNavigate } from 'react-router-dom';
+import '../../styles/base-theme.scss';
 import { observer } from 'mobx-react-lite';
 import { CartList } from '../CartList/CartList';
 import { CartPay } from '../CartPay/CartPay';
 import { shopCart } from '../../store/CartStorage';
 import { CartContext } from '../CartContext/CartContext';
+import { BtnBack } from '../BtnBack';
 
 export const ShopCart: FC = observer(() => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { setCartCount } = useContext(CartContext);
-
-  const history = useNavigate();
-  const returnToPreviousPage = () => {
-    history(-1);
-  };
 
   const handleCheckout = () => {
     setIsModalOpen(true);
@@ -31,16 +25,9 @@ export const ShopCart: FC = observer(() => {
 
   return (
     <div className="shopCart">
-      <button
-        className={cn('shopCart__back', {
-          'shopCart__back--hidden': isModalOpen,
-        })}
-        type="button"
-        aria-label="btn"
-        onClick={returnToPreviousPage}
-      >
-        Back
-      </button>
+      <div className="mb-24">
+        <BtnBack isHidden={isModalOpen} />
+      </div>
 
       <h1 className="shopCart__title">Cart</h1>
 

@@ -13,23 +13,28 @@ const PREF_TO_STATIC_SERVER
   = 'https://fsociety-be-product-catalog.onrender.com/static/';
 
 export const CartCard: FC<Props> = observer(({ cart }) => {
-  const { name, price, image } = cart;
+  const {
+    name, price, image, counter,
+  } = cart;
   const normalisedImage = `${PREF_TO_STATIC_SERVER}${image}`;
-  const [counter, setCounter] = useState(1);
+  const [count, setCount] = useState(cart.counter);
   const { cartCount, setCartCount } = useContext(CartContext);
 
   const handleIncrement = () => {
-    setCounter((p) => p + 1);
+    setCount((p) => p + 1);
+    // eslint-disable-next-line no-param-reassign
+    cart.counter += 1;
     shopCart.totalPrice += +price;
   };
 
   const deleteFromCart = () => {
+    shopCart.totalPrice -= price * counter;
     shopCart.deleteItem(cart);
     setCartCount(cartCount - 1);
   };
 
   const handleDecrement = () => {
-    setCounter((prevCounter) => {
+    setCount((prevCounter) => {
       if (prevCounter === 1) {
         deleteFromCart();
       } else {
@@ -68,7 +73,7 @@ export const CartCard: FC<Props> = observer(({ cart }) => {
               onClick={handleDecrement}
             />
 
-            <p className="counter__current">{counter}</p>
+            <p className="counter__current">{count}</p>
 
             <button
               type="button"
@@ -78,7 +83,7 @@ export const CartCard: FC<Props> = observer(({ cart }) => {
             />
           </div>
 
-          <h3 className="cartItem__bottom-price">{`$${price}`}</h3>
+          <h3 className="cartItem__bottom-price">{`$${price * counter}`}</h3>
         </div>
       </div>
     </li>

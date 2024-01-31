@@ -1,0 +1,20 @@
+@import '../../styles/base-theme.scss';
+@import '../../styles/mixins.scss';
+
+.btn-back {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: transparent;
+  color: $secondary-color;
+  border: none;
+  @include small-text;
+  line-height: 9px;
+  padding-block: 3px;
+
+  cursor: pointer;
+
+  &--hidden {
+    visibility: hidden;
+  }
+}

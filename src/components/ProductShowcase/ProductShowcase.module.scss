@@ -42,7 +42,7 @@
 .productSlider {
   display: flex;
 
-  @media (max-width: 640px) {  
+  @media (max-width: 640px) {
     flex-direction: column-reverse;
   }
 
@@ -57,7 +57,7 @@
       margin-bottom: 40px;
     }
 
-    >*:not(:last-child) {
+    > *:not(:last-child) {
       margin-bottom: 16px;
 
       @media (max-width: 1200px) {
@@ -72,7 +72,7 @@
   }
 
   &__navItem {
-    > img {
+    >img {
       object-fit: contain;
       width: 135%;
       height: 100%;
@@ -134,12 +134,12 @@
 
   .colorSelector {
     &::after {
-      content: "";
+      content: '';
       display: block;
 
       width: 320px;
       height: 1px;
-      background-color: #E2E6E9;
+      background-color: #e2e6e9;
       margin-bottom: 24px;
 
       @media (max-width: 1200px) {
@@ -160,7 +160,6 @@
         color: $light-grey;
         font-size: 12px;
         line-height: 15.34px;
-  
         margin-bottom: 8px;
       }
 
@@ -177,7 +176,7 @@
       display: flex;
       margin-bottom: 24px;
 
-      >*:not(:last-child) {
+      > *:not(:last-child) {
         margin-right: 8px;
       }
     }
@@ -188,12 +187,12 @@
     flex-direction: column;
 
     &::after {
-      content: "";
+      content: '';
       display: block;
 
       width: 320px;
       height: 1px;
-      background-color: #E2E6E9;
+      background-color: #e2e6e9;
       margin-bottom: 32px;
 
       @media (max-width: 1200px) {
@@ -218,7 +217,7 @@
       display: flex;
       margin-bottom: 24px;
 
-      >*:not(:last-child) {
+      > *:not(:last-child) {
         margin-right: 8px;
       }
     }
@@ -228,20 +227,22 @@
       font-size: 14px;
       line-height: 21px;
       color: $primary-grey;
-      
       height: 32px;
       min-width: 65px;
 
       border: 1px solid $border-grey-second;
       background-color: $white;
 
-      transition: border 0.2s ease-in-out, background-color 0.2s ease-in-out, color 0.2 e;
+      transition:
+        border 0.2s ease-in-out,
+        background-color 0.2s ease-in-out,
+        color 0.2 e;
 
       &:hover {
         border: 1px solid $primary-grey;
       }
 
-      &:focus {
+      &.selected {
         background-color: $primary-grey;
         border: 1px solid $primary-grey;
         color: $white;
@@ -297,7 +298,7 @@
     font-size: 12px;
     line-height: 15.34px;
 
-    >*:not(:last-child) {
+    > *:not(:last-child) {
       margin-bottom: 8px;
     }
   }
