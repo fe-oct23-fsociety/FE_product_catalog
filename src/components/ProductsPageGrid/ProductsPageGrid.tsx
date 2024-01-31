@@ -53,64 +53,63 @@ export const ProductsPageGrid: React.FC<Props> = ({
 
   return (
     <>
-      <br />
-      <h1 className="category__title">
-        {categoryHeaderName}
-      </h1>
-      <p className="description">{`${countOfGoods} models`}</p>
-
-      <div className="sort">
-        <div className="sorter">
-          <label htmlFor="sort__pagination" className="pagination__description">
-            Items on page
-          </label>
-          <select
-            name=""
-            id=""
-            className="select__pagination"
-            onChange={(event) => onPaginationSelect(event.target.value)}
-          >
-            <option value={Pagination.Sixteen}>{Pagination.Sixteen}</option>
-            <option value={Pagination.ThirtyTwo}>{Pagination.ThirtyTwo}</option>
-            <option value={Pagination.SixtyFour}>{Pagination.SixtyFour}</option>
-          </select>
+      <div className="card-container">
+        <br />
+        <h1 className="category__title">
+          {categoryHeaderName}
+        </h1>
+        <p className="description">{`${countOfGoods} models`}</p>
+        <div className="sort">
+          <div className="sorter">
+            <label htmlFor="sort__pagination" className="pagination__description">
+              Items on page
+            </label>
+            <select
+              name=""
+              id=""
+              className="select__pagination"
+              onChange={(event) => onPaginationSelect(event.target.value)}
+            >
+              <option value={Pagination.Sixteen}>{Pagination.Sixteen}</option>
+              <option value={Pagination.ThirtyTwo}>{Pagination.ThirtyTwo}</option>
+              <option value={Pagination.SixtyFour}>{Pagination.SixtyFour}</option>
+            </select>
+          </div>
+          <div className="sorter">
+            <label htmlFor="sort__sort-by" className="sort-by__description">
+              Sort by
+            </label>
+            <select
+              name=""
+              id=""
+              className="sort__sort-by"
+              onChange={(event) => onPaginationSelect(event.target.value)}
+            >
+              <option value={SortBy.Newest}>{SortBy.Newest}</option>
+              <option value={SortBy.Price}>{SortBy.Price}</option>
+              <option value={SortBy.Screen}>{SortBy.Screen}</option>
+            </select>
+          </div>
+          <div className="sorter">
+            <label htmlFor="sort__sort-order" className="sort-order__description">
+              Sort order
+            </label>
+            <select
+              name=""
+              id=""
+              className="sort__sort-order"
+              onChange={(event) => onPaginationSelect(event.target.value)}
+            >
+              <option value={SortOrder.DESC}>From high to low</option>
+              <option value={SortOrder.ASC}>From low to high</option>
+            </select>
+          </div>
         </div>
-
-        <div className="sorter">
-          <label htmlFor="sort__sort-by" className="sort-by__description">
-            Sort by
-          </label>
-          <select
-            name=""
-            id=""
-            className="sort__sort-by"
-            onChange={(event) => onPaginationSelect(event.target.value)}
-          >
-            <option value={SortBy.Newest}>{SortBy.Newest}</option>
-            <option value={SortBy.Price}>{SortBy.Price}</option>
-            <option value={SortBy.Screen}>{SortBy.Screen}</option>
-          </select>
+        <div className="container">
+          {products.map((good) => (
+            <Card productData={good} key={good.id} />
+          ))}
         </div>
-
-        <div className="sorter">
-          <label htmlFor="sort__sort-order" className="sort-order__description">
-            Sort by
-          </label>
-          <select
-            name=""
-            id=""
-            className="sort__sort-order"
-            onChange={(event) => onPaginationSelect(event.target.value)}
-          >
-            <option value={SortOrder.DESC}>From high to low</option>
-            <option value={SortOrder.ASC}>From low to high</option>
-          </select>
-        </div>
-      </div>
-      <div className="container">
-        {products.map((good) => (
-          <Card productData={good} key={good.id} />
-        ))}
       </div>
     </>
   );

@@ -13,7 +13,7 @@
   flex-direction: column;
   justify-content: space-between;
 
-  @include hover(transform, scale(110%));
+  @include hover(transform, scale(105%));
 
   &__image {
     height: 196px;
