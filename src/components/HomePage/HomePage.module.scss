@@ -39,14 +39,6 @@
 
 .productsContainer {
   grid-column: 1 / -1;
-
-  @include onTablet {
-    grid-column: 2 / -2;
-  }
-
-  @include onDesktop {
-    grid-column: 2 / -2;
-  }
 }
 
 .cardContainer {

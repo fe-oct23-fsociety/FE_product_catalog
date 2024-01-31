@@ -1,0 +1,50 @@
+@import '../../styles/mixins.scss';
+
+.productSlider {
+  grid-column: 1 / -1;
+
+  &__topBar {
+    margin-top: 56px;
+    margin-bottom: 24px;
+
+    display: flex;
+    justify-content: space-between;
+
+    &-title {
+      @include h2-mobile;
+  
+      @include onTablet {
+        @include h2;
+      }
+    }
+
+    &-actions {
+      display: flex;
+      gap: 16px;
+    }
+  }
+
+  &__swiperRoot {
+    overflow: hidden;
+  }
+
+  &__swiperWrapper {
+    display: flex;
+  }
+
+  &__swiperCard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > div {
+      min-height: 506px;
+      width: 270px;
+    }
+  }
+
+  &__swiperSlide {
+    flex-shrink: 0;
+    width: 272px;
+  }
+}

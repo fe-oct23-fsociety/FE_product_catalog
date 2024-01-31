@@ -75,7 +75,10 @@ export const PromoSlider: React.FC = () => {
           }}
         >
           {!isMob && slidesPlaceholder.map(slidePlaceholder => (
-            <SwiperSlide className={styles.promoSlider__swiperSlide}>
+            <SwiperSlide
+              key={crypto.randomUUID()}
+              className={styles.promoSlider__swiperSlide}
+            >
               <img
                 src={slidePlaceholder}
                 alt="1"
@@ -84,7 +87,10 @@ export const PromoSlider: React.FC = () => {
           ))}
 
           {isMob && slidesPlaceholderMob.map(slidePlaceholderMob => (
-            <SwiperSlide className={styles.promoSlider__swiperSlide}>
+            <SwiperSlide
+              className={styles.promoSlider__swiperSlide}
+              key={crypto.randomUUID()}
+            >
               <img
                 src={slidePlaceholderMob}
                 alt="1"
