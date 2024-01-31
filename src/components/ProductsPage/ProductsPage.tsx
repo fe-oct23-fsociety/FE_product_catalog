@@ -13,7 +13,7 @@ import arrowRightIcon from '../../images/icons/arrow-right.svg';
 import styles from './Pagination.module.scss';
 import { Loader } from '../Loader';
 import { ItemsFromServer } from '../../types/ItemsFromServer';
-import { Pagination, SortType } from '../../types/sortType';
+import { Pagination, SortOrder, SortType } from '../../types/sortType';
 import { getProductsToRender } from './helper';
 
 export const ProductsPage: React.FC = () => {
@@ -25,8 +25,8 @@ export const ProductsPage: React.FC = () => {
   const [setAxios, loading, data, error] = useAxios<ItemsFromServer>(null);
   const [totalPages, setTotalPages] = useState(0);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [sortType, setSortType] = useState<SortType | string>('');
-  const [sortBy, setSortBy] = useState<SortType | string>('');
+  const [sortType, setSortType] = useState<SortOrder | string>(SortOrder.ASC);
+  const [sortBy, setSortBy] = useState<SortType | string>(SortType.Newest);
   const [limit, setLimit] = useState<Pagination | string>(Pagination.Sixteen);
 
   useEffect(() => {

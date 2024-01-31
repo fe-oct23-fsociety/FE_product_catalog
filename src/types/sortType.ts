@@ -1,7 +1,7 @@
 export enum SortType {
-  Screen = 'screen',
-  Newest = 'year',
-  Price = 'price',
+  Screen = 'Screen',
+  Newest = 'Year',
+  Price = 'Price',
 }
 
 export enum Pagination {
