@@ -61,3 +61,7 @@
   color: $secondary-color;
   @include body-text;
 }
+
+h1 {
+  @include h1;
+}
