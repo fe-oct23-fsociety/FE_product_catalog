@@ -34,8 +34,8 @@
   outline: 2px solid #B4BDC3;
   border: none;
   display: inline-block;
-  padding: 0 5px;
-  height: 30px;
+  padding: 5px 10px;
+  height: 40px;
   @include body-text;
 
   &:focus {

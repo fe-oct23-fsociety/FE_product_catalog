@@ -12,18 +12,6 @@ export const getProductsToRender = (products: Product[], sortType: SortType | st
       ));
       break;
 
-    case SortType.PriceAsc:
-      productsToRender.sort((product1, product2) => (
-        product1.price - product2.price
-      ));
-      break;
-
-    case SortType.PriceDesc:
-      productsToRender.sort((product1, product2) => (
-        product2.price - product1.price
-      ));
-      break;
-
     case SortType.Screen:
       productsToRender.sort((product1, product2) => (
         parseFloat(product1.screen) - parseFloat(product2.screen)
