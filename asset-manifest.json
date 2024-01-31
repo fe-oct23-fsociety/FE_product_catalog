@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/FE_product_catalog/static/css/main.5ae11174.css",
-    "main.js": "/FE_product_catalog/static/js/main.ff4a378b.js",
+    "main.css": "/FE_product_catalog/static/css/main.0fd99d78.css",
+    "main.js": "/FE_product_catalog/static/js/main.508c4c73.js",
     "static/media/logo.svg": "/FE_product_catalog/static/media/logo.8d9701d3a3d9b9371273d63b2ee047b3.svg",
     "static/media/Banner.png": "/FE_product_catalog/static/media/Banner.d050523a38b733655d0b.png",
     "static/media/accessories-category.png": "/FE_product_catalog/static/media/accessories-category.b914f4124f0dab3439fb.png",
@@ -24,11 +24,11 @@
     "static/media/arrow-top.svg": "/FE_product_catalog/static/media/arrow-top.11522d037be5ce34a980560400d2b004.svg",
     "index.html": "/FE_product_catalog/index.html",
     "static/media/counter-minus.svg": "/FE_product_catalog/static/media/counter-minus.4f727ec4693f6105d0f6.svg",
-    "main.5ae11174.css.map": "/FE_product_catalog/static/css/main.5ae11174.css.map",
-    "main.ff4a378b.js.map": "/FE_product_catalog/static/js/main.ff4a378b.js.map"
+    "main.0fd99d78.css.map": "/FE_product_catalog/static/css/main.0fd99d78.css.map",
+    "main.508c4c73.js.map": "/FE_product_catalog/static/js/main.508c4c73.js.map"
   },
   "entrypoints": [
-    "static/css/main.5ae11174.css",
-    "static/js/main.ff4a378b.js"
+    "static/css/main.0fd99d78.css",
+    "static/js/main.508c4c73.js"
   ]
 }
