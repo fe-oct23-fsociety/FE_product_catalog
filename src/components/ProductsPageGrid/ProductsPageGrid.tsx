@@ -1,6 +1,7 @@
 import React, {
   Dispatch, SetStateAction, useEffect, useState,
 } from 'react';
+import '../../styles/mixins.scss';
 import './container.scss';
 import { Card } from '../Card';
 import { ItemsFromServer } from '../../types/ItemsFromServer';
