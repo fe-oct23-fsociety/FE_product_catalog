@@ -7,10 +7,11 @@ import { CartPay } from '../CartPay/CartPay';
 import { shopCart } from '../../store/CartStorage';
 import { CartContext } from '../CartContext/CartContext';
 import { BtnBack } from '../BtnBack';
+import emptyCart from '../../images/empty-box.svg';
 
 export const ShopCart: FC = observer(() => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { setCartCount } = useContext(CartContext);
+  const { cartCount, setCartCount } = useContext(CartContext);
 
   const handleCheckout = () => {
     setIsModalOpen(true);
@@ -33,11 +34,26 @@ export const ShopCart: FC = observer(() => {
 
       <div className="shopCart__content">
         <CartList />
-        <CartPay
-          isModalOpen={isModalOpen}
-          handleCheckout={handleCheckout}
-          closeModal={closeModal}
-        />
+        {cartCount > 0 && (
+          <CartPay
+            isModalOpen={isModalOpen}
+            handleCheckout={handleCheckout}
+            closeModal={closeModal}
+          />
+        )}
+
+        {cartCount === 0 && (
+          <div className="emptyCart">
+            <div className="emtyCart_content">
+              <img
+                className="emptyCart__img"
+                src={emptyCart}
+                alt="empty cart"
+              />
+              <h2 className="emptyCart__title">Any items found</h2>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

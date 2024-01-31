@@ -38,3 +38,21 @@
 .favourites {
   padding-top: 30px;
 }
+
+.emptyFavourites {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  text-align: center;
+  
+  &__img {
+    width: 100%;
+  }
+  
+  &__title {
+    @include h3;
+    color: $primary-grey;
+  }
+}

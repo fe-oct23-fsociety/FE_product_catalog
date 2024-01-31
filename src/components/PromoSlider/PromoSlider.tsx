@@ -5,8 +5,8 @@ import SwiperCore from 'swiper';
 import { Pagination, Autoplay } from 'swiper/modules';
 import arrowLeftIcon from '../../images/icons/arrow-left.svg';
 import arrowRightIcon from '../../images/icons/arrow-right.svg';
-import palceHolderBannerImg from '../../images/Banner.png';
-import palceHolderMobBannerImg from '../../images/Banner-mobile.png';
+import placeHolderBannerImg from '../../images/Banner.png';
+import placeHolderMobBannerImg from '../../images/Banner-mobile.png';
 
 import styles from './PromoSlider.module.scss';
 import '../../styles/paginationBullets.scss';
@@ -18,15 +18,15 @@ export const PromoSlider: React.FC = () => {
   const swiperRef = useRef<SwiperCore | null>(null);
 
   const slidesPlaceholder = [
-    palceHolderBannerImg,
-    palceHolderBannerImg,
-    palceHolderBannerImg,
+    placeHolderBannerImg,
+    placeHolderBannerImg,
+    placeHolderBannerImg,
   ];
 
   const slidesPlaceholderMob = [
-    palceHolderMobBannerImg,
-    palceHolderMobBannerImg,
-    palceHolderMobBannerImg,
+    placeHolderMobBannerImg,
+    placeHolderMobBannerImg,
+    placeHolderMobBannerImg,
   ];
 
   const goNext = () => {
@@ -73,6 +73,7 @@ export const PromoSlider: React.FC = () => {
                 </div>`;
             },
           }}
+          speed={1300}
         >
           {!isMob && slidesPlaceholder.map(slidePlaceholder => (
             <SwiperSlide
