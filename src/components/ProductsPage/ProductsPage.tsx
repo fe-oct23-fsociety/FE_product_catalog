@@ -12,7 +12,7 @@ import arrowLeftIcon from '../../images/icons/arrow-left.svg';
 import arrowRightIcon from '../../images/icons/arrow-right.svg';
 import styles from './Pagination.module.scss';
 import { ItemsFromServer } from '../../types/ItemsFromServer';
-import { Pagination, SortType } from '../../types/sortType';
+import { Pagination, SortOrder, SortType } from '../../types/sortType';
 import { getProductsToRender } from './helper';
 
 export const ProductsPage: React.FC = () => {
@@ -24,7 +24,8 @@ export const ProductsPage: React.FC = () => {
   const [setAxios, loading, data, error] = useAxios<ItemsFromServer>(null);
   const [totalPages, setTotalPages] = useState(0);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [sortType, setSortType] = useState<SortType | string>('');
+  const [sortType, setSortType] = useState<SortOrder | string>(SortOrder.ASC);
+  const [sortBy, setSortBy] = useState<SortType | string>(SortType.Newest);
   const [limit, setLimit] = useState<Pagination | string>(Pagination.Sixteen);
   const [searchValue, setSearchValue] = useState('');
 
@@ -42,22 +43,12 @@ export const ProductsPage: React.FC = () => {
       method: 'get',
       url:
         `${apiRoutes.SHOW_PRODUCTS}`
-        + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(+limit, offset)}`,
-    });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, limit, currentPage]);
-
-  useEffect(() => {
-    setAxios({
-      method: 'get',
-      url:
-        `${apiRoutes.SHOW_PRODUCTS}`
-        + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(+limit, 0)}`
+        + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(+limit, offset)}`
+        + `&${apiRoutes.SORT_BY(sortBy)}&${apiRoutes.SORT_TYPE(sortType)}`
         + `&${apiRoutes.SEARCH(searchValue)}`,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchValue]);
+  }, [category, limit, currentPage, sortType, sortBy, searchValue]);
 
   const memoizedCount = useMemo(() => {
     if (data && data.count > 0) {
@@ -86,6 +77,8 @@ export const ProductsPage: React.FC = () => {
         productEntities={data}
         products={productsToRender}
         onPaginationSelect={setLimit}
+        onSortBySelect={setSortBy}
+        onSortTypeSelect={setSortType}
         getSearch={setSearchValue}
         isLoading={loading}
         isError={error}
