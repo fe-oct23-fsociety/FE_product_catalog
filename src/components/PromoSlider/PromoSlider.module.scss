@@ -9,7 +9,7 @@
     grid-template-columns: repeat(12, 1fr);
   }
 
-  @media (min-width: 1999px) {
+  @media (min-width: 1199px) {
     grid-template-columns: repeat(24, 1fr);
   }
 
@@ -70,7 +70,7 @@
     display: flex;
     cursor: grab;
 
-    @media (min-width: 1999px) {
+    @media (min-width: 1199px) {
       max-height: none;
     }
   }
