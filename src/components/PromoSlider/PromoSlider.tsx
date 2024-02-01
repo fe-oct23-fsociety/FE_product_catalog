@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
@@ -118,21 +119,16 @@ export const PromoSlider: React.FC = () => {
               key={crypto.randomUUID()}
               className={styles.promoSlider__swiperSlide}
             >
-              <div
+              <img
+                src={slidePlaceholder}
+                alt="1"
                 onClick={() => handleCardClick(index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
-                role="button"
-                tabIndex={0}
-              >
-                <img
-                  src={slidePlaceholder}
-                  alt="1"
-                />
-              </div>
+              />
             </SwiperSlide>
           ))}
 
-          {isMob && slidesPlaceholderMob.map(slidePlaceholderMob => (
+          {isMob && slidesPlaceholderMob.map((slidePlaceholderMob, index) => (
             <SwiperSlide
               className={styles.promoSlider__swiperSlide}
               key={crypto.randomUUID()}
@@ -140,6 +136,8 @@ export const PromoSlider: React.FC = () => {
               <img
                 src={slidePlaceholderMob}
                 alt="1"
+                onClick={() => handleCardClick(index)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
               />
             </SwiperSlide>
           ))}
