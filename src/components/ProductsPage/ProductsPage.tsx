@@ -69,6 +69,10 @@ export const ProductsPage: React.FC = () => {
     scrollToTop();
   };
 
+  const handleSortParamsChange = () => {
+    handlePageClick({ selected: 0 });
+  };
+
   const productsToRender = getProductsToRender(data?.products || [], sortType);
 
   return (
@@ -82,6 +86,7 @@ export const ProductsPage: React.FC = () => {
         getSearch={setSearchValue}
         isLoading={loading}
         isError={error}
+        handleSortParamsChange={handleSortParamsChange}
       />
 
       <ReactPaginate
