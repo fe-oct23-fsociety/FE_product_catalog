@@ -88,7 +88,6 @@ export const ProductsPageGrid: React.FC<Props> = ({
     setTimeout(() => {
       onSortBySelect(event.target.value);
       setIsDelayActive(false);
-      handleSortParamsChange();
     }, DELAY_TIME);
   };
 
@@ -99,7 +98,6 @@ export const ProductsPageGrid: React.FC<Props> = ({
     setTimeout(() => {
       onSortTypeSelect(event.target.value);
       setIsDelayActive(false);
-      handleSortParamsChange();
     }, DELAY_TIME);
   };
 
