@@ -1,0 +1,56 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/base-theme.scss';
+
+.search {
+  display: flex;
+  align-items: center;
+  border: 2px solid #B4BDC3;
+  padding: 5px;
+  height: 35px;
+
+  @media (max-width: 768px) {
+    flex-direction: row-reverse;
+  }
+
+  &__input {
+    border: none;
+    @include body-text;
+    transition: max-width .3s ease-in-out;
+
+    &--show {
+      max-width: 0;
+    }
+
+    &--hide {
+      max-width: 200px;
+    }
+
+    &::placeholder {
+      color: $secondary-color;
+      line-height: 0;
+    }
+
+    &:focus {
+      outline: none;
+
+      &::placeholder {
+        color: transparent;
+      }
+    }
+  }
+
+  &__icon-wrapp {
+    display: flex;
+    background: transparent;
+    cursor: pointer;
+
+    & svg {
+      width: 16px;
+      height: 16px;
+
+      path {
+        fill: $primary-color;
+      }
+    }
+  }
+}

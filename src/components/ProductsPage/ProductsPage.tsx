@@ -11,7 +11,6 @@ import { scrollToTop } from '../../helpers';
 import arrowLeftIcon from '../../images/icons/arrow-left.svg';
 import arrowRightIcon from '../../images/icons/arrow-right.svg';
 import styles from './Pagination.module.scss';
-import { Loader } from '../Loader';
 import { ItemsFromServer } from '../../types/ItemsFromServer';
 import { Pagination, SortOrder, SortType } from '../../types/sortType';
 import { getProductsToRender } from './helper';
@@ -28,6 +27,7 @@ export const ProductsPage: React.FC = () => {
   const [sortType, setSortType] = useState<SortOrder | string>(SortOrder.ASC);
   const [sortBy, setSortBy] = useState<SortType | string>(SortType.Newest);
   const [limit, setLimit] = useState<Pagination | string>(Pagination.Sixteen);
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     setCategory(pathname);
@@ -44,17 +44,11 @@ export const ProductsPage: React.FC = () => {
       url:
         `${apiRoutes.SHOW_PRODUCTS}`
         + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(+limit, offset)}`
-        + `&${apiRoutes.SORT_BY(sortBy)}&${apiRoutes.SORT_TYPE(sortType)}`,
+        + `&${apiRoutes.SORT_BY(sortBy)}&${apiRoutes.SORT_TYPE(sortType)}`
+        + `&${apiRoutes.SEARCH(searchValue)}`,
     });
-    // eslint-disable-next-line no-console
-    console.log(
-      `${apiRoutes.SHOW_PRODUCTS}`
-        + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(+limit, offset)}`
-        + `&${apiRoutes.SORT_BY(sortBy)}&${apiRoutes.SORT_TYPE(sortType)}`,
-    );
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, limit, currentPage, sortType, sortBy]);
+  }, [category, limit, currentPage, sortType, sortBy, searchValue]);
 
   const memoizedCount = useMemo(() => {
     if (data && data.count > 0) {
@@ -79,21 +73,16 @@ export const ProductsPage: React.FC = () => {
 
   return (
     <>
-      {loading && !error && (
-        <div className={styles['container-loading']}>
-          <Loader />
-        </div>
-      )}
-
-      {data && data.count > 0 && (
-        <ProductsPageGrid
-          productEntities={data}
-          products={productsToRender}
-          onPaginationSelect={setLimit}
-          onSortBySelect={setSortBy}
-          onSortTypeSelect={setSortType}
-        />
-      )}
+      <ProductsPageGrid
+        productEntities={data}
+        products={productsToRender}
+        onPaginationSelect={setLimit}
+        onSortBySelect={setSortBy}
+        onSortTypeSelect={setSortType}
+        getSearch={setSearchValue}
+        isLoading={loading}
+        isError={error}
+      />
 
       <ReactPaginate
         previousLabel={

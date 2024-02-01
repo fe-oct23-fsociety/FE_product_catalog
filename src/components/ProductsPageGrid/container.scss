@@ -3,8 +3,6 @@
 
 .container {
   $column-count: 1;
- 
-
   display: grid;
   grid-template-columns: repeat($column-count, 272px);
   row-gap: 40px;
@@ -26,6 +24,10 @@
 
 .card-container {
   margin-bottom: 25px;
+
+  @media (min-width: 641px) {
+    padding-inline: 24px;
+  }
 }
 
 .select__pagination,
@@ -43,12 +45,22 @@
   }
 }
 
-
 .description {
   color: $secondary-color;
   margin-bottom: 40px;
 
   @include body-text;
+}
+
+.params-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .sort {
@@ -84,4 +96,17 @@
 
 h1 {
   @include h1;
+}
+
+.container-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+.container-img {
+  width: 50vw;
+  margin: 0 auto;
+  margin-bottom: 25px;
 }
