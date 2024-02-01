@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, {
   Dispatch, SetStateAction, useEffect, useState,
 } from 'react';
@@ -18,7 +19,7 @@ type Props = {
   onPaginationSelect: Dispatch<SetStateAction<string>>;
   getSearch: (arg: string) => void;
   isLoading: boolean;
-  isError: string | unknown | null,
+  isError: string | unknown | null;
   onSortBySelect: Dispatch<SetStateAction<string>>;
   onSortTypeSelect: Dispatch<SetStateAction<string>>;
 };
@@ -35,7 +36,11 @@ export const ProductsPageGrid: React.FC<Props> = ({
 }) => {
   const countOfGoods = productEntities ? productEntities.count : 0;
 
-  const [categoryHeaderName, setCategoryHeaderName] = useState<string | undefined>('');
+  const [categoryHeaderName, setCategoryHeaderName] = useState<
+  string | undefined
+  >('');
+  const [isDelayActive, setIsDelayActive] = useState(false);
+  const DELAY_TIME = 850;
 
   useEffect(() => {
     const { hash } = window.location;
@@ -65,6 +70,36 @@ export const ProductsPageGrid: React.FC<Props> = ({
     setCategoryHeaderName(categoryName?.toString());
   }, [products]);
 
+  const handlePaginationChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setIsDelayActive(true);
+    setTimeout(() => {
+      onPaginationSelect(event.target.value);
+      setIsDelayActive(false);
+    }, DELAY_TIME);
+  };
+
+  const handleSortByChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setIsDelayActive(true);
+    setTimeout(() => {
+      onSortBySelect(event.target.value);
+      setIsDelayActive(false);
+    }, DELAY_TIME);
+  };
+
+  const handleSortTypeChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setIsDelayActive(true);
+    setTimeout(() => {
+      onSortTypeSelect(event.target.value);
+      setIsDelayActive(false);
+    }, DELAY_TIME);
+  };
+
   return (
     <>
       <div className="card-container">
@@ -85,7 +120,7 @@ export const ProductsPageGrid: React.FC<Props> = ({
                 name=""
                 id=""
                 className="select__pagination"
-                onChange={(event) => onPaginationSelect(event.target.value)}
+                onChange={(event) => handlePaginationChange(event)}
               >
                 <option value={Pagination.Sixteen}>{Pagination.Sixteen}</option>
                 <option value={Pagination.ThirtyTwo}>
@@ -104,7 +139,7 @@ export const ProductsPageGrid: React.FC<Props> = ({
                 name=""
                 id=""
                 className="sort__sort-by"
-                onChange={(event) => onSortBySelect(event.target.value)}
+                onChange={(event) => handleSortByChange(event)}
               >
                 <option value={SortType.Newest}>{SortType.Newest}</option>
                 <option value={SortType.Price}>{SortType.Price}</option>
@@ -122,7 +157,7 @@ export const ProductsPageGrid: React.FC<Props> = ({
                 name=""
                 id=""
                 className="sort__sort-order"
-                onChange={(event) => onSortTypeSelect(event.target.value)}
+                onChange={(event) => handleSortTypeChange(event)}
               >
                 <option value={SortOrder.ASC}>From low to high</option>
                 <option value={SortOrder.DESC}>From high to low</option>
@@ -142,18 +177,21 @@ export const ProductsPageGrid: React.FC<Props> = ({
         </div>
       )}
 
-      {(products && products.length > 0)
-        ? (
-          <div className="container">
-            {products.map((good) => (
-              <Card productData={good} key={good.id} />))}
-          </div>
-        )
-        : (
-          <div className="container-img">
-            <img src={noProductFound} alt="no productfound" />
-          </div>
-        )}
+      {isDelayActive ? (
+        <div className="loader-grid">
+          <Loader />
+        </div>
+      ) : products && products.length > 0 ? (
+        <div className="container">
+          {products.map((good) => (
+            <Card productData={good} key={good.id} />
+          ))}
+        </div>
+      ) : (
+        <div className="container-img">
+          <img src={noProductFound} alt="no productfound" />
+        </div>
+      )}
     </>
   );
 };
