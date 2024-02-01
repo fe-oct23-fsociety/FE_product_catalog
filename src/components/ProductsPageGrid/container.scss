@@ -103,8 +103,12 @@
   @include body-text;
 }
 
-h1 {
+.category__title {
   @include h1;
+  @media (max-width: 576px) {
+    font-size: 32px;
+    line-height: 41px;
+  }
 }
 
 .container-loading {
