@@ -5,12 +5,13 @@ import { favourites } from '../../store/FavouritesStorage';
 import { Card } from '../Card';
 import { BtnBack } from '../BtnBack';
 import emptyFavourites from '../../images/favorites-not-found.svg';
+import { PageSection } from '../PageSection';
 
 export const FavouritesPage: React.FC = observer(() => {
   const { itemsInFavourites } = favourites;
 
   return (
-    <>
+    <PageSection>
       <div className="btn-back-wrapper">
         <BtnBack />
       </div>
@@ -42,6 +43,6 @@ export const FavouritesPage: React.FC = observer(() => {
         )}
 
       </div>
-    </>
+    </PageSection>
   );
 });

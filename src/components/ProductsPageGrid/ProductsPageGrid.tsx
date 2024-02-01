@@ -12,6 +12,7 @@ import { Product } from '../../types/ProductEntity';
 import { Pagination, SortType, SortOrder } from '../../types/sortType';
 import { Categories } from '../../types/categories';
 import noProductFound from '../../images/no-product-found.svg';
+import { PageSection } from '../PageSection';
 
 type Props = {
   productEntities: ItemsFromServer | null;
@@ -102,7 +103,7 @@ export const ProductsPageGrid: React.FC<Props> = ({
   };
 
   return (
-    <>
+    <PageSection>
       <div className="card-container">
         <br />
         <h1 className="category__title">{categoryHeaderName}</h1>
@@ -166,7 +167,7 @@ export const ProductsPageGrid: React.FC<Props> = ({
             </div>
           </div>
 
-          <div>
+          <div className="params-container__search">
             <Search handleSearch={getSearch} />
           </div>
         </div>
@@ -193,7 +194,7 @@ export const ProductsPageGrid: React.FC<Props> = ({
           <img src={noProductFound} alt="no productfound" />
         </div>
       )}
-    </>
+    </PageSection>
   );
 };
 
