@@ -68,7 +68,7 @@
 
   &__swiperWrapper {
     display: flex;
-    cursor: grab;
+    cursor: pointer;
 
     @media (min-width: 1199px) {
       max-height: none;

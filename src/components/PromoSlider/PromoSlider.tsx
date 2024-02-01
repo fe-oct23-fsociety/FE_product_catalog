@@ -47,14 +47,36 @@ export const PromoSlider: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>, index: number) => {
     if (event.key === 'Enter') {
-      navigate('/phones');
+      switch (index) {
+        case 0:
+          navigate('/phones/81');
+          break;
+        case 1:
+          navigate('/tablets/155');
+          break;
+        case 2:
+          navigate('/accessories/142');
+          break;
+        default:
+      }
     }
   };
 
-  const handleCardClick = () => {
-    navigate('/phones');
+  const handleCardClick = (index: number) => {
+    switch (index) {
+      case 0:
+        navigate('/phones/81');
+        break;
+      case 1:
+        navigate('/tablets/155');
+        break;
+      case 2:
+        navigate('/accessories/142');
+        break;
+      default:
+    }
   };
 
   return (
@@ -66,13 +88,7 @@ export const PromoSlider: React.FC = () => {
       >
         <img src={arrowLeftIcon} alt="arrow left icon" />
       </button>
-      <div
-        className={styles.promoSlider__swiperRoot}
-        onClick={() => handleCardClick()}
-        onKeyDown={(e) => handleKeyDown(e)}
-        role="button"
-        tabIndex={0}
-      >
+      <div className={styles.promoSlider__swiperRoot}>
         <Swiper
           slidesPerView={1}
           spaceBetween={10}
@@ -97,15 +113,22 @@ export const PromoSlider: React.FC = () => {
           }}
           speed={1300}
         >
-          {!isMob && slidesPlaceholder.map(slidePlaceholder => (
+          {!isMob && slidesPlaceholder.map((slidePlaceholder, index) => (
             <SwiperSlide
               key={crypto.randomUUID()}
               className={styles.promoSlider__swiperSlide}
             >
-              <img
-                src={slidePlaceholder}
-                alt="1"
-              />
+              <div
+                onClick={() => handleCardClick(index)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
+                role="button"
+                tabIndex={0}
+              >
+                <img
+                  src={slidePlaceholder}
+                  alt="1"
+                />
+              </div>
             </SwiperSlide>
           ))}
 
