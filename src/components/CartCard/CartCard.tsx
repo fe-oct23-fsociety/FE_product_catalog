@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import React, { FC, useContext, useState } from 'react';
 import './CartCard.scss';
 import { observer } from 'mobx-react-lite';
@@ -14,7 +15,12 @@ const PREF_TO_STATIC_SERVER
 
 export const CartCard: FC<Props> = observer(({ cart }) => {
   const {
-    name, price, image, counter,
+    name,
+    price,
+    image,
+    counter,
+    category,
+    id,
   } = cart;
   const normalisedImage = `${PREF_TO_STATIC_SERVER}${image}`;
   const [count, setCount] = useState(cart.counter);
@@ -45,9 +51,27 @@ export const CartCard: FC<Props> = observer(({ cart }) => {
     });
   };
 
+  const navigate = useNavigate();
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      navigate(`/${category}/${id}`);
+    }
+  };
+
+  const handleCardClick = () => {
+    navigate(`/${category}/${id}`);
+  };
+
   return (
     <li className="cartItem">
-      <div className="cartItem__container">
+      <div
+        className="cartItem__container"
+        onClick={() => handleCardClick()}
+        onKeyDown={(e) => handleKeyDown(e)}
+        role="button"
+        tabIndex={0}
+      >
         <div className="cartItem__top">
           <button
             aria-label="close-btn"
