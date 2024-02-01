@@ -4,14 +4,6 @@
 $custom-background: attr(data-bg);
 
 .product {
-  @media (max-width: 1199px) {
-    padding-inline: 24px;
-  }
-
-  @media (max-width: 576px) {
-    padding-inline: 16px;
-  }
-
   &__main-title {
     @include h2;
     margin-bottom: 40px;

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../../styles/base-theme.scss';
 
 import styles from './HomePage.module.scss';
 import { useAxios } from '../../hooks/useAxios';
@@ -74,7 +75,9 @@ export const HomePage: React.FC = () => {
 
   return (
     <main className={styles.main}>
-      <h1 className={styles.title}>Welcome to Nice Gadgets store!</h1>
+      <h1 className={`${styles.title} sides-indentation`}>
+        Welcome to Nice Gadgets store!
+      </h1>
 
       <PromoSlider />
 
@@ -93,7 +96,7 @@ export const HomePage: React.FC = () => {
         )}
       </section>
 
-      <section className={styles.productsContainer}>
+      <section className={`${styles.productsContainer} sides-indentation`}>
         <h2 className={styles.subTitle}>Shop by category</h2>
         <div className={styles.categoriesContainer}>
           <div
