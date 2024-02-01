@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import { useNavigate } from 'react-router-dom';
 import React, { FC, useContext, useState } from 'react';
 import './CartCard.scss';
@@ -26,23 +27,32 @@ export const CartCard: FC<Props> = observer(({ cart }) => {
   const [count, setCount] = useState(cart.counter);
   const { cartCount, setCartCount } = useContext(CartContext);
 
-  const handleIncrement = () => {
+  const handleIncrement = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    event.stopPropagation();
     setCount((p) => p + 1);
     // eslint-disable-next-line no-param-reassign
     cart.counter += 1;
     shopCart.totalPrice += +price;
   };
 
-  const deleteFromCart = () => {
+  const deleteFromCart = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    event.stopPropagation();
     shopCart.totalPrice -= price * counter;
     shopCart.deleteItem(cart);
     setCartCount(cartCount - 1);
   };
 
-  const handleDecrement = () => {
+  const handleDecrement = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    event.stopPropagation();
     setCount((prevCounter) => {
       if (prevCounter === 1) {
-        deleteFromCart();
+        deleteFromCart(event);
       } else {
         shopCart.totalPrice -= +price;
       }
