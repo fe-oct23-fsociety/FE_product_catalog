@@ -12,6 +12,7 @@ import accessoriesCategoryImg from '../../images/accessories-category.png';
 import { Product } from '../../types/ProductEntity';
 import { PromoSlider } from '../PromoSlider';
 import { ProductsSlider } from '../ProductsSlider';
+import { scrollToTop } from '../../helpers';
 
 export const HomePage: React.FC = () => {
   const [setAxios] = useAxios<ItemsFromServer>(null);
@@ -27,6 +28,10 @@ export const HomePage: React.FC = () => {
     dataNewProducts,
     errorNewProducts,
   ] = useAxios<Product[]>(null);
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   useEffect(() => {
     setAxios({
