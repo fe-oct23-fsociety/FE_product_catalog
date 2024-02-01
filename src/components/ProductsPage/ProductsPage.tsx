@@ -1,5 +1,11 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, {
+  useState,
+  useMemo,
+  useEffect,
+  useCallback,
+} from 'react';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import { apiRoutes } from '../../const/routes';
 import { useAxios } from '../../hooks/useAxios';
@@ -19,6 +25,8 @@ export const ProductsPage: React.FC = () => {
   const location = useLocation();
   const pathname = location.pathname.replace('/', '');
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [currentPage, setCurrentPage] = useState(0);
   const [category, setCategory] = useState(pathname);
   const [setAxios, loading, data, error] = useAxios<ItemsFromServer>(null);
@@ -26,8 +34,25 @@ export const ProductsPage: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [sortType, setSortType] = useState<SortOrder | string>(SortOrder.ASC);
   const [sortBy, setSortBy] = useState<SortType | string>(SortType.Newest);
-  const [limit, setLimit] = useState<Pagination | string>(Pagination.Sixteen);
+  // const [limit, setLimit] = useState<Pagination | string>(Pagination.Sixteen);
   const [searchValue, setSearchValue] = useState('');
+
+  const setLimit = (val: Pagination | string) => {
+    setSearchParams(`limit=${val}`);
+  };
+
+  const getLimit = useCallback((): string | Pagination => {
+    const limit = searchParams.get('limit');
+
+    if (limit && Object.values(Pagination).includes(limit as Pagination)) {
+      return limit;
+    }
+
+    return Pagination.Sixteen;
+  }, [searchParams]);
+
+  // eslint-disable-next-line no-console, padding-line-between-statements
+  console.log(getLimit());
 
   useEffect(() => {
     setCategory(pathname);
@@ -37,26 +62,26 @@ export const ProductsPage: React.FC = () => {
   }, [location]);
 
   useEffect(() => {
-    const offset = currentPage * +limit;
+    const offset = currentPage * +getLimit();
 
     setAxios({
       method: 'get',
       url:
         `${apiRoutes.SHOW_PRODUCTS}`
-        + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(+limit, offset)}`
+        + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(+getLimit(), offset)}`
         + `&${apiRoutes.SORT_BY(sortBy)}&${apiRoutes.SORT_TYPE(sortType)}`
         + `&${apiRoutes.SEARCH(searchValue)}`,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, limit, currentPage, sortType, sortBy, searchValue]);
+  }, [category, getLimit(), currentPage, sortType, sortBy, searchValue]);
 
   const memoizedCount = useMemo(() => {
     if (data && data.count > 0) {
-      return Math.ceil(data.count / +limit);
+      return Math.ceil(data.count / +getLimit());
     }
 
     return 0;
-  }, [data, limit]);
+  }, [data, getLimit]);
 
   useEffect(() => {
     if (memoizedCount) {

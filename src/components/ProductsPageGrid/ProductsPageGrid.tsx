@@ -17,7 +17,7 @@ import { PageSection } from '../PageSection';
 type Props = {
   productEntities: ItemsFromServer | null;
   products: Product[];
-  onPaginationSelect: Dispatch<SetStateAction<string>>;
+  onPaginationSelect: (arg: Pagination | string) => void;
   getSearch: (arg: string) => void;
   isLoading: boolean;
   isError: string | unknown | null;
