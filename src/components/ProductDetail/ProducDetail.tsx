@@ -21,6 +21,7 @@ import { ProductShowcase } from '../ProductShowcase';
 import { BtnBack } from '../BtnBack';
 import { preperedColor } from '../../utils/helpers';
 import { ProductsSlider } from '../ProductsSlider';
+import { PageSection } from '../PageSection';
 
 const shortSpecTitles = ['Screen', 'Resolution', 'Processor', 'RAM'];
 const specTitles = [
@@ -114,7 +115,7 @@ export const ProductDetail: React.FC = observer(() => {
     if (selectedColor) {
       handleChangeId();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedColor, selectedCapacity]);
 
   const handleChangeColor = (color: string) => {
@@ -159,103 +160,105 @@ export const ProductDetail: React.FC = observer(() => {
 
   return (
     <section className={styles.product}>
-      <div className="mb-24">
-        <BtnBack />
-      </div>
-
-      {loading && !error && (
-        <div className={styles['container-loading']}>
-          <Loader />
+      <PageSection>
+        <div className="mb-24">
+          <BtnBack />
         </div>
-      )}
 
-      {data && (
-        <>
-          <h2 className={styles['product__main-title']}>{data.name}</h2>
-          <div className={styles.product__wrapp}>
-            <ProductShowcase
-              data={data}
-              selectedColor={selectedColor}
-              selectedCapacity={selectedCapacity}
-              handleChangeColor={handleChangeColor}
-              handleChangeCapacity={handleChangeCapacity}
-              handleAddToCart={handleAddToCart}
-              isInCart={isInCart}
-              shortSpecTitles={shortSpecTitles}
-              handleAddToFav={handleAddToFav}
-              isInFavourites={isInFavourites}
-            />
+        {loading && !error && (
+          <div className={styles['container-loading']}>
+            <Loader />
+          </div>
+        )}
 
-            <div
-              className={cn(
-                styles.product__container,
-                styles['product__container--bottom'],
-              )}
-            >
-              <div className={styles['product__container--part-50']}>
-                <h3 className={cn(styles.product__title, styles.product__line)}>
-                  About
-                </h3>
-                {data.description.map(({ title, text }) => (
-                  <div
-                    className={styles['about-content']}
-                    key={title}
-                  >
-                    <p
-                      className={styles['about-content__title']}
+        {data && (
+          <>
+            <h2 className={styles['product__main-title']}>{data.name}</h2>
+            <div className={styles.product__wrapp}>
+              <ProductShowcase
+                data={data}
+                selectedColor={selectedColor}
+                selectedCapacity={selectedCapacity}
+                handleChangeColor={handleChangeColor}
+                handleChangeCapacity={handleChangeCapacity}
+                handleAddToCart={handleAddToCart}
+                isInCart={isInCart}
+                shortSpecTitles={shortSpecTitles}
+                handleAddToFav={handleAddToFav}
+                isInFavourites={isInFavourites}
+              />
+
+              <div
+                className={cn(
+                  styles.product__container,
+                  styles['product__container--bottom'],
+                )}
+              >
+                <div className={styles['product__container--part-50']}>
+                  <h3 className={cn(styles.product__title, styles.product__line)}>
+                    About
+                  </h3>
+                  {data.description.map(({ title, text }) => (
+                    <div
+                      className={styles['about-content']}
+                      key={title}
                     >
-                      {title}
-                    </p>
-                    {text.map(content => (
                       <p
-                        className={cn(
-                          styles['product__body-text'],
-                          styles['product__body-text--ligth'],
-                          styles['about-content__text'],
-                        )}
-                        key={crypto.randomUUID()}
+                        className={styles['about-content__title']}
                       >
-                        {content}
+                        {title}
                       </p>
-                    ))}
+                      {text.map(content => (
+                        <p
+                          className={cn(
+                            styles['product__body-text'],
+                            styles['product__body-text--ligth'],
+                            styles['about-content__text'],
+                          )}
+                          key={crypto.randomUUID()}
+                        >
+                          {content}
+                        </p>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+
+                <div className={styles['product__container--part-50']}>
+                  <h3 className={cn(styles.product__title, styles.product__line)}>
+                    Tech specs
+                  </h3>
+
+                  <div>
+                    {specTitles.map((item) => {
+                      const key
+                        = item.toLocaleLowerCase() as keyof ProductDetailItem;
+
+                      if (data[key] !== null) {
+                        return (
+                          <div className={styles['product__spec-wrapp']} key={key}>
+                            <p
+                              className={cn(
+                                styles['product__body-text'],
+                                styles['product__body-text--ligth'],
+                              )}
+                            >
+                              {item}
+                            </p>
+                            <p className={styles['product__body-text']}>
+                              {`${data[key]}`}
+                            </p>
+                          </div>
+                        );
+                      }
+                    })}
                   </div>
-                ))}
-              </div>
-
-              <div className={styles['product__container--part-50']}>
-                <h3 className={cn(styles.product__title, styles.product__line)}>
-                  Tech specs
-                </h3>
-
-                <div>
-                  {specTitles.map((item) => {
-                    const key
-                      = item.toLocaleLowerCase() as keyof ProductDetailItem;
-
-                    if (data[key] !== null) {
-                      return (
-                        <div className={styles['product__spec-wrapp']} key={key}>
-                          <p
-                            className={cn(
-                              styles['product__body-text'],
-                              styles['product__body-text--ligth'],
-                            )}
-                          >
-                            {item}
-                          </p>
-                          <p className={styles['product__body-text']}>
-                            {`${data[key]}`}
-                          </p>
-                        </div>
-                      );
-                    }
-                  })}
                 </div>
               </div>
             </div>
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </PageSection>
 
       <section className={styles.recommendedProducts}>
         {recommendedProducts && recommendedProducts.length > 0 && (

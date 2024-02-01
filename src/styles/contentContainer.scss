@@ -6,12 +6,4 @@
 
   max-width: 1156px;
   margin: 0 auto;
-
-  @media (max-width: 640px) {
-    padding: 0 16px;
-  }
-
-  @media (min-width: 1200px) { 
-    padding: 0 32px;
-  }
 }

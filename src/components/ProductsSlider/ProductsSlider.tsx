@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
+import '../../styles/base-theme.scss';
 
 import { Card } from '../Card';
 import { Product } from '../../types/ProductEntity';
@@ -61,7 +62,7 @@ export const ProductsSlider: React.FC<Props> = ({
 
   return (
     <section className={styles.productSlider}>
-      <div className={styles.productSlider__topBar}>
+      <div className={`${styles.productSlider__topBar} sides-indentation`}>
         <h2 className={styles['productSlider__topBar-title']}>{sectionTitle}</h2>
 
         {isShowButton && (

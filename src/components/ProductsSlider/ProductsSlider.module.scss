@@ -12,7 +12,7 @@
 
     &-title {
       @include h2-mobile;
-  
+
       @include onTablet {
         @include h2;
       }
@@ -26,6 +26,15 @@
 
   &__swiperRoot {
     overflow: hidden;
+
+
+    @media (max-width: 1199px) {
+      padding-left: 24px;
+    }
+
+    @media (max-width: 576px) {
+      padding-left: 16px;
+    }
   }
 
   &__swiperWrapper {
@@ -37,7 +46,7 @@
     align-items: center;
     justify-content: center;
 
-    > div {
+    >div {
       min-height: 506px;
       width: 270px;
     }

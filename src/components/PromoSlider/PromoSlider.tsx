@@ -18,7 +18,7 @@ import '../../styles/paginationBullets.scss';
 import { useWindowWidth } from '../../hooks/useWindowWidth';
 
 export const PromoSlider: React.FC = () => {
-  const isMob = useWindowWidth() <= 640;
+  const isMob = useWindowWidth() <= 639;
   const swiperRef = useRef<SwiperCore | null>(null);
 
   const slidesPlaceholder = [
