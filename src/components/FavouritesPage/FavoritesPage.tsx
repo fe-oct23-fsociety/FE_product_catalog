@@ -6,6 +6,7 @@ import { Card } from '../Card';
 import { BtnBack } from '../BtnBack';
 import emptyFavourites from '../../images/favorites-not-found.svg';
 import { PageSection } from '../PageSection';
+import { BtnGoStore } from '../BtnGoStore';
 
 export const FavouritesPage: React.FC = observer(() => {
   const { itemsInFavourites } = favourites;
@@ -38,6 +39,7 @@ export const FavouritesPage: React.FC = observer(() => {
                 alt="emptyFavourites"
               />
               <h2 className={styles.emptyFavourites__title}>Any items found</h2>
+              <BtnGoStore />
             </div>
           </div>
         )}
