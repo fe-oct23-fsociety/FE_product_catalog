@@ -4,12 +4,24 @@
 .search {
   display: flex;
   align-items: center;
-  border: 2px solid #B4BDC3;
+  border: 1px solid #fff;
   padding: 5px;
-  height: 35px;
+  height: 40px;
+  transition: border .3s ease-in-out;
 
-  @media (max-width: 768px) {
+  &--is-show {
+    border: 1px solid #B4BDC3;
+  }
+
+  @media (max-width: 700px) {
     flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  &__input-wrapp {
+    @media (max-width: 700px) {
+      width: 100%;
+    }
   }
 
   &__input {
@@ -19,10 +31,18 @@
 
     &--show {
       max-width: 0;
+      @media (max-width: 700px) {
+        max-width: 0%;
+      }
     }
 
     &--hide {
       max-width: 200px;
+
+      @media (max-width: 700px) {
+        max-width: 100%;
+        width: 100%;
+      }
     }
 
     &::placeholder {

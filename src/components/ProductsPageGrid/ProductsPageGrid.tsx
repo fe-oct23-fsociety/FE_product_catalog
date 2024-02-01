@@ -165,7 +165,7 @@ export const ProductsPageGrid: React.FC<Props> = ({
             </div>
           </div>
 
-          <div>
+          <div className="params-container__search">
             <Search handleSearch={getSearch} />
           </div>
         </div>
