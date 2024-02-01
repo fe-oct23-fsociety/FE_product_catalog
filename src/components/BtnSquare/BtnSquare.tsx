@@ -23,7 +23,8 @@ export const BtnSquare: React.FC<Props> = ({
   onClick,
 }) => {
   const btnsSize = {
-    width: `${sizeValue}px`,
+    minWidth: `${sizeValue}px`,
+    maxWidth: `${sizeValue}px`,
     height: `${sizeValue}px`,
   };
 

@@ -5,6 +5,7 @@
 .productShowcase {
   overflow: hidden;
   display: flex;
+  justify-content: center;
 
   @media (max-width: 640px) {
     flex-direction: column;
@@ -215,11 +216,8 @@
 
     &__capacityes {
       display: flex;
-      margin-bottom: 24px;
-
-      > *:not(:last-child) {
-        margin-right: 8px;
-      }
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     &__capacity {
@@ -227,16 +225,17 @@
       font-size: 14px;
       line-height: 21px;
       color: $primary-grey;
+
+      margin-bottom: 24px;
       height: 32px;
       min-width: 65px;
 
       border: 1px solid $border-grey-second;
       background-color: $white;
 
-      transition:
-        border 0.2s ease-in-out,
-        background-color 0.2s ease-in-out,
-        color 0.2 e;
+      transition: border 0.2s ease-in-out,
+      background-color 0.2s ease-in-out;
+      transition: color 0.2s;
 
       &:hover {
         border: 1px solid $primary-grey;
