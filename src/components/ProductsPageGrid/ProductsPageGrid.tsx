@@ -23,6 +23,7 @@ type Props = {
   isError: string | unknown | null;
   onSortBySelect: Dispatch<SetStateAction<string>>;
   onSortTypeSelect: Dispatch<SetStateAction<string>>;
+  handleSortParamsChange: () => void;
 };
 
 export const ProductsPageGrid: React.FC<Props> = ({
@@ -34,6 +35,7 @@ export const ProductsPageGrid: React.FC<Props> = ({
   isError,
   onSortBySelect,
   onSortTypeSelect,
+  handleSortParamsChange,
 }) => {
   const countOfGoods = productEntities ? productEntities.count : 0;
 
@@ -78,16 +80,16 @@ export const ProductsPageGrid: React.FC<Props> = ({
     setTimeout(() => {
       onPaginationSelect(event.target.value);
       setIsDelayActive(false);
+      handleSortParamsChange();
     }, DELAY_TIME);
   };
 
-  const handleSortByChange = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
+  const handleSortByChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setIsDelayActive(true);
     setTimeout(() => {
       onSortBySelect(event.target.value);
       setIsDelayActive(false);
+      handleSortParamsChange();
     }, DELAY_TIME);
   };
 
@@ -98,6 +100,7 @@ export const ProductsPageGrid: React.FC<Props> = ({
     setTimeout(() => {
       onSortTypeSelect(event.target.value);
       setIsDelayActive(false);
+      handleSortParamsChange();
     }, DELAY_TIME);
   };
 

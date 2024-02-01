@@ -10,6 +10,7 @@ type Props = {
 
 export const BtnBack: FC<Props> = ({ isHidden }) => {
   const history = useNavigate();
+
   const returnToPreviousPage = () => {
     history(-1);
   };
