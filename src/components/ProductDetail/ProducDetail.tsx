@@ -77,6 +77,10 @@ export const ProductDetail: React.FC = observer(() => {
   };
 
   useEffect(() => {
+    window.scroll(0, 0);
+  }, [id]);
+
+  useEffect(() => {
     setAxios({
       method: 'get',
       url: `${apiRoutes.SHOW_PRODUCTS}/${id}`,
