@@ -2,15 +2,19 @@ import React, { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
 
+import { useNavigate } from 'react-router-dom';
+
 import { Pagination, Autoplay } from 'swiper/modules';
 import arrowLeftIcon from '../../images/icons/arrow-left.svg';
 import arrowRightIcon from '../../images/icons/arrow-right.svg';
 import placeHolderBannerImg from '../../images/Banner.png';
+import placeHolderBannerImg2 from '../../images/banner-2.png';
+import placeHolderBannerImg3 from '../../images/banner-3.png';
 import placeHolderMobBannerImg from '../../images/Banner-mobile.png';
-
+import placeHolderMobBannerImg2 from '../../images/banner-mobile-2.png';
+import placeHolderMobBannerImg3 from '../../images/banner-mobil-3.png';
 import styles from './PromoSlider.module.scss';
 import '../../styles/paginationBullets.scss';
-
 import { useWindowWidth } from '../../hooks/useWindowWidth';
 
 export const PromoSlider: React.FC = () => {
@@ -19,14 +23,14 @@ export const PromoSlider: React.FC = () => {
 
   const slidesPlaceholder = [
     placeHolderBannerImg,
-    placeHolderBannerImg,
-    placeHolderBannerImg,
+    placeHolderBannerImg2,
+    placeHolderBannerImg3,
   ];
 
   const slidesPlaceholderMob = [
     placeHolderMobBannerImg,
-    placeHolderMobBannerImg,
-    placeHolderMobBannerImg,
+    placeHolderMobBannerImg2,
+    placeHolderMobBannerImg3,
   ];
 
   const goNext = () => {
@@ -41,6 +45,18 @@ export const PromoSlider: React.FC = () => {
     }
   };
 
+  const navigate = useNavigate();
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      navigate('/phones');
+    }
+  };
+
+  const handleCardClick = () => {
+    navigate('/phones');
+  };
+
   return (
     <section className={styles.promoSlider}>
       <button
@@ -50,7 +66,13 @@ export const PromoSlider: React.FC = () => {
       >
         <img src={arrowLeftIcon} alt="arrow left icon" />
       </button>
-      <div className={styles.promoSlider__swiperRoot}>
+      <div
+        className={styles.promoSlider__swiperRoot}
+        onClick={() => handleCardClick()}
+        onKeyDown={(e) => handleKeyDown(e)}
+        role="button"
+        tabIndex={0}
+      >
         <Swiper
           slidesPerView={1}
           spaceBetween={10}
