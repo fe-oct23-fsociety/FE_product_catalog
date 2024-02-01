@@ -34,7 +34,7 @@ export const Search: FC<Props> = ({ handleSearch }) => {
 
   useEffect(() => {
     handleOnClear();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   useEffect(() => {
@@ -59,7 +59,10 @@ export const Search: FC<Props> = ({ handleSearch }) => {
   };
 
   return (
-    <div className={styles.search}>
+    <div className={cn(styles.search, {
+      [styles['search--is-show']]: !hideInput,
+    })}
+    >
       <div className={styles['search__input-wrapp']}>
         <input
           type="text"

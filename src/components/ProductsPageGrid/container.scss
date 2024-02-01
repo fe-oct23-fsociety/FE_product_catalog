@@ -32,10 +32,6 @@
 
 .card-container {
   margin-bottom: 25px;
-
-  @media (min-width: 641px) {
-    padding-inline: 24px;
-  }
 }
 
 .select__pagination,
@@ -58,6 +54,10 @@
   margin-bottom: 40px;
 
   @include body-text;
+
+  @media (max-width: 768px) {
+    margin-bottom: 24px;
+  }
 }
 
 .params-container {
@@ -65,9 +65,15 @@
   justify-content: space-between;
   align-items: center;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
+  @media (max-width: 700px) {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  &__search {
+    @media (max-width: 700px) {
+      margin-bottom: 12px;
+    }
   }
 }
 
@@ -103,8 +109,11 @@
   @include body-text;
 }
 
-h1 {
+.category__title {
   @include h1;
+  @media (max-width: 576px) {
+    @include h1-mobile
+  }
 }
 
 .container-loading {

@@ -10,6 +10,7 @@ import { Header } from './components/Header';
 import { CartProvider } from './components/CartContext/CartContext';
 import { getRoutes } from './helpers';
 import { BreadCrumbs } from './components/BreadCrumbs/BreadCrumbs';
+import { PageSection } from './components/PageSection';
 
 const App = observer(() => {
   const [route, setRoute] = useState<string[]>([]);
@@ -35,7 +36,11 @@ const App = observer(() => {
         <div className="main-container">
           <Header />
           <div className="contentContainer">
-            {isCrumbsShown && <BreadCrumbs routes={route} />}
+            {isCrumbsShown && (
+              <PageSection>
+                <BreadCrumbs routes={route} />
+              </PageSection>
+            )}
             <Outlet />
           </div>
           <Footer />
