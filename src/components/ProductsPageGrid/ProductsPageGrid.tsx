@@ -1,5 +1,6 @@
 /* eslint-disable no-nested-ternary */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
 import '../../styles/mixins.scss';
 import './container.scss';
 import { Loader } from '../Loader';
@@ -33,8 +34,10 @@ export const ProductsPageGrid: React.FC<Props> = ({
   onSortBySelect,
   onSortTypeSelect,
 }) => {
-  const countOfGoods = productEntities ? productEntities.count : 0;
+  const locationPath = useLocation().pathname;
+  const [forceUpdateKey, setForceUpdateKey] = useState(locationPath);
 
+  const countOfGoods = productEntities ? productEntities.count : 0;
   const [categoryHeaderName, setCategoryHeaderName] = useState<
   string | undefined
   >('');
@@ -97,9 +100,17 @@ export const ProductsPageGrid: React.FC<Props> = ({
     }, DELAY_TIME);
   };
 
+  const memoLocation = useMemo(() => {
+    return locationPath;
+  }, [locationPath]);
+
+  useEffect(() => {
+    setForceUpdateKey(memoLocation);
+  }, [memoLocation]);
+
   return (
     <PageSection>
-      <div className="card-container">
+      <div className="card-container" key={forceUpdateKey}>
         <br />
         <h1 className="category__title">{categoryHeaderName}</h1>
         <p className="description">{`${countOfGoods} models`}</p>
