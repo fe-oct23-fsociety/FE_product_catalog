@@ -9,6 +9,7 @@ import { CartContext } from '../CartContext/CartContext';
 import { BtnBack } from '../BtnBack';
 import emptyCart from '../../images/empty-box.svg';
 import { PageSection } from '../PageSection';
+import { BtnGoStore } from '../BtnGoStore';
 
 export const ShopCart: FC = observer(() => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -53,6 +54,7 @@ export const ShopCart: FC = observer(() => {
                   alt="empty cart"
                 />
                 <h2 className="emptyCart__title">Any items found</h2>
+                <BtnGoStore />
               </div>
             </div>
           )}
