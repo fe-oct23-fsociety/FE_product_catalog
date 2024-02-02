@@ -15,7 +15,7 @@
 
   &__btnBack {
     grid-row: 1;
-    grid-column: 1/1;
+    grid-column: 1 / 1;
     height: 100%;
     justify-self: right;
     align-self: center;
@@ -68,7 +68,7 @@
 
   &__swiperWrapper {
     display: flex;
-    cursor: grab;
+    cursor: pointer;
 
     @media (min-width: 1199px) {
       max-height: none;
