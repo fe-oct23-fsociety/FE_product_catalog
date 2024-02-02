@@ -21,6 +21,8 @@ export const Footer: React.FC = () => {
         <a
           href="https://github.com/fe-oct23-fsociety"
           className={styles.footer__link}
+          target="_blank"
+          rel="noreferrer"
         >
           GitHub
         </a>
@@ -28,6 +30,8 @@ export const Footer: React.FC = () => {
         <a
           href="https://github.com/fe-oct23-fsociety"
           className={styles.footer__link}
+          target="_blank"
+          rel="noreferrer"
         >
           Contacts
         </a>
@@ -35,6 +39,8 @@ export const Footer: React.FC = () => {
         <a
           href="https://github.com/fe-oct23-fsociety"
           className={styles.footer__link}
+          target="_blank"
+          rel="noreferrer"
         >
           Rights
         </a>
