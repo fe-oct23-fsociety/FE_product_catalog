@@ -35,7 +35,7 @@ export const Search: FC<Props> = ({ handleSearch }) => {
   useEffect(() => {
     handleOnClear();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location]);
+  }, [location.pathname]);
 
   useEffect(() => {
     handleSearch(searchQuery);

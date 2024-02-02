@@ -1,7 +1,6 @@
 /* eslint-disable no-nested-ternary */
-import React, {
-  Dispatch, SetStateAction, useEffect, useState,
-} from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
 import '../../styles/mixins.scss';
 import './container.scss';
 import { Loader } from '../Loader';
@@ -17,13 +16,12 @@ import { PageSection } from '../PageSection';
 type Props = {
   productEntities: ItemsFromServer | null;
   products: Product[];
-  onPaginationSelect: Dispatch<SetStateAction<string>>;
+  onPaginationSelect: (arg: Pagination | string) => void;
   getSearch: (arg: string) => void;
   isLoading: boolean;
   isError: string | unknown | null;
-  onSortBySelect: Dispatch<SetStateAction<string>>;
-  onSortTypeSelect: Dispatch<SetStateAction<string>>;
-  handleSortParamsChange: () => void;
+  onSortBySelect: (val: SortType | string) => void;
+  onSortTypeSelect: (arg: SortOrder | string) => void;
 };
 
 export const ProductsPageGrid: React.FC<Props> = ({
@@ -35,10 +33,11 @@ export const ProductsPageGrid: React.FC<Props> = ({
   isError,
   onSortBySelect,
   onSortTypeSelect,
-  handleSortParamsChange,
 }) => {
-  const countOfGoods = productEntities ? productEntities.count : 0;
+  const locationPath = useLocation().pathname;
+  const [forceUpdateKey, setForceUpdateKey] = useState(locationPath);
 
+  const countOfGoods = productEntities ? productEntities.count : 0;
   const [categoryHeaderName, setCategoryHeaderName] = useState<
   string | undefined
   >('');
@@ -80,7 +79,6 @@ export const ProductsPageGrid: React.FC<Props> = ({
     setTimeout(() => {
       onPaginationSelect(event.target.value);
       setIsDelayActive(false);
-      handleSortParamsChange();
     }, DELAY_TIME);
   };
 
@@ -102,9 +100,17 @@ export const ProductsPageGrid: React.FC<Props> = ({
     }, DELAY_TIME);
   };
 
+  const memoLocation = useMemo(() => {
+    return locationPath;
+  }, [locationPath]);
+
+  useEffect(() => {
+    setForceUpdateKey(memoLocation);
+  }, [memoLocation]);
+
   return (
     <PageSection>
-      <div className="card-container">
+      <div className="card-container" key={forceUpdateKey}>
         <br />
         <h1 className="category__title">{categoryHeaderName}</h1>
         <p className="description">{`${countOfGoods} models`}</p>
