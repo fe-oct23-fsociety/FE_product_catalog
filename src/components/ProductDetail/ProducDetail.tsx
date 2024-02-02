@@ -102,21 +102,26 @@ export const ProductDetail: React.FC = observer(() => {
   }, [data]);
 
   const handleChangeId = () => {
-    const newId
-      = `${data?.namespaceId}-${selectedCapacity?.toLowerCase()}-${selectedColor}`;
-    const changedId = productsArray.find((el) => el.itemId === newId);
+    if (data && selectedCapacity && selectedColor) {
+      const newId
+        = `${data?.namespaceId}-${selectedCapacity.toLowerCase()}-${selectedColor}`;
+      const changedId = productsArray.find((el) => el.itemId === newId);
 
-    if (changedId) {
-      navigate(`/${changedId.category}/${changedId.id}`);
+      if (changedId) {
+        navigate(
+          `/${changedId.category}/${changedId.id}`,
+          {
+            replace: true,
+          },
+        );
+      }
     }
   };
 
   useEffect(() => {
-    if (selectedColor) {
-      handleChangeId();
-    }
+    handleChangeId();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedColor, selectedCapacity]);
+  }, [selectedCapacity, selectedColor]);
 
   const handleChangeColor = (color: string) => {
     setSelectedColor(preperedColor(color));
