@@ -24,8 +24,16 @@
 }
 
 .title {
-  @include h1;
+  @include h1-mobile;
   margin-bottom: 8px;
+
+  @include onTablet {
+    @include h1;
+  }
+
+  @include onDesktop {
+    @include h1;
+  }
 }
 
 .description {

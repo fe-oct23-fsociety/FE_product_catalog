@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
@@ -47,14 +48,36 @@ export const PromoSlider: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>, index: number) => {
     if (event.key === 'Enter') {
-      navigate('/phones');
+      switch (index) {
+        case 0:
+          navigate('/phones/81');
+          break;
+        case 1:
+          navigate('/tablets/155');
+          break;
+        case 2:
+          navigate('/accessories/142');
+          break;
+        default:
+      }
     }
   };
 
-  const handleCardClick = () => {
-    navigate('/phones');
+  const handleCardClick = (index: number) => {
+    switch (index) {
+      case 0:
+        navigate('/phones/81');
+        break;
+      case 1:
+        navigate('/tablets/155');
+        break;
+      case 2:
+        navigate('/accessories/142');
+        break;
+      default:
+    }
   };
 
   return (
@@ -66,13 +89,7 @@ export const PromoSlider: React.FC = () => {
       >
         <img src={arrowLeftIcon} alt="arrow left icon" />
       </button>
-      <div
-        className={styles.promoSlider__swiperRoot}
-        onClick={() => handleCardClick()}
-        onKeyDown={(e) => handleKeyDown(e)}
-        role="button"
-        tabIndex={0}
-      >
+      <div className={styles.promoSlider__swiperRoot}>
         <Swiper
           slidesPerView={1}
           spaceBetween={10}
@@ -97,7 +114,7 @@ export const PromoSlider: React.FC = () => {
           }}
           speed={1300}
         >
-          {!isMob && slidesPlaceholder.map(slidePlaceholder => (
+          {!isMob && slidesPlaceholder.map((slidePlaceholder, index) => (
             <SwiperSlide
               key={crypto.randomUUID()}
               className={styles.promoSlider__swiperSlide}
@@ -105,11 +122,13 @@ export const PromoSlider: React.FC = () => {
               <img
                 src={slidePlaceholder}
                 alt="1"
+                onClick={() => handleCardClick(index)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
               />
             </SwiperSlide>
           ))}
 
-          {isMob && slidesPlaceholderMob.map(slidePlaceholderMob => (
+          {isMob && slidesPlaceholderMob.map((slidePlaceholderMob, index) => (
             <SwiperSlide
               className={styles.promoSlider__swiperSlide}
               key={crypto.randomUUID()}
@@ -117,6 +136,8 @@ export const PromoSlider: React.FC = () => {
               <img
                 src={slidePlaceholderMob}
                 alt="1"
+                onClick={() => handleCardClick(index)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
               />
             </SwiperSlide>
           ))}
