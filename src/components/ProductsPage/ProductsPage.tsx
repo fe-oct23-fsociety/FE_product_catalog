@@ -30,9 +30,20 @@ export const ProductsPage: React.FC = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [searchValue, setSearchValue] = useState('');
 
+  const getCurrentPage = (): number => {
+    const page = searchParams.get('page');
+
+    return page ? +page - 1 : 0;
+  };
+
   const setLimit = (val: Pagination | string) => {
     setSearchParams(prev => Object
       .assign(Object.fromEntries(prev.entries()), { limit: val }));
+
+    if (searchParams.get('page')) {
+      setSearchParams(prev => Object
+        .assign(Object.fromEntries(prev.entries()), { limit: val, page: 1 }));
+    }
   };
 
   const getLimit = useCallback((): string | Pagination => {
@@ -44,12 +55,6 @@ export const ProductsPage: React.FC = () => {
 
     return Pagination.Sixteen;
   }, [searchParams]);
-
-  const getCurrentPage = (): number => {
-    const page = searchParams.get('page');
-
-    return page ? +page - 1 : 0;
-  };
 
   const setSortType = (val: SortOrder | string) => {
     setSearchParams(prev => Object
