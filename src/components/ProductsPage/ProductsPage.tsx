@@ -27,7 +27,7 @@ export const ProductsPage: React.FC = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [currentPage, setCurrentPage] = useState(0);
+  // const [currentPage, setCurrentPage] = useState(0);
   const [category, setCategory] = useState(pathname);
   const [setAxios, loading, data, error] = useAxios<ItemsFromServer>(null);
   const [totalPages, setTotalPages] = useState(0);
@@ -38,7 +38,8 @@ export const ProductsPage: React.FC = () => {
   const [searchValue, setSearchValue] = useState('');
 
   const setLimit = (val: Pagination | string) => {
-    setSearchParams(`limit=${val}`);
+    setSearchParams(prev => Object
+      .assign(Object.fromEntries(prev.entries()), { limit: val }));
   };
 
   const getLimit = useCallback((): string | Pagination => {
@@ -51,18 +52,24 @@ export const ProductsPage: React.FC = () => {
     return Pagination.Sixteen;
   }, [searchParams]);
 
-  // eslint-disable-next-line no-console, padding-line-between-statements
-  console.log(getLimit());
+  const getCurrentPage = (): number => {
+    const page = searchParams.get('page');
+
+    return page ? +page - 1 : 0;
+  };
+
+  // eslint-disable-next-line no-console
+  console.log(Object.fromEntries(searchParams.entries()));
 
   useEffect(() => {
     setCategory(pathname);
-    setCurrentPage(0);
+    // setCurrentPage(0);
     scrollToTop();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   useEffect(() => {
-    const offset = currentPage * +getLimit();
+    const offset = getCurrentPage() * +getLimit();
 
     setAxios({
       method: 'get',
@@ -73,7 +80,7 @@ export const ProductsPage: React.FC = () => {
         + `&${apiRoutes.SEARCH(searchValue)}`,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, getLimit(), currentPage, sortType, sortBy, searchValue]);
+  }, [category, getLimit(), getCurrentPage(), sortType, sortBy, searchValue]);
 
   const memoizedCount = useMemo(() => {
     if (data && data.count > 0) {
@@ -90,7 +97,9 @@ export const ProductsPage: React.FC = () => {
   }, [memoizedCount]);
 
   const handlePageClick = (selectedItem: { selected: number }) => {
-    setCurrentPage(selectedItem.selected);
+    setSearchParams(prev => Object
+      .assign(Object.fromEntries(prev.entries()), { page: selectedItem.selected + 1 }));
+
     scrollToTop();
   };
 
@@ -129,7 +138,7 @@ export const ProductsPage: React.FC = () => {
         activeClassName={styles.pagination__active}
         previousClassName={styles.pagination__arrowLeft}
         nextClassName={styles.pagination__arrowRight}
-        forcePage={currentPage}
+        forcePage={getCurrentPage()}
       />
     </>
   );
