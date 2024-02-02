@@ -1,7 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, {
-  Dispatch, SetStateAction, useEffect, useState,
-} from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../styles/mixins.scss';
 import './container.scss';
 import { Loader } from '../Loader';
@@ -21,7 +19,7 @@ type Props = {
   getSearch: (arg: string) => void;
   isLoading: boolean;
   isError: string | unknown | null;
-  onSortBySelect: Dispatch<SetStateAction<string>>;
+  onSortBySelect: (val: SortType | string) => void;
   onSortTypeSelect: (arg: SortOrder | string) => void;
 };
 

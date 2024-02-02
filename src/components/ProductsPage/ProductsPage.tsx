@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {
   useState,
   useMemo,
@@ -26,15 +25,9 @@ export const ProductsPage: React.FC = () => {
   const pathname = location.pathname.replace('/', '');
 
   const [searchParams, setSearchParams] = useSearchParams();
-
-  // const [currentPage, setCurrentPage] = useState(0);
   const [category, setCategory] = useState(pathname);
   const [setAxios, loading, data, error] = useAxios<ItemsFromServer>(null);
   const [totalPages, setTotalPages] = useState(0);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const [sortType, setSortType] = useState<SortOrder | string>(SortOrder.ASC);
-  const [sortBy, setSortBy] = useState<SortType | string>(SortType.Newest);
-  // const [limit, setLimit] = useState<Pagination | string>(Pagination.Sixteen);
   const [searchValue, setSearchValue] = useState('');
 
   const setLimit = (val: Pagination | string) => {
@@ -73,12 +66,23 @@ export const ProductsPage: React.FC = () => {
     return SortOrder.ASC;
   };
 
-  // eslint-disable-next-line no-console
-  console.log(Object.fromEntries(searchParams.entries()));
+  const setSortBy = (val: SortType | string) => {
+    setSearchParams(prev => Object
+      .assign(Object.fromEntries(prev.entries()), { sortBy: val }));
+  };
+
+  const getSortBy = (): string | SortType => {
+    const sortBy = searchParams.get('sortBy');
+
+    if (sortBy && Object.values(SortType).includes(sortBy as SortType)) {
+      return sortBy;
+    }
+
+    return SortType.Newest;
+  };
 
   useEffect(() => {
     setCategory(pathname);
-    // setCurrentPage(0);
     scrollToTop();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
@@ -91,11 +95,11 @@ export const ProductsPage: React.FC = () => {
       url:
         `${apiRoutes.SHOW_PRODUCTS}`
         + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(+getLimit(), offset)}`
-        + `&${apiRoutes.SORT_BY(sortBy)}&${apiRoutes.SORT_TYPE(getSortType())}`
+        + `&${apiRoutes.SORT_BY(getSortBy())}&${apiRoutes.SORT_TYPE(getSortType())}`
         + `&${apiRoutes.SEARCH(searchValue)}`,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, getLimit(), getCurrentPage(), getSortType(), sortBy, searchValue]);
+  }, [category, getLimit(), getCurrentPage(), getSortType(), getSortBy(), searchValue]);
 
   const memoizedCount = useMemo(() => {
     if (data && data.count > 0) {
@@ -106,7 +110,7 @@ export const ProductsPage: React.FC = () => {
   }, [data, getLimit]);
 
   useEffect(() => {
-    if (memoizedCount) {
+    if (memoizedCount >= 0) {
       setTotalPages(memoizedCount);
     }
   }, [memoizedCount]);
@@ -132,29 +136,31 @@ export const ProductsPage: React.FC = () => {
         isLoading={loading}
         isError={error}
       />
-
-      <ReactPaginate
-        previousLabel={
-          <BtnSquare sizeValue={32} srcValue={arrowLeftIcon} altValue="<" />
-        }
-        pageLabelBuilder={(page) => (
-          <BtnSquare sizeValue={32} buttonContent={page.toString()} />
+      {totalPages > 0
+        && (
+          <ReactPaginate
+            previousLabel={
+              <BtnSquare sizeValue={32} srcValue={arrowLeftIcon} altValue="<" />
+            }
+            pageLabelBuilder={(page) => (
+              <BtnSquare sizeValue={32} buttonContent={page.toString()} />
+            )}
+            nextLabel={
+              <BtnSquare sizeValue={32} srcValue={arrowRightIcon} altValue=">" />
+            }
+            breakLabel="..."
+            breakClassName="break-me"
+            pageCount={totalPages}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={2}
+            onPageChange={handlePageClick}
+            containerClassName={styles.pagination}
+            activeClassName={styles.pagination__active}
+            previousClassName={styles.pagination__arrowLeft}
+            nextClassName={styles.pagination__arrowRight}
+            forcePage={getCurrentPage()}
+          />
         )}
-        nextLabel={
-          <BtnSquare sizeValue={32} srcValue={arrowRightIcon} altValue=">" />
-        }
-        breakLabel="..."
-        breakClassName="break-me"
-        pageCount={totalPages}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={2}
-        onPageChange={handlePageClick}
-        containerClassName={styles.pagination}
-        activeClassName={styles.pagination__active}
-        previousClassName={styles.pagination__arrowLeft}
-        nextClassName={styles.pagination__arrowRight}
-        forcePage={getCurrentPage()}
-      />
     </>
   );
 };
