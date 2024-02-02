@@ -63,6 +63,10 @@
     text-transform: uppercase;
     @include font-mont-bold;
     color: $light-grey;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .48px;
+    line-height: 11px;
   }
 
   &__anchor {
@@ -73,6 +77,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    > span {
+      @include small-text;
+    }
 
     @media (max-width: 639px) {
       grid-row-start: 6;
