@@ -25,11 +25,17 @@ export const Footer: React.FC = () => {
           GitHub
         </a>
 
-        <a href="##" className={styles.footer__link}>
+        <a
+          href="https://github.com/fe-oct23-fsociety"
+          className={styles.footer__link}
+        >
           Contacts
         </a>
 
-        <a href="##" className={styles.footer__link}>
+        <a
+          href="https://github.com/fe-oct23-fsociety"
+          className={styles.footer__link}
+        >
           Rights
         </a>
       </section>

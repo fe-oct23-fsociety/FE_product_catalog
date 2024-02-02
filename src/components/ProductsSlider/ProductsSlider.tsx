@@ -8,7 +8,6 @@ import { Product } from '../../types/ProductEntity';
 import { BtnSquare } from '../BtnSquare';
 
 import styles from './ProductsSlider.module.scss';
-// import { useWindowWidth } from '../../hooks/useWindowWidth';
 
 import arrowLeftIcon from '../../images/icons/arrow-left.svg';
 import arrowRightIcon from '../../images/icons/arrow-right.svg';
@@ -31,22 +30,6 @@ export const ProductsSlider: React.FC<Props> = ({
       setIsShowButton(productsData?.length >= 5);
     }
   }, [productsData]);
-
-  // const getColumsCount = () => {
-  //   if (windowWidth <= 639) {
-  //     return 1.5;
-  //   }
-
-  //   if (windowWidth <= 1199) {
-  //     return 2.5;
-  //   }
-
-  //   if (windowWidth > 1199) {
-  //     return 4;
-  //   }
-
-  //   return 1;
-  // };
 
   const goNext = () => {
     if (swiperRef.current) {
@@ -78,7 +61,6 @@ export const ProductsSlider: React.FC<Props> = ({
           loop
           navigation
           spaceBetween={16}
-          // slidesPerView={Number(getColumsCount())}
           slidesPerView="auto"
           wrapperClass={styles.productSlider__swiperWrapper}
           onSwiper={(swiper: SwiperCore) => {

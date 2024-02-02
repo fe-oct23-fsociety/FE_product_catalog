@@ -13,7 +13,7 @@
   flex-direction: column;
   justify-content: space-between;
 
-  @include hover(transform, scale(105%));
+  @include hover(transform, scale(101%));
 
   &__image {
     height: 196px;
@@ -79,6 +79,7 @@
   &__actions {
     display: flex;
     justify-content: space-between;
+    gap: 8px;
   }
 
   &__btnAdd {
