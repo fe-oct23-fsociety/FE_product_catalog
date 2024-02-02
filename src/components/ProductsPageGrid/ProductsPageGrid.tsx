@@ -22,7 +22,7 @@ type Props = {
   isLoading: boolean;
   isError: string | unknown | null;
   onSortBySelect: Dispatch<SetStateAction<string>>;
-  onSortTypeSelect: Dispatch<SetStateAction<string>>;
+  onSortTypeSelect: (arg: SortOrder | string) => void;
 };
 
 export const ProductsPageGrid: React.FC<Props> = ({

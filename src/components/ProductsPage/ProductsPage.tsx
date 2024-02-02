@@ -32,7 +32,7 @@ export const ProductsPage: React.FC = () => {
   const [setAxios, loading, data, error] = useAxios<ItemsFromServer>(null);
   const [totalPages, setTotalPages] = useState(0);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [sortType, setSortType] = useState<SortOrder | string>(SortOrder.ASC);
+  // const [sortType, setSortType] = useState<SortOrder | string>(SortOrder.ASC);
   const [sortBy, setSortBy] = useState<SortType | string>(SortType.Newest);
   // const [limit, setLimit] = useState<Pagination | string>(Pagination.Sixteen);
   const [searchValue, setSearchValue] = useState('');
@@ -58,6 +58,21 @@ export const ProductsPage: React.FC = () => {
     return page ? +page - 1 : 0;
   };
 
+  const setSortType = (val: SortOrder | string) => {
+    setSearchParams(prev => Object
+      .assign(Object.fromEntries(prev.entries()), { order: val }));
+  };
+
+  const getSortType = (): string | SortOrder => {
+    const order = searchParams.get('order');
+
+    if (order && Object.values(SortOrder).includes(order as SortOrder)) {
+      return order;
+    }
+
+    return SortOrder.ASC;
+  };
+
   // eslint-disable-next-line no-console
   console.log(Object.fromEntries(searchParams.entries()));
 
@@ -76,11 +91,11 @@ export const ProductsPage: React.FC = () => {
       url:
         `${apiRoutes.SHOW_PRODUCTS}`
         + `?${apiRoutes.CATEGORY(category)}&${apiRoutes.PAGINATION(+getLimit(), offset)}`
-        + `&${apiRoutes.SORT_BY(sortBy)}&${apiRoutes.SORT_TYPE(sortType)}`
+        + `&${apiRoutes.SORT_BY(sortBy)}&${apiRoutes.SORT_TYPE(getSortType())}`
         + `&${apiRoutes.SEARCH(searchValue)}`,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, getLimit(), getCurrentPage(), sortType, sortBy, searchValue]);
+  }, [category, getLimit(), getCurrentPage(), getSortType(), sortBy, searchValue]);
 
   const memoizedCount = useMemo(() => {
     if (data && data.count > 0) {
@@ -103,7 +118,7 @@ export const ProductsPage: React.FC = () => {
     scrollToTop();
   };
 
-  const productsToRender = getProductsToRender(data?.products || [], sortType);
+  const productsToRender = getProductsToRender(data?.products || [], getSortType());
 
   return (
     <>
