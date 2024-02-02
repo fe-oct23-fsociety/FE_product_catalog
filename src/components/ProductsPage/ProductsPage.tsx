@@ -129,10 +129,6 @@ export const ProductsPage: React.FC = () => {
 
   const productsToRender = getProductsToRender(data?.products || [], getSortType());
 
-  const handleSortParamsChange = () => {
-    handlePageClick({ selected: 0 });
-  };
-
   return (
     <>
       <ProductsPageGrid
@@ -144,7 +140,6 @@ export const ProductsPage: React.FC = () => {
         getSearch={setSearchValue}
         isLoading={loading}
         isError={error}
-        handleSortParamsChange={handleSortParamsChange}
       />
       {totalPages > 0
         && (
